@@ -22,7 +22,12 @@ CONDITIONS = ("below_good", "above_good")
 def main(model: str, family: str, run_dir: str, count: int = 100,
          max_tokens: int = 24000, max_model_len: int = 32768,
          temperature: float = 1.0, top_p: float = 1.0,
-         gpu_memory_utilization: float = 0.90):
+         gpu_memory_utilization: float = 0.90,
+         reasoning_effort: str | None = None):
+    if reasoning_effort and family != "gptoss":
+        raise ValueError(
+            f"reasoning_effort given for family={family!r}; only gpt-oss honours it — "
+            "Qwen's template ignores it silently")
     from vllm import LLM, SamplingParams
 
     run_path = Path(run_dir)
@@ -38,7 +43,7 @@ def main(model: str, family: str, run_dir: str, count: int = 100,
 
     for condition in CONDITIONS:
         user_msg = build_prompt(condition, threshold)
-        prompt = render(tok, user_msg)
+        prompt = render(tok, user_msg, reasoning_effort)
         print(f"\n=== {condition} | n={count} ===", flush=True)
 
         t0 = time.time()
@@ -64,7 +69,7 @@ def main(model: str, family: str, run_dir: str, count: int = 100,
             "family": family, "condition": condition, "threshold": threshold,
             "prompt": user_msg, "rendered_prompt": prompt,
             "max_tokens": max_tokens, "temperature": temperature, "top_p": top_p,
-            "reasoning_effort": None, "rows": rows,
+            "reasoning_effort": reasoning_effort, "rows": rows,
         }, indent=2, ensure_ascii=False))
 
         print(f"{count} rollouts in {dt:.0f}s | {ntok} tokens = {ntok/dt:.0f} tok/s")

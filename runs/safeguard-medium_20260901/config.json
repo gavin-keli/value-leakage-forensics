@@ -1,0 +1,12 @@
+{
+  "model": "gpt-oss-safeguard-20b-medium",
+  "model_id": "openai/gpt-oss-safeguard-20b",
+  "backend": "local-vllm",
+  "provider": null,
+  "family": "gptoss",
+  "task": "giraffes",
+  "count": 100,
+  "target_max_tokens": 24000,
+  "target_reasoning_effort": "medium",
+  "judge_model": "claude-sonnet-5"
+}

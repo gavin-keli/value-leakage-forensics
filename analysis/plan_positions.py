@@ -39,12 +39,7 @@ def matched_control(units, k, used):
 
 
 def main(run_dir: str, out: str, n_traces: int = 6, grid: int = 10,
-         max_tagged: int = 8, n_exploratory: int = 4, per_trace_cap: int = 22,
-         select: str = "index"):
-    """select: 'index' takes the first n_traces (unbiased); 'shortest' takes the cheapest
-    to resample. 'shortest' is a BUDGET decision — resampling cost scales with how many
-    tokens each continuation must still generate — and biases the sample toward terse
-    traces, which must be stated wherever those results are reported."""
+         max_tagged: int = 8, n_exploratory: int = 4, per_trace_cap: int = 22):
     run_path = Path(run_dir)
     screen = json.loads((run_path / "screen.json").read_text())
     rng = np.random.default_rng(0)
@@ -55,11 +50,7 @@ def main(run_dir: str, out: str, n_traces: int = 6, grid: int = 10,
 
     for cond in CONDS:
         segs = json.loads((run_path / f"segments_{cond}.json").read_text())
-        segs = [s for s in segs if s["n_units"] >= 12]
-        if select == "shortest":
-            rows = json.loads((run_path / f"{cond}.json").read_text())["rows"]
-            segs.sort(key=lambda s: len(rows[s["i"]]["reasoning"]))
-        segs = segs[:n_traces]
+        segs = [s for s in segs if s["n_units"] >= 12][:n_traces]
 
         # exploratory nominations from the screen, per trace
         byt = {}

@@ -700,6 +700,10 @@ rather than by the sentence you changed. gpt-oss's short traces are what make th
 work on it. If that is right, applying this technique to long agentic trajectories — the
 obvious next use — needs the intervention placed near the outcome, or a much larger R.
 
+**Tested and confirmed in A8**, holding model and R fixed and varying only trace length.
+Note this comparison as stated is doubly confounded — different models *and* different R
+(100 vs 32) — which is why A8 re-ran it properly rather than resting on it.
+
 ### A3. Why the class result survives the placebo problem
 
 The placebo check concerns **magnitude** (|Δp|, unsigned), while §2.5's claim rests on the
@@ -862,6 +866,47 @@ This is the same conclusion §2.2 reached about the shipped 10-model leaderboard
 the other end: **100 rollouts per condition is not enough to compare models in this
 paradigm.** It was adequate only where the effect was very large.
 
+### A8. The horizon limit, tested directly — A2's hypothesis holds
+
+A2 observed that the meaning-split degrades and guessed trace length was responsible: the
+further the model still has to travel after an intervention, the more the outcome is decided
+by downstream sampling rather than by the sentence that was changed. That comparison was
+weak in two ways — it pitted gpt-oss against Qwen3.5, confounding length with model family,
+and it compared R=100 against R=32, so sample size varied too.
+
+The clean test varies **only trace length**: the same model, the same R, with reasoning
+effort used to make its traces long. gpt-oss at `high` writes ~23k-char traces, comparable
+to Qwen3.5's ~30k.
+
+| | trace length | R | placebo separation |
+|---|---|---|---|
+| gpt-oss @ medium | ~2.8k chars | 48 | **+0.011** |
+| **gpt-oss @ high** | **~23k chars** | **48** | **−0.037** |
+| Qwen3.5 | ~30k chars | 32 | −0.033 |
+
+**The separation flips from positive to negative purely by making the same model think
+longer, and lands on Qwen3.5's value.** The degradation is a property of trace length, not
+of the Qwen lineage.
+
+Two further signs of the same thing in that run. The class table loses its structure: at
+medium, parameter-selection was the only class whose interval excluded zero
+(+0.039 [+0.004, +0.065]); at high the point estimate barely moves (+0.042) but the interval
+now spans zero ([−0.014, +0.112]). And the positional concentration disappears — all five
+normalised-position bands are flat and null, where medium showed a clear early peak. The
+signal has not reversed; the instrument has stopped resolving it.
+
+**What this means for reuse.** Counterfactual importance has a horizon limit, and the
+obvious next application — long agentic trajectories — sits squarely inside it. Resampling a
+step thousands of tokens before the outcome will mostly measure the sampling that follows.
+The mitigations are to place interventions near the outcome, or to raise R sharply; the
+paper's 100 rollouts per position exist for this reason.
+
+**Limits of this test.** The placebo comparison rests on 29 positions with ≥5 samples in
+both arms, against a split-half noise floor of 0.050 that both arms sit near. The direction
+is consistent across three independent configurations, but the magnitude is not tightly
+pinned, and one intermediate trace length would establish whether the transition is gradual
+or sharp.
+
 ### A4. Revised confidence
 
 - **§2.1 (MRF blind to a 48-point outcome swing)** — unaffected; it never used resampling.
@@ -873,7 +918,11 @@ paradigm.** It was adequate only where the effect was very large.
   comparison (A7), where halving the honesty-talk left the bias unchanged. The two lines of
   evidence use different methods — intervening on sentences, and comparing checkpoints.
 - **Track A's role** — its screen (§2.4) and disavowal test (§2.7) stand; its class-level
-  counterfactual table should be treated as a null measurement, not weak evidence.
+  counterfactual table should be treated as a null measurement, not weak evidence. A8
+  explains why it was always going to be one: Qwen3.5's traces are long enough that the
+  method cannot resolve class-level structure in them at any R used here.
+- **A2's horizon hypothesis** — was speculation, now *tested* (A8) with model and R held
+  fixed. It is the most transferable result here, and the sharpest caveat on the method.
 
 ## Appendix — artefacts
 

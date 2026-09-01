@@ -133,12 +133,15 @@ parameter choices carry the bias.
 - **Sampling noise dominates below ~R=32.** An early pass at R=16 produced a treatment
   effect of 0.149 against a same-meaning placebo of 0.144 — noise measuring itself. The
   noise floor is now measured by split-half of the base arm rather than assumed.
-- **The meaning-split degrades on long traces.** On both models the same-meaning placebo now
-  moves the answer as much as the different-meaning arm (−0.010 for gpt-oss, −0.033 for
-  Qwen3.5). Both arms sit above their noise floors, so the intervention does something — it
-  is the semantic discrimination that fails. Likely a **horizon limit**: the further the
-  model still has to travel after the intervention, the more the outcome is decided by
-  downstream sampling. Relevant to anyone applying this to long agentic trajectories.
+- **Counterfactual importance has a horizon limit — measured, not inferred.** Holding model
+  and sample size fixed and varying only trace length (via reasoning effort), the
+  same-meaning placebo goes from **+0.011** on ~2.8k-char traces to **−0.037** on ~23k-char
+  traces — landing on the −0.033 seen for a different model at ~30k chars. Past roughly a
+  few thousand tokens of remaining reasoning, swapping a sentence stops explaining the
+  outcome and downstream sampling takes over. The class and positional structure vanish at
+  the same point, while the point estimates barely move: the signal survives, the instrument
+  stops resolving it. **This is the main caution for anyone applying the method to long
+  agentic trajectories** — place interventions near the outcome, or raise R sharply.
 - **The signed metric survives that failure** where an unsigned one would not: symmetric
   perturbation noise cancels under signing, and misclassification can only dilute a
   treatment arm toward the base, never manufacture an effect.

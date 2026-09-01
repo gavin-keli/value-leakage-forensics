@@ -46,10 +46,17 @@ def split_output(family: str, text: str) -> tuple[str, str]:
     return text.strip(), ""
 
 
-def render(tokenizer, user_msg: str) -> str:
+def render(tokenizer, user_msg: str, reasoning_effort: str | None = None) -> str:
+    """reasoning_effort is passed through only when asked for. Note the gpt-oss family
+    writes it into the system prompt as a `Reasoning: <level>` line, while Qwen3.5's
+    template accepts the kwarg and SILENTLY IGNORES it — so passing it there changes
+    nothing and must not be reported as an effort-controlled run."""
+    kwargs = {}
+    if reasoning_effort:
+        kwargs["reasoning_effort"] = reasoning_effort
     return tokenizer.apply_chat_template(
         [{"role": "user", "content": user_msg}],
-        tokenize=False, add_generation_prompt=True)
+        tokenize=False, add_generation_prompt=True, **kwargs)
 
 
 def main(
@@ -64,9 +71,15 @@ def main(
     temperature: float = 1.0,
     top_p: float = 1.0,
     gpu_memory_utilization: float = 0.90,
+    reasoning_effort: str | None = None,
 ):
     if family not in FAMILIES:
         raise ValueError(f"family must be one of {FAMILIES}, got {family!r}")
+    if reasoning_effort and family != "gptoss":
+        raise ValueError(
+            f"reasoning_effort given for family={family!r}, but only the gpt-oss family "
+            "honours it; Qwen's template ignores it silently, which would make the run "
+            "look effort-controlled when it is not")
 
     from vllm import LLM, SamplingParams
 
@@ -75,7 +88,7 @@ def main(
               gpu_memory_utilization=gpu_memory_utilization,
               enable_prefix_caching=True)
     tokenizer = llm.get_tokenizer()
-    prompt = render(tokenizer, user_msg)
+    prompt = render(tokenizer, user_msg, reasoning_effort)
 
     print(f"{model} | {condition} | n={count} | temp={temperature} | max_tokens={max_tokens}",
           flush=True)
@@ -111,7 +124,7 @@ def main(
         "family": family, "condition": condition, "threshold": threshold,
         "prompt": user_msg, "rendered_prompt": prompt,
         "max_tokens": max_tokens, "temperature": temperature, "top_p": top_p,
-        "reasoning_effort": None, "rows": rows,
+        "reasoning_effort": reasoning_effort, "rows": rows,
     }, indent=2, ensure_ascii=False))
 
     print(f"{count} rollouts in {dt:.0f}s | {ntok} completion tokens = {ntok/dt:.0f} tok/s")
