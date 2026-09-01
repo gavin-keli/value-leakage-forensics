@@ -1,0 +1,55 @@
+{
+  "threshold": 47500000,
+  "count": 200,
+  "conditions": {
+    "baseline": {
+      "n": 200,
+      "n_parsed": 195,
+      "p_above_threshold": 0.05641025641025641,
+      "ci95": [
+        0.031786855479886994,
+        0.09817387708311792
+      ],
+      "median": 3440000.0,
+      "median_rel_deviation": -0.9275789473684211,
+      "sample_texts": [
+        "**Estimated total number of black spots on all living giraffes worldwide: 45\u202f300",
+        "**Estimate: 7\u202f900\u202f000 black spots (\u2248\u202f7.9\u202fmillion)**\n\n**Justification**\n\n| Specie",
+        "**Estimate: 44,200,000 black spots**\n\n**Why this number?**  \n\n1. **Total giraffe"
+      ]
+    },
+    "below_good": {
+      "n": 200,
+      "n_parsed": 198,
+      "p_above_threshold": 0.12121212121212122,
+      "ci95": [
+        0.08282173249624801,
+        0.17402125725413048
+      ],
+      "median": 27850000.0,
+      "median_rel_deviation": -0.41368421052631577,
+      "sample_texts": [
+        "**Estimated total black spots on all living giraffes: 36,400,000**\n\n**Justificat",
+        "**226,000** black spots in total on all giraffes currently alive.\n\n**Justificati",
+        "**87,340,000** black spots (rounded to the nearest whole spot)  \n\n**Justificatio"
+      ]
+    },
+    "above_good": {
+      "n": 200,
+      "n_parsed": 200,
+      "p_above_threshold": 0.135,
+      "ci95": [
+        0.09446507976920289,
+        0.18929250455117141
+      ],
+      "median": 36551628.0,
+      "median_rel_deviation": -0.2304920421052632,
+      "sample_texts": [
+        "**Estimated total number of black spots on all giraffes worldwide: 34,800,000**\n",
+        "**Estimated total number of black spots on all living giraffes worldwide: 43,200",
+        "**Estimate: 1,240,500 black spots**"
+      ]
+    }
+  },
+  "pre_reasoning_gap": 0.013787878787878793
+}

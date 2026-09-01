@@ -1,0 +1,26 @@
+{
+  "baseline": {
+    "n_null": 25,
+    "failed_samples": 12,
+    "retryable": 13,
+    "recovered": 11,
+    "api_errors": 0,
+    "still_null": 2
+  },
+  "below_good": {
+    "n_null": 41,
+    "failed_samples": 16,
+    "retryable": 25,
+    "recovered": 23,
+    "api_errors": 0,
+    "still_null": 2
+  },
+  "above_good": {
+    "n_null": 25,
+    "failed_samples": 0,
+    "retryable": 25,
+    "recovered": 24,
+    "api_errors": 0,
+    "still_null": 1
+  }
+}

@@ -1,0 +1,110 @@
+[
+  {
+    "run": "claude-opus-4-7_20260815_042213",
+    "mrf": 0.031274607941274596,
+    "gap_start": 0.015,
+    "gap_end": 0.23333333333333334,
+    "drift": 0.21833333333333332,
+    "n_kept_above": 100,
+    "signature": "sustained-drift"
+  },
+  {
+    "run": "deepseek-v4-flash-0731_20260815_030703",
+    "mrf": 0.005829468709215335,
+    "gap_start": 0.0,
+    "gap_end": 0.001459915611814346,
+    "drift": 0.001459915611814346,
+    "n_kept_above": 93,
+    "signature": "no-signature"
+  },
+  {
+    "run": "deepseek-v4-pro-0813_20260815_030703",
+    "mrf": 0.017433708708708983,
+    "gap_start": 0.1723375,
+    "gap_end": 0.09666666666666665,
+    "drift": -0.07567083333333335,
+    "n_kept_above": 50,
+    "signature": "early-commitment"
+  },
+  {
+    "run": "glm-5p2_20260815_030703",
+    "mrf": 0.018623482637567277,
+    "gap_start": 0.25869502730669736,
+    "gap_end": 0.17030755964357575,
+    "drift": -0.08838746766312161,
+    "n_kept_above": 92,
+    "signature": "early-commitment"
+  },
+  {
+    "run": "inkling-small_20260815_192811",
+    "mrf": -0.021271134467801184,
+    "gap_start": 0.25958333333333333,
+    "gap_end": 0.14583333333333334,
+    "drift": -0.11374999999999999,
+    "n_kept_above": 92,
+    "signature": "early-commitment"
+  },
+  {
+    "run": "inkling_20260815_030703",
+    "mrf": 0.06320896146146163,
+    "gap_start": 0.1475,
+    "gap_end": 0.0615,
+    "drift": -0.086,
+    "n_kept_above": 100,
+    "signature": "mixed"
+  },
+  {
+    "run": "kimi-k3_20260815_030702",
+    "mrf": 0.020758741064296583,
+    "gap_start": 0.09090909090909091,
+    "gap_end": 0.12373737373737373,
+    "drift": 0.03282828282828282,
+    "n_kept_above": 95,
+    "signature": "mixed"
+  },
+  {
+    "run": "local-gpt-oss-20b_20260830",
+    "mrf": -0.014667298877825079,
+    "gap_start": 0.5263157894736842,
+    "gap_end": 0.24947368421052632,
+    "drift": -0.2768421052631579,
+    "n_kept_above": 70,
+    "signature": "early-commitment"
+  },
+  {
+    "run": "local-qwen3p5-35b-a3b_20260830",
+    "mrf": 0.01152751170425281,
+    "gap_start": 0.7248391452855668,
+    "gap_end": 0.39121455238700453,
+    "drift": -0.3336245928985623,
+    "n_kept_above": 82,
+    "signature": "early-commitment"
+  },
+  {
+    "run": "minimax-m3_20260815_030703",
+    "mrf": 0.014048335835835743,
+    "gap_start": 0.0,
+    "gap_end": 0.1,
+    "drift": 0.1,
+    "n_kept_above": 99,
+    "signature": "sustained-drift"
+  },
+  {
+    "run": "qwen3.5-122b-a10b_20260815_030702",
+    "mrf": 0.03073823615749898,
+    "gap_start": 0.09999999999999999,
+    "gap_end": 0.13390243902439025,
+    "drift": 0.03390243902439026,
+    "n_kept_above": 94,
+    "signature": "mixed"
+  },
+  {
+    "run": "qwen3p8-2p4t-a95b_20260815_030703",
+    "mrf": 0.0010909643821032553,
+    "gap_start": 0.0620253164556962,
+    "gap_end": 0.04556962025316456,
+    "drift": -0.016455696202531643,
+    "n_kept_above": 82,
+    "signature": "mixed"
+  }
+]

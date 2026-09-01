@@ -1,0 +1,17 @@
+# secrets — never commit
+.env
+*.key
+
+# python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# local scratch
+/tmp/
+*.log
+
+# model weights and caches are not part of this repo
+*.safetensors
+*.bin
+.cache/

@@ -1,0 +1,16 @@
+{
+  "baseline": {
+    "n_null": 0,
+    "recovered": 0
+  },
+  "below_good": {
+    "n_null": 0,
+    "recovered": 0
+  },
+  "above_good": {
+    "n_null": 2,
+    "recovered": 2,
+    "api_errors": 0,
+    "still_null": 0
+  }
+}

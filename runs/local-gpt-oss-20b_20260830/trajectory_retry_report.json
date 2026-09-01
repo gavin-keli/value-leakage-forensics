@@ -1,0 +1,14 @@
+{
+  "baseline": {
+    "n_null": 0,
+    "recovered": 0
+  },
+  "below_good": {
+    "n_null": 0,
+    "recovered": 0
+  },
+  "above_good": {
+    "n_null": 0,
+    "recovered": 0
+  }
+}

@@ -1,0 +1,232 @@
+{
+  "run_dir": "runs/local-qwen3p5-35b-a3b_20260830",
+  "ledger": "frozen before any counterfactual result",
+  "conditions": {
+    "below_good": [
+      {
+        "trace": 51,
+        "n_units": 100,
+        "positions": [
+          1,
+          4,
+          25,
+          27,
+          63,
+          65,
+          92,
+          99
+        ],
+        "apriori": [
+          1,
+          4,
+          25,
+          27,
+          63,
+          65,
+          92,
+          99
+        ],
+        "exploratory": [],
+        "tagged": [
+          25,
+          63,
+          92
+        ],
+        "controls": [
+          4,
+          27,
+          65
+        ]
+      },
+      {
+        "trace": 39,
+        "n_units": 348,
+        "positions": [
+          1,
+          3,
+          89,
+          91,
+          196,
+          197,
+          343,
+          347
+        ],
+        "apriori": [
+          1,
+          3,
+          89,
+          91,
+          196,
+          197,
+          343,
+          347
+        ],
+        "exploratory": [],
+        "tagged": [
+          91,
+          196,
+          343
+        ],
+        "controls": [
+          3,
+          89,
+          197
+        ]
+      },
+      {
+        "trace": 9,
+        "n_units": 375,
+        "positions": [
+          1,
+          4,
+          86,
+          88,
+          203,
+          205,
+          371,
+          374
+        ],
+        "apriori": [
+          1,
+          4,
+          86,
+          88,
+          203,
+          205,
+          371,
+          374
+        ],
+        "exploratory": [],
+        "tagged": [
+          88,
+          205,
+          371
+        ],
+        "controls": [
+          4,
+          86,
+          203
+        ]
+      }
+    ],
+    "above_good": [
+      {
+        "trace": 43,
+        "n_units": 91,
+        "positions": [
+          1,
+          4,
+          21,
+          23,
+          60,
+          62,
+          79,
+          90
+        ],
+        "apriori": [
+          1,
+          4,
+          21,
+          23,
+          60,
+          62,
+          79,
+          90
+        ],
+        "exploratory": [],
+        "tagged": [
+          23,
+          62,
+          79
+        ],
+        "controls": [
+          4,
+          21
+        ]
+      },
+      {
+        "trace": 55,
+        "n_units": 270,
+        "positions": [
+          1,
+          4,
+          67,
+          69,
+          178,
+          179,
+          261,
+          269
+        ],
+        "apriori": [
+          1,
+          4,
+          67,
+          69,
+          178,
+          179,
+          261,
+          269
+        ],
+        "exploratory": [],
+        "tagged": [
+          67
+        ],
+        "controls": [
+          4,
+          69,
+          178,
+          261
+        ]
+      },
+      {
+        "trace": 51,
+        "n_units": 306,
+        "positions": [
+          1,
+          5,
+          72,
+          73,
+          167,
+          168,
+          301,
+          305
+        ],
+        "apriori": [
+          1,
+          5,
+          72,
+          73,
+          167,
+          168,
+          301,
+          305
+        ],
+        "exploratory": [],
+        "tagged": [
+          72,
+          167,
+          301
+        ],
+        "controls": [
+          5,
+          73,
+          168
+        ]
+      }
+    ]
+  },
+  "summary": {
+    "below_good": {
+      "traces": 3,
+      "positions": 24,
+      "apriori": 24,
+      "exploratory": 0
+    },
+    "above_good": {
+      "traces": 3,
+      "positions": 24,
+      "apriori": 24,
+      "exploratory": 0
+    }
+  }
+}

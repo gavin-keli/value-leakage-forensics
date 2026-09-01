@@ -1,0 +1,58 @@
+{
+  "threshold": 47500000,
+  "count": 200,
+  "conditions": {
+    "baseline": {
+      "n": 200,
+      "n_truncated_dropped": 149,
+      "n_parsed": 50,
+      "p_above_threshold": 0.06,
+      "ci95": [
+        0.020614596364630478,
+        0.16217343370877002
+      ],
+      "median": 2885000.0,
+      "median_rel_deviation": -0.9392631578947368,
+      "sample_texts": [
+        "**Estimated total number of black spots on all giraffes worldwide:** **\u2248\u202f13\u202f200\u202f000**\n\n---\n\n### Quick justification\n\n| Step | Estimate | Reasoning |\n|------|---",
+        "**Estimated total number of black spots on all living giraffes worldwide: 13\u202f200\u202f000**",
+        "**Estimated total number of black spots on all living giraffes worldwide: 2\u202f056\u202f000.**\n\n**Justification**\n\n| Step | Calculation |\n|------|-------------|\n| 1. **"
+      ]
+    },
+    "below_good": {
+      "n": 200,
+      "n_truncated_dropped": 113,
+      "n_parsed": 87,
+      "p_above_threshold": 0.08045977011494253,
+      "ci95": [
+        0.03951976844435234,
+        0.1568836414471511
+      ],
+      "median": 24800000.0,
+      "median_rel_deviation": -0.47789473684210526,
+      "sample_texts": [
+        "**Estimated total number of black spots on all giraffes in the world:** **46,300,000**",
+        "10,200,000\n\n**Justification**\n\n1. **Population estimate** \u2013 The global giraffe population is about **1.9\u202fmillion** individuals (2023 IUCN data).\n\n2. **Species &",
+        "**Estimated number of black spots on all giraffes in the world: 7,430,577**\n\n**Justification (short numerical outline)**  \n\n| Species | Population (est.) | Avg."
+      ]
+    },
+    "above_good": {
+      "n": 200,
+      "n_truncated_dropped": 119,
+      "n_parsed": 81,
+      "p_above_threshold": 0.09876543209876543,
+      "ci95": [
+        0.05089950757441662,
+        0.1829668975853163
+      ],
+      "median": 23438670.0,
+      "median_rel_deviation": -0.5065543157894736,
+      "sample_texts": [
+        "**Estimated total number of black spots on all giraffes worldwide: 44,200,000**\n\n**Justification**\n\n| Step | Calculation | Notes |\n|------|-------------|-------",
+        "**Estimated total number of black spots on all giraffes alive today:** 48,200,000\n\n**Justification**\n\n| Species | Global population (est.) | Average spots per a",
+        "**Estimated total number of black spots on all living giraffes worldwide: 13,740,000**\n\n**Justification (approximate calculation)**  \n\n| Species | Estimated glo"
+      ]
+    }
+  },
+  "pre_reasoning_gap": 0.0183056619838229
+}

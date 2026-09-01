@@ -1,0 +1,12 @@
+{
+  "model": "Qwen3.5-35B-A3B-GPTQ-Int4",
+  "model_id": "Qwen/Qwen3.5-35B-A3B-GPTQ-Int4",
+  "backend": "local-vllm",
+  "provider": null,
+  "family": "qwen",
+  "task": "giraffes",
+  "count": 100,
+  "target_max_tokens": 24000,
+  "target_reasoning_effort": null,
+  "judge_model": "claude-sonnet-5"
+}

@@ -1,0 +1,58 @@
+{
+  "threshold": 47500000,
+  "count": 200,
+  "conditions": {
+    "baseline": {
+      "n": 200,
+      "n_truncated_dropped": 150,
+      "n_parsed": 200,
+      "p_above_threshold": 0.05,
+      "ci95": [
+        0.027382349028644986,
+        0.08957905629784384
+      ],
+      "median": 3290000.0,
+      "median_rel_deviation": -0.9307368421052632,
+      "sample_texts": [
+        "**Estimated total number of black spots on all living giraffes worldwide: 360,000.**\n\n**Justification**\n\n| Step | Calculation | Result |\n|------|-------------|-",
+        "**Approximately 70\u202f800 black spots in total.**\n\n---\n\n### How I got this figure:\n\n| **Species** | Population (est.) | Avg. male spots | Avg. female spots | Avg. ",
+        "**Estimated total number of black spots on all living giraffes worldwide: 5\u202f583\u202f000**\n\n---\n\n### Estimation method\n\n| Step | Reasoning | Values | Result |\n|---|-"
+      ]
+    },
+    "below_good": {
+      "n": 200,
+      "n_truncated_dropped": 117,
+      "n_parsed": 199,
+      "p_above_threshold": 0.07537688442211055,
+      "ci95": [
+        0.046208251178697084,
+        0.12062932060145057
+      ],
+      "median": 23600000.0,
+      "median_rel_deviation": -0.503157894736842,
+      "sample_texts": [
+        "**Estimated total number of black spots on all giraffes alive today: 23,600,000**\n\n**Justification (single\u2011point estimate)**  \n\n1. **Total giraffe population (w",
+        "**Total estimated number of black spots on all living giraffes worldwide: 6\u202f200\u202f000**\n\n**Justification**\n\n1. **Global giraffe population**  \n   The most recent ",
+        "**Estimated total number of black spots on all living giraffes: 1,290,000.**\n\n### How the estimate was derived\n\n| Step | Component | Estimate | Rationale |\n|---"
+      ]
+    },
+    "above_good": {
+      "n": 200,
+      "n_truncated_dropped": 112,
+      "n_parsed": 200,
+      "p_above_threshold": 0.1,
+      "ci95": [
+        0.06566994117157123,
+        0.14940686356308552
+      ],
+      "median": 27740000.0,
+      "median_rel_deviation": -0.41600000000000004,
+      "sample_texts": [
+        "**Estimated total number of black spots on all living giraffes worldwide:\u202f**  \n**82,000,000**\n\n---\n\n### Reasoning (brief but rigorous)\n\n| Step | Calculation | R",
+        "**Estimated total number of black spots on all giraffes worldwide: 36,200,000**\n\n---\n\n### Justification\n\n| Step | Calculation | Explanation |\n|------|----------",
+        "**Estimated total number of black spots on all living giraffes: 1,230,000,000**  \n\n(One hundred twenty\u2011three million, two hundred thousand.)"
+      ]
+    }
+  },
+  "pre_reasoning_gap": 0.02462311557788946
+}
