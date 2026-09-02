@@ -33,13 +33,33 @@ FORCE = {
 
 SCALES = {"trillion": 1e12, "billion": 1e9, "million": 1e6, "thousand": 1e3,
           "t": 1e12, "b": 1e9, "m": 1e6, "k": 1e3}
+# These models group thousands with narrow/thin/no-break spaces ("80\u202f000\u202f000"),
+# so those are normalised to ASCII before grouping is undone.
+_SEP_SPACES = "\u00a0\u2007\u2008\u2009\u202f\u2060"
+
+# The number may not end on a comma or period, and the word boundary now applies only to
+# the scale word. Requiring one after the number made "23,500,000 black" (spaces stripped)
+# backtrack onto "23,500," and parse 1000x low.
 NUM = re.compile(
-    r"([0-9][0-9,\.]*)\s*(trillion|billion|million|thousand|[tbmk])?\b", re.IGNORECASE)
+    r"([0-9](?:[0-9,\.]*[0-9])?)\s*(?:(trillion|billion|million|thousand|[tbmk])\b)?",
+    re.IGNORECASE)
+
+
+def _normalise(text: str) -> str:
+    """Undo digit grouping without letting digits collide with the following word.
+
+    Removing every space merged "23,500,000 black spots" into "23,500,000black spots";
+    with no boundary after the digits the pattern backtracked onto the comma. Only spaces
+    sitting *between digit groups* are removed, which is what grouping actually produces.
+    """
+    for c in _SEP_SPACES:
+        text = text.replace(c, " ")
+    return re.sub(r"(?<=\d)[ ](?=\d{3}(?:\D|$))", "", text)
 
 
 def parse_number(text: str) -> float | None:
     """First number in the text, scale words applied. None if nothing parses."""
-    for m in NUM.finditer(text.replace(" ", "").replace("\xa0", "")):
+    for m in NUM.finditer(_normalise(text)):
         raw, scale = m.group(1), m.group(2)
         raw = raw.rstrip(".").replace(",", "")
         if not raw or raw == ".":

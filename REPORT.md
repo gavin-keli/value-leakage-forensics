@@ -653,17 +653,16 @@ reported; neither is discarded for tidiness.
   control but was not needed for the headline.
 - **The shipped `claude-opus-4-7` run is a summarised trace, not raw CoT** — it can never be
   resampled, and its trajectory judge was reading a summary.
-- **Regex answer parsing has now been validated against the judge**, on 200 answers sampled
-  across all five runs: **192/200 (96%) agree** within 2% relative tolerance, with 0 cases
-  where either parser declined and the other did not. All 8 disagreements are
-  order-of-magnitude — there is no middle ground — and they split across *both* parsers:
-  - the regex takes the first number ≥1000, which is sometimes the population rather than
-    the spot count (*"approximately **100,000** individuals"* → regex 100,000, judge
-    70,000,000);
-  - **the judge misreads space-separated thousands** (*"5 300 000 000"* → judge 530,000,000,
-    regex correct). This is the same formatting quirk behind the §2.3 parser bug, and it
-    matters beyond this check: the estimate judge produced every threshold and every P(>thr)
-    in this report, so it carries a ~1% order-of-magnitude failure mode of its own.
+- **Regex answer parsing has been validated against the judge twice, and the second pass
+  found real defects.** The first check covered five runs and split its 8 disagreements
+  across both parsers, including a judge failure on space-separated thousands
+  (*"5 300 000 000"* → judge 530,000,000, regex correct) — so the estimate judge, which
+  produced every threshold and every P(>thr) here, carries a ~1% order-of-magnitude failure
+  mode of its own. Re-running the check against all **six** local runs, with the later
+  gpt-oss configurations included, gave **193/200 (96.5%)** and a different picture: every
+  disagreement now had the *regex* reading low, and two of the three causes were outright
+  bugs. After repair, **196/200 (98.0%)**, with the four survivors all Qwen3.5. Full
+  diagnosis, the measured impact, and what it does and does not affect: **§A9**.
 - **Forced-answer magnitudes are unreliable for Qwen3.5** (§2.3): its no-reasoning medians
   move by orders of magnitude between parser versions, so only its P(>thr) comparison is
   used. gpt-oss's magnitudes were stable across all three versions.
@@ -1020,6 +1019,68 @@ argument". The strongest evidence against the latter is that the same-meaning ar
 grows, which position-importance does not predict. A designed test would fix the cut position
 and vary only what follows it.
 
+### A9. The answer parser, validated and repaired
+
+The first validation pass covered five runs and read as reassuring. Re-running it against all
+six local runs — the three added later included — found defects the first pass could not
+have, because the newer gpt-oss configurations format numbers differently.
+
+**Result.** 200 visible answers sampled across six runs, parsed by the regex and
+independently by the estimate judge, compared at 2% relative tolerance:
+
+| | agree | disagree | of which order-of-magnitude |
+|---|---|---|---|
+| before the fix | 193/200 (96.5%) | 7 | 7 |
+| after the fix | **196/200 (98.0%)** | 4 | 4 |
+
+There is no middle ground — a disagreement is never a rounding difference, it is a factor of
+1000. And every one had the regex reading *low*, which matters because estimates are scored
+against a threshold: a downward misread moves P(>threshold) in one direction only.
+
+**Three causes, two of them bugs.**
+
+| cause | example | regex read | status |
+|---|---|---|---|
+| `U+202F` narrow no-break space not normalised, so `80 000 000` parsed as three separate numbers | `**≈ 80 000 000 black spots**` | 1,250,000 | fixed |
+| stripping *every* space made digits abut the next word; with no word boundary there, the pattern backtracked onto a comma | `23,500,000 black spots` | 23,500 | fixed |
+| "first number ≥1000" is sometimes a year or a population rather than the estimate | `…estimates from 2016…` | 2,016 | open |
+
+The first two share a root cause, and it is worth recording: the global space-stripping was
+*itself* the repair for the §2.3 k=−1 bug, where gpt-oss wrote `45 300 000`. That fix created
+this one. The correct form removes spaces only *between digit groups* and anchors the word
+boundary on the scale word rather than on the number.
+
+**Measured impact.** Re-parsing all 1,799 stored visible answers under both versions:
+
+| | value |
+|---|---|
+| answers whose parsed value changes | 54 / 1,799 (3.0%) |
+| largest shift in P(>threshold) for any single condition | +0.045 |
+| largest shift in an above-vs-below *gap* | 0.02 |
+
+Every gap shift is smaller than the confidence interval on the corresponding effect, so the
+conclusions in this report stand.
+
+**What cannot be repaired.** The resampling runs stored thresholded 0/1 outcomes rather than
+completion text, so §2.5 and A8 cannot be re-parsed — only re-run. Those numbers carry a ~3%
+parse-error rate, and the honest statement is that they were produced with the buggy parser.
+
+**Why that does not undermine A8.** Two facts bound it. First, the rate is ~3% for gpt-oss
+and **0% for Qwen3.5** (0 of 300 answers changed), so it cannot explain Qwen's degraded
+separation at all. Second, within a run the parse-error rate does not depend on position, while
+A8's load-bearing result is a contrast between early and late cuts *in the same traces* — a
+roughly uniform noise term lifts both halves together and cannot manufacture a gradient
+between them. What the noise does do is inflate the floor slightly in the gpt-oss arms, which
+if anything makes A8's separations conservative.
+
+**Remaining limitation.** The four surviving disagreements are all Qwen3.5 and all the same
+shape: the model opens with prose citing a population or a survey year before stating the
+spot count, and "first number ≥1000" takes the wrong one. Fixing it means changing the
+*selection* policy — prefer the last qualifying number, or defer to the judge — which would
+move numbers throughout the report and needs its own labelled validation set to justify. I
+left it, and it is the reason Qwen3.5's forced-answer magnitudes are reported only as
+P(>thr) (§2.3).
+
 ### A4. Revised confidence
 
 - **§2.1 (MRF blind to a 48-point outcome swing)** — unaffected; it never used resampling.
@@ -1034,6 +1095,12 @@ and vary only what follows it.
   counterfactual table should be treated as a null measurement, not weak evidence. A8
   explains why it was always going to be one: Qwen3.5's traces are long enough that the
   method cannot resolve class-level structure in them at any R used here.
+- **The answer parser** — *weakened then repaired* (A9). Two order-of-magnitude regex bugs
+  were found on the expanded run set and fixed, lifting judge agreement from 96.5% to 98.0%.
+  Sampled-condition results were re-parsed and move by at most 0.02 in any arm gap. The
+  resampling runs (§2.5, A8) stored only thresholded outcomes and so carry a ~3% parse-error
+  rate that can be removed only by re-running them; A9 argues why this cannot produce A8's
+  within-run gradient, and why it makes those separations conservative rather than inflated.
 - **A2's horizon hypothesis** — was speculation, now *tested* (A8) with model and R held
   fixed, and then sharpened: the operative variable is reasoning *remaining after the cut*,
   not total trace length, which is measurable within a single run and monotone rather than
@@ -1059,9 +1126,11 @@ All under `~/github/value-leakage-forensics/` on `machine B`; analysis code in `
 | `analysis/pre_retry/` | as-shipped `factor.json` for every run, before the judge repair |
 | `analysis/positions_*.json` | frozen position plans — a-priori and exploratory ledgers kept separate |
 | `analysis/horizon_curve.json` | separation vs reasoning remaining after the cut, pooled and per-configuration (A8) |
+| `analysis/parser_validation.json` | regex-vs-judge agreement before and after the parser repair (A9) |
 | `analysis/PLAN.md`, `analysis/STATUS.md` | plan of record and running status log |
 
 Key scripts: `local_gen.py` (sampling with per-family CoT splitting), `segment.py`
 (units + offsets + tags), `screen.py` (forced-answer screen), `resample.py` (counterfactual
 importance), `disavowal_test.py`, `forensics.py`, `fingerprints.py`, `retry_nulls.py`,
-`horizon_curve.py` (separation as a function of remaining reasoning).
+`horizon_curve.py` (separation as a function of remaining reasoning), `validate_parser.py`
+(regex vs the estimate judge).

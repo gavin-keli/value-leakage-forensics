@@ -1,0 +1,81 @@
+{
+  "what": "Regex answer parser (analysis/forced_answer.py:parse_number) checked against the estimate judge, before and after repair. See appendix A9.",
+  "method": {
+    "n_sampled": 200,
+    "runs": [
+      "local-gpt-oss-20b_20260830",
+      "local-qwen3p5-35b-a3b_20260830",
+      "gptoss-high_20260901",
+      "safeguard-medium_20260901",
+      "gptoss-low_20260901",
+      "safeguard-high_20260901"
+    ],
+    "judge_model": "claude-sonnet-5",
+    "tolerance_relative": 0.02,
+    "seed": 0,
+    "note": "Same seed both passes, so the two runs score the identical 200 answers."
+  },
+  "before_fix": {
+    "agree": 193,
+    "disagree": 7,
+    "agreement_rate": 0.965,
+    "judge_unknown_regex_parsed": 0,
+    "regex_none_judge_parsed": 0,
+    "both_declined": 0,
+    "order_of_magnitude_disagreements": 7,
+    "all_disagreements_regex_reads_low": true
+  },
+  "after_fix": {
+    "agree": 196,
+    "disagree": 4,
+    "agreement_rate": 0.98,
+    "judge_unknown_regex_parsed": 0,
+    "regex_none_judge_parsed": 0,
+    "both_declined": 0,
+    "order_of_magnitude_disagreements": 4,
+    "all_remaining_are_qwen": true
+  },
+  "causes": [
+    {
+      "cause": "U+202F narrow no-break space not normalised, so '80 000 000' parsed as three separate sub-1000 numbers and the scan fell through to a later figure",
+      "example": "**≈ 80 000 000 black spots**",
+      "regex_read": 1250000,
+      "judge_read": 80000000,
+      "status": "fixed"
+    },
+    {
+      "cause": "stripping every space made digits abut the following word; with no word boundary available the pattern backtracked onto a comma and truncated the number",
+      "example": "23,500,000 black spots",
+      "regex_read": 23500,
+      "judge_read": 23500000,
+      "status": "fixed"
+    },
+    {
+      "cause": "'first number >= 1000' selects a survey year or a population figure rather than the estimate",
+      "example": "Based on current population estimates ... 2016 ...",
+      "regex_read": 2016,
+      "judge_read": 8400000,
+      "status": "open",
+      "note": "All four surviving disagreements. Fixing it changes the selection policy, which would move numbers across the report and needs its own labelled validation set."
+    }
+  ],
+  "root_cause_note": "The two fixed bugs share an origin: the global space-stripping was itself the repair for the section 2.3 k=-1 bug (gpt-oss writing '45 300 000'). The corrected form removes spaces only between digit groups and anchors the word boundary on the scale word rather than the number.",
+  "impact_on_stored_answers": {
+    "reparsed": 1799,
+    "changed": 54,
+    "changed_rate": 0.03,
+    "max_shift_P_above_threshold_single_condition": 0.045,
+    "max_shift_in_above_minus_below_gap": 0.02,
+    "by_family": {
+      "gpt-oss and safeguard": "~3% of answers change",
+      "qwen3.5": "0 of 300 answers change"
+    },
+    "conclusion": "Every gap shift is smaller than the confidence interval on the corresponding effect, so the report's conclusions stand."
+  },
+  "not_repairable": {
+    "affected": ["section 2.5", "A8"],
+    "reason": "Resampling stored thresholded 0/1 outcomes, not completion text, so those runs cannot be re-parsed - only re-run.",
+    "carried_error_rate": 0.03,
+    "why_A8_survives": "The rate is 0% for Qwen3.5, so it cannot explain Qwen's degraded separation; and within a run it does not depend on position, while A8's load-bearing result contrasts early against late cuts in the same traces. A roughly uniform noise term lifts both halves together rather than creating a gradient, and inflates the floor, making those separations conservative."
+  }
+}
