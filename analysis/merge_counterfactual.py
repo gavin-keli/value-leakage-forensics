@@ -1,7 +1,7 @@
 """Merge Track A's two condition files, produced on separate GPUs.
 
-copenhagen ran below_good -> counterfactual.json
-oslo       ran above_good -> counterfactual_above.json
+node A     ran below_good -> counterfactual.json
+node B       ran above_good -> counterfactual_above.json
 
 The conditions are analytically independent (each is scored against its own base arm), so
 splitting them across hosts changes nothing except wall clock. Verifies the shared

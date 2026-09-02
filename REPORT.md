@@ -431,20 +431,58 @@ The content differs as sharply as the timing:
 
 ### 2.5 Causally, parameter choices carry the bias; talking about the bet does not
 
-Counterfactual importance, gpt-oss, R=48, a-priori positions only, bootstrapped over traces.
-Effects are signed by incentive direction, so a positive value means the original sentence
-pushed the answer toward the side that condition rewards.
+Counterfactual importance, gpt-oss @ medium, R=100, a-priori positions only, bootstrapped
+over traces. Effects are signed by incentive direction, so a positive value means the
+original sentence pushed the answer toward the side that condition rewards.
 
 | unit class | n | signed effect | 95% CI |
 |---|---|---|---|
-| **parameter-selection** | 59 | **+0.037** | **[+0.013, +0.063]** |
-| directional-sensitivity-check | 4 | +0.021 | [+0.000, +0.083] |
-| threshold-comparison | 20 | +0.004 | [−0.009, +0.016] |
-| incentive-acknowledgment | 46 | −0.003 | [−0.012, +0.006] |
+| **parameter-selection** | 59 | **+0.039** | **[+0.004, +0.065]** |
+| threshold-comparison | 20 | +0.009 | [−0.003, +0.023] |
+| incentive-acknowledgment | 46 | +0.013 | [−0.001, +0.028] |
 | untagged | 158 | +0.004 | [−0.005, +0.013] |
 
 The units that *visibly* engage the incentive are causally inert. The work is done where it
 looks like ordinary estimation.
+
+#### The same measurement across five configurations
+
+Repeating it on other models and trace lengths does two things at once: it tests whether the
+class result replicates, and it shows where the *method* stops working. Both belong in one
+table, because the second explains the first.
+
+| configuration | trace length | R | parameter-selection | resolves? |
+|---|---|---|---|---|
+| gpt-oss @ medium | 2.8k chars | 100 | **+0.039 [+0.004, +0.065]** | **yes** |
+| safeguard @ medium | 2.8k chars | 100 | +0.021 [−0.001, +0.043] | borderline |
+| gpt-oss @ high | 23k chars | 48 | +0.042 [−0.014, +0.112] | no |
+| Qwen3.5 | 30k chars | 32 | −0.019 [−0.083, +0.031] | no |
+| gpt-oss @ low | 0.25k chars | 48 | −0.021 [−0.045, +0.002] | different regime |
+
+Read the middle two rows together with §A8. **gpt-oss @ high has almost the same point
+estimate as @ medium (+0.042 vs +0.039) with an interval three times wider.** The signal did
+not change; the instrument stopped resolving it, exactly as the horizon limit predicts. Qwen
+sits further along the same axis, and its opposite-signed estimate is best read as an
+unresolved measurement rather than a contrary finding.
+
+**Safeguard is a genuine, partial replication.** Same base model, different post-training,
+matched on trace regime, R, and position-selection policy — and its parameter-selection
+effect is the largest positive class, same sign, at about half the magnitude, with an
+interval that includes zero by a hair (−0.001). Its placebo behaves identically to
+gpt-oss's (−0.011 vs −0.010). The honest summary is *directionally consistent on a second
+checkpoint, not independently significant*.
+
+**The low-effort row is a different reasoning regime, not a contradiction.** At ~7 units per
+trace the model is not doing Fermi decomposition — it states a number with token
+justification, against a threshold (180M) far from the accurate range, and the tagger's
+categories do not carry the same meaning. Its classes invert (parameter-selection −0.021,
+incentive-acknowledgment +0.018 [+0.001, +0.035]). That is a judgement about regime rather
+than a measurement, so this row is reported but not treated as evidence either way.
+
+A caveat that applies to the whole table: **R varies by row** (100/100/48/32/48), so interval
+width reflects sample size as well as trace length. Matching R everywhere would mean
+re-running the long-trace rows at R=100 — 15+ GPU-hours for rows that are unresolved
+regardless.
 
 **The contrast is the evidence, not the absolute value.** A single sentence moving the
 outcome ~3.7 points is modest on its own, and most parameter sentences do nothing at all —
@@ -615,11 +653,17 @@ reported; neither is discarded for tidiness.
   control but was not needed for the headline.
 - **The shipped `claude-opus-4-7` run is a summarised trace, not raw CoT** — it can never be
   resampled, and its trajectory judge was reading a summary.
-- **Regex answer parsing** in the screen and resampling passes was validated by parse rate
-  (98.7–99.1% on gpt-oss, 87.5–92.8% on Qwen3.5), not against the Claude judge on a sample.
-  That check is cheap and should be done before any of this is published further — and the
-  parser bug in §2.3 shows why: parse *rate* was 97.5% while the parsed *values* were an
-  order of magnitude wrong.
+- **Regex answer parsing has now been validated against the judge**, on 200 answers sampled
+  across all five runs: **192/200 (96%) agree** within 2% relative tolerance, with 0 cases
+  where either parser declined and the other did not. All 8 disagreements are
+  order-of-magnitude — there is no middle ground — and they split across *both* parsers:
+  - the regex takes the first number ≥1000, which is sometimes the population rather than
+    the spot count (*"approximately **100,000** individuals"* → regex 100,000, judge
+    70,000,000);
+  - **the judge misreads space-separated thousands** (*"5 300 000 000"* → judge 530,000,000,
+    regex correct). This is the same formatting quirk behind the §2.3 parser bug, and it
+    matters beyond this check: the estimate judge produced every threshold and every P(>thr)
+    in this report, so it carries a ~1% order-of-magnitude failure mode of its own.
 - **Forced-answer magnitudes are unreliable for Qwen3.5** (§2.3): its no-reasoning medians
   move by orders of magnitude between parser versions, so only its P(>thr) comparison is
   used. gpt-oss's magnitudes were stable across all three versions.
@@ -866,7 +910,7 @@ This is the same conclusion §2.2 reached about the shipped 10-model leaderboard
 the other end: **100 rollouts per condition is not enough to compare models in this
 paradigm.** It was adequate only where the effect was very large.
 
-### A8. The horizon limit, tested directly — A2's hypothesis holds
+### A8. The horizon limit, tested directly — A2's hypothesis holds, on a corrected variable
 
 A2 observed that the meaning-split degrades and guessed trace length was responsible: the
 further the model still has to travel after an intervention, the more the outcome is decided
@@ -880,6 +924,7 @@ to Qwen3.5's ~30k.
 
 | | trace length | R | placebo separation |
 |---|---|---|---|
+| gpt-oss @ low | ~0.25k chars | 48 | **+0.004** |
 | gpt-oss @ medium | ~2.8k chars | 48 | **+0.011** |
 | **gpt-oss @ high** | **~23k chars** | **48** | **−0.037** |
 | Qwen3.5 | ~30k chars | 32 | −0.033 |
@@ -887,6 +932,67 @@ to Qwen3.5's ~30k.
 **The separation flips from positive to negative purely by making the same model think
 longer, and lands on Qwen3.5's value.** The degradation is a property of trace length, not
 of the Qwen lineage.
+
+**Correction: this is a gradient in *remaining* reasoning, not a cliff in total length.**
+The table above compares whole runs, but the variable the mechanism actually names is not how
+long a trace is — it is how much reasoning remains *after* the intervention. That is
+recoverable for every position already resampled, from the stored segment offsets, so it can
+be measured without generating anything new: **1,328 positions across all five
+configurations**.
+
+| reasoning remaining after the cut | n | \|Δp\| different | \|Δp\| same | separation | 95% CI |
+|---|---|---|---|---|---|
+| <0.5k chars | 984 | 0.126 | 0.121 | **+0.005** | [−0.003, +0.013] |
+| 0.5–2k | 153 | 0.063 | 0.079 | −0.016 | [−0.028, −0.005] |
+| 2–8k | 147 | 0.097 | 0.112 | −0.015 | [−0.033, +0.004] |
+| 8–20k | 29 | 0.046 | 0.092 | −0.046 | [−0.080, −0.004] |
+| >20k | 15 | 0.118 | 0.176 | −0.058 | [−0.109, +0.008] |
+
+Pooled like this the comparison is confounded: positions with little remaining come mostly
+from short-trace runs. The test that breaks the confound is **within a single configuration**,
+where model, effort and R are all held fixed and only position in the trace varies. Splitting
+each run at its own median remaining length:
+
+| configuration | median remaining | separation, less remaining | separation, more remaining | difference | 95% CI |
+|---|---|---|---|---|---|
+| gpt-oss @ high | 17.4k | −0.007 | −0.070 | **+0.061** | [+0.001, +0.104] |
+| Qwen3.5 | 4.7k | −0.012 | −0.054 | **+0.043** | [+0.001, +0.080] |
+| gpt-oss @ medium | 1.6k | −0.004 | −0.016 | +0.012 | [−0.025, +0.045] |
+| safeguard @ medium | 2.0k | −0.006 | −0.015 | +0.009 | [−0.025, +0.036] |
+| gpt-oss @ low | 0.1k | +0.005 | +0.003 | +0.001 | [−0.014, +0.017] |
+
+Both long-trace configurations degrade significantly *within themselves*: late positions in a
+23k-char gpt-oss trace behave like short traces, early positions in the same traces do not.
+Qwen3.5's rank correlation with remaining length is −0.238 (p = 0.037); pooled over all 1,328
+positions it is −0.081 (p = 0.002). The three short-trace runs carry the same sign with
+intervals spanning zero — expected, since remaining length barely varies inside them.
+
+So the "cliff between 2.8k and 23k" was an artifact of comparing runs to each other. Each
+run's headline separation is just its own distribution of remaining length, averaged over:
+low effort puts every position near the end, high effort puts most of them far from it.
+**I am retracting the cliff claim — the underlying relationship is monotone.**
+
+**Which arm moves says this is noise, not signal.** Across the bins the same-meaning arm
+grows faster than the different-meaning arm (0.121 → 0.176 against 0.126 → 0.118). Were long
+horizons a sign that early sentences genuinely matter more, the *different*-meaning arm
+should have pulled ahead. It does not. What grows is the answer movement produced by an
+intervention that changed no meaning at all — downstream sampling re-randomising the outcome
+faster than the edit can steer it.
+
+**Low effort fails for the opposite reason, and it is not a floor effect.** I expected very
+short traces to leave no variance for the intervention to move, driving |Δp| toward zero in
+both arms. The opposite happened: |Δp| is *largest* at low effort (0.126 and 0.121, the
+highest of any configuration in both arms), with 270 of 1,527 positions exceeding 0.25. There
+is ample variance at 250 characters. But almost nothing remains after the cut, so the horizon
+account cannot explain the null either — and within that run remaining length predicts nothing
+(ρ = −0.018, p = 0.58). What does explain it is *fraction*: in a three- or four-unit trace,
+replacing one unit rewrites most of the reasoning, so even a same-meaning resample produces a
+different derivation.
+
+**The usable regime is bounded at both ends.** Counterfactual importance needs traces long
+enough that one unit is a small part of the whole, and cuts placed late enough that little
+remains to re-randomise the outcome. Neither condition is about total length alone, which is
+why the run-level view looked like a cliff.
 
 Two further signs of the same thing in that run. The class table loses its structure: at
 medium, parameter-selection was the only class whose interval excluded zero
@@ -898,14 +1004,21 @@ signal has not reversed; the instrument has stopped resolving it.
 **What this means for reuse.** Counterfactual importance has a horizon limit, and the
 obvious next application — long agentic trajectories — sits squarely inside it. Resampling a
 step thousands of tokens before the outcome will mostly measure the sampling that follows.
-The mitigations are to place interventions near the outcome, or to raise R sharply; the
-paper's 100 rollouts per position exist for this reason.
+The mitigation is now more specific than "raise R": **place interventions late**. The
+within-run tables show that late cuts in a long trace recover most of the method's resolving
+power at no extra cost, because the operative variable is remaining reasoning rather than
+trace length. Where early steps must be tested, R has to rise to cover a noise floor that
+grows with the distance to the outcome; the paper's 100 rollouts per position exist for this
+reason.
 
-**Limits of this test.** The placebo comparison rests on 29 positions with ≥5 samples in
-both arms, against a split-half noise floor of 0.050 that both arms sit near. The direction
-is consistent across three independent configurations, but the magnitude is not tightly
-pinned, and one intermediate trace length would establish whether the transition is gradual
-or sharp.
+**Limits of this test.** The run-level comparison rests on 29 positions with ≥5 samples in
+both arms for gpt-oss @ high, against a split-half noise floor of 0.050 that both arms sit
+near. The within-run analysis is better powered (1,328 positions) but reuses data collected
+for other purposes, so remaining length is observational rather than assigned — it correlates
+with position index, and I cannot fully separate "far from the outcome" from "early in the
+argument". The strongest evidence against the latter is that the same-meaning arm is what
+grows, which position-importance does not predict. A designed test would fix the cut position
+and vary only what follows it.
 
 ### A4. Revised confidence
 
@@ -922,11 +1035,14 @@ or sharp.
   explains why it was always going to be one: Qwen3.5's traces are long enough that the
   method cannot resolve class-level structure in them at any R used here.
 - **A2's horizon hypothesis** — was speculation, now *tested* (A8) with model and R held
-  fixed. It is the most transferable result here, and the sharpest caveat on the method.
+  fixed, and then sharpened: the operative variable is reasoning *remaining after the cut*,
+  not total trace length, which is measurable within a single run and monotone rather than
+  a cliff. The cliff reading in the first version of A8 is retracted. It remains the most
+  transferable result here, and the sharpest caveat on the method.
 
 ## Appendix — artefacts
 
-All paths are relative to the repository root.
+All under `~/github/value-leakage-forensics/` on `machine B`; analysis code in `analysis/`.
 
 | file | contents |
 |---|---|
@@ -942,8 +1058,10 @@ All paths are relative to the repository root.
 | `runs/*/trajectory_retry_report.json` | judge-null recovery per condition (§2.2) |
 | `analysis/pre_retry/` | as-shipped `factor.json` for every run, before the judge repair |
 | `analysis/positions_*.json` | frozen position plans — a-priori and exploratory ledgers kept separate |
+| `analysis/horizon_curve.json` | separation vs reasoning remaining after the cut, pooled and per-configuration (A8) |
 | `analysis/PLAN.md`, `analysis/STATUS.md` | plan of record and running status log |
 
 Key scripts: `local_gen.py` (sampling with per-family CoT splitting), `segment.py`
 (units + offsets + tags), `screen.py` (forced-answer screen), `resample.py` (counterfactual
-importance), `disavowal_test.py`, `forensics.py`, `fingerprints.py`, `retry_nulls.py`.
+importance), `disavowal_test.py`, `forensics.py`, `fingerprints.py`, `retry_nulls.py`,
+`horizon_curve.py` (separation as a function of remaining reasoning).

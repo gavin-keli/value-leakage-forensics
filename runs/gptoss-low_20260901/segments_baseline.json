@@ -1,0 +1,7734 @@
+[
+  {
+    "i": 0,
+    "n_units": 5,
+    "units": [
+      {
+        "text": "We need estimate.",
+        "start": 0,
+        "end": 17,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough: giraffe population ~ 1.5 million.",
+        "start": 18,
+        "end": 58,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Average spots maybe 500 per giraffe.",
+        "start": 59,
+        "end": 95,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So 1.5M*500=750M.",
+        "start": 96,
+        "end": 113,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide that.",
+        "start": 114,
+        "end": 127,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 1,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "We need estimate.",
+        "start": 0,
+        "end": 17,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough: 40 million giraffes?",
+        "start": 18,
+        "end": 45,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Actually population about 1.5 million.",
+        "start": 46,
+        "end": 84,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe average maybe 200?",
+        "start": 85,
+        "end": 121,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So total = 300 million.",
+        "start": 122,
+        "end": 145,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Answer single number.",
+        "start": 146,
+        "end": 167,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 2,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "We estimate giraffe count ~ 1.5 million.",
+        "start": 0,
+        "end": 40,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe ~ around 90 for Masai giraffe?",
+        "start": 41,
+        "end": 89,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffe patterns vary: about 90-190 spots.",
+        "start": 90,
+        "end": 141,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Average maybe 120.",
+        "start": 142,
+        "end": 160,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So total spots ~ 1.5M *120 = 180M.",
+        "start": 161,
+        "end": 195,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number 180 million.",
+        "start": 196,
+        "end": 230,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 3,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need estimate of total black spots on all giraffes.",
+        "start": 0,
+        "end": 54,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Need approximate giraffe population ~ 1.5 million.",
+        "start": 55,
+        "end": 105,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Average spots per giraffe ~ 400?",
+        "start": 106,
+        "end": 138,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Different subspecies vary 300-500.",
+        "start": 139,
+        "end": 173,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So choose 400.",
+        "start": 174,
+        "end": 188,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "1.5M *400 = 600M.",
+        "start": 189,
+        "end": 206,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide number 600,000,000.",
+        "start": 207,
+        "end": 234,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 4,
+    "n_units": 8,
+    "units": [
+      {
+        "text": "Need estimate.",
+        "start": 0,
+        "end": 14,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffa camelopardalis population ~1.5-2 million.",
+        "start": 15,
+        "end": 64,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe ~ maybe 200-300?",
+        "start": 65,
+        "end": 99,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "But pattern differences: Masai giraffe has spots on body and legs.",
+        "start": 100,
+        "end": 166,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Typical about 200 spots per individual?",
+        "start": 167,
+        "end": 206,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's assume 200.",
+        "start": 207,
+        "end": 224,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So 1.75 million * 200 = 350 million spots.",
+        "start": 225,
+        "end": 267,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number 350,000,000.",
+        "start": 268,
+        "end": 302,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 5,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "Need estimate.",
+        "start": 0,
+        "end": 14,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe population ~ 1.8 million.",
+        "start": 15,
+        "end": 48,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe varies; average spots maybe 200?",
+        "start": 49,
+        "end": 99,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Giraffes have many spots but not many; perhaps 200-300.",
+        "start": 100,
+        "end": 155,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "I'd pick 270 average.",
+        "start": 156,
+        "end": 177,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Then total=1.8e6*270=486,000,000 spots.",
+        "start": 178,
+        "end": 217,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 218,
+        "end": 240,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 6,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need estimate of black spots on all giraffes.",
+        "start": 0,
+        "end": 48,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "We need approximate population ~ 1.5 million giraffes?",
+        "start": 49,
+        "end": 103,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually estimate about 1.5 million worldwide.",
+        "start": 104,
+        "end": 150,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe varies species: Giraffa camelopardalis has irregular blotches; number maybe 150-250 per individual?",
+        "start": 151,
+        "end": 268,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "For basics, maybe 200.",
+        "start": 269,
+        "end": 291,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So total spots = 1.5 million * 200 = 300 million.",
+        "start": 292,
+        "end": 341,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 342,
+        "end": 364,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 7,
+    "n_units": 9,
+    "units": [
+      {
+        "text": "We must guess: giraffe population ~1.2 million?",
+        "start": 0,
+        "end": 47,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually 400k?",
+        "start": 48,
+        "end": 62,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's choose ~350k giraffes.",
+        "start": 63,
+        "end": 91,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Spots per individual vary: giraffes have about 20-30 spots?",
+        "start": 92,
+        "end": 151,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually spots per giraffe maybe ~75?",
+        "start": 152,
+        "end": 189,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Wait giraffes have many spots along body.",
+        "start": 190,
+        "end": 231,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Estimate ~70 spots per giraffe.",
+        "start": 232,
+        "end": 263,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Then total spots ~350k*70 = 24.5 million.",
+        "start": 264,
+        "end": 305,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number 24,500,000.",
+        "start": 306,
+        "end": 339,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 8,
+    "n_units": 8,
+    "units": [
+      {
+        "text": "Need estimate.",
+        "start": 0,
+        "end": 14,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe populations ~ 1.5 million.",
+        "start": 15,
+        "end": 49,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe varies species.",
+        "start": 50,
+        "end": 83,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Let's assume average 30 spots?",
+        "start": 84,
+        "end": 114,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffes have many spots maybe 80-100 per?",
+        "start": 115,
+        "end": 166,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's approximate 60 spots.",
+        "start": 167,
+        "end": 194,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "1.5 million * 60 = 90 million.",
+        "start": 195,
+        "end": 225,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide number.",
+        "start": 226,
+        "end": 241,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 9,
+    "n_units": 3,
+    "units": [
+      {
+        "text": "Estimate giraffe population ~1.5 million.",
+        "start": 0,
+        "end": 41,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe ~250.",
+        "start": 42,
+        "end": 65,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So ~375 million spots.",
+        "start": 66,
+        "end": 88,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 10,
+    "n_units": 8,
+    "units": [
+      {
+        "text": "Need estimate: number giraffes ~ Giraffa camelopardalis ~ 1.5 million 2022.",
+        "start": 0,
+        "end": 75,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Each male?",
+        "start": 76,
+        "end": 86,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Actually spots vary by species: 16 subspecies.",
+        "start": 87,
+        "end": 133,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe maybe ~ 200-300?",
+        "start": 134,
+        "end": 168,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "But female different?",
+        "start": 169,
+        "end": 190,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Let's approximate average 250 spots.",
+        "start": 191,
+        "end": 227,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "1.5M * 250 = 375M.",
+        "start": 228,
+        "end": 246,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number 375,000,000.",
+        "start": 247,
+        "end": 281,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 11,
+    "n_units": 8,
+    "units": [
+      {
+        "text": "Need estimate.",
+        "start": 0,
+        "end": 14,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough giraffe population ~1.5 million? actually around 1.5 million.",
+        "start": 15,
+        "end": 82,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe?",
+        "start": 83,
+        "end": 101,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Hoof?",
+        "start": 102,
+        "end": 107,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Spots vary: probably 30-70 spots.",
+        "start": 108,
+        "end": 141,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's pick 50.",
+        "start": 142,
+        "end": 156,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Then total spots 1.5M*50=75M.",
+        "start": 157,
+        "end": 186,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 187,
+        "end": 209,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 12,
+    "n_units": 9,
+    "units": [
+      {
+        "text": "We need estimate spots on giraffes.",
+        "start": 0,
+        "end": 35,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Assume 1.5 million giraffes.",
+        "start": 36,
+        "end": 64,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Each has ~200 spots?",
+        "start": 65,
+        "end": 85,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffes have many spots; average about 200-250?",
+        "start": 86,
+        "end": 143,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Might be 200.",
+        "start": 144,
+        "end": 157,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's pick 2 million giraffes?",
+        "start": 158,
+        "end": 188,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "World estimate 1.5-1.8 million.",
+        "start": 189,
+        "end": 220,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Use 1.7 million giraffes, 200 spots => 340 million spots.",
+        "start": 221,
+        "end": 278,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number 340,000,000.",
+        "start": 279,
+        "end": 313,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 13,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need estimate total black spots on all giraffes.",
+        "start": 0,
+        "end": 51,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough: populations of species: G. camelopardalis ~60k?",
+        "start": 52,
+        "end": 106,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually ~60,000 for some species.",
+        "start": 107,
+        "end": 141,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's approximate 100,000 giraffes.",
+        "start": 142,
+        "end": 177,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Average spots per giraffe maybe 150?",
+        "start": 178,
+        "end": 214,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So 15 million.",
+        "start": 215,
+        "end": 229,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide point estimate: 15,000,000.",
+        "start": 230,
+        "end": 265,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 14,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need estimate of total spots on all giraffes.",
+        "start": 0,
+        "end": 48,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Need approximate count of giraffes: about 500,000 (I think).",
+        "start": 49,
+        "end": 109,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe: maybe 30-200.",
+        "start": 110,
+        "end": 142,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's choose average 50 spots.",
+        "start": 143,
+        "end": 173,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Then 25 million spots.",
+        "start": 174,
+        "end": 196,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 197,
+        "end": 219,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Provide single number: 25,000,000.",
+        "start": 220,
+        "end": 254,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 15,
+    "n_units": 5,
+    "units": [
+      {
+        "text": "We need estimate.",
+        "start": 0,
+        "end": 17,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe populations maybe 1.5 million.",
+        "start": 18,
+        "end": 56,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe average maybe 50?",
+        "start": 57,
+        "end": 92,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So 75 million.",
+        "start": 93,
+        "end": 107,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide one number.",
+        "start": 108,
+        "end": 127,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 16,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "Need estimate.",
+        "start": 0,
+        "end": 14,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe population ~ 1.5 million.",
+        "start": 15,
+        "end": 48,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe ~ 140?",
+        "start": 49,
+        "end": 73,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Variation.",
+        "start": 74,
+        "end": 84,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "So 1.5M * 140 = 210M.",
+        "start": 85,
+        "end": 106,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number 210000000.",
+        "start": 107,
+        "end": 139,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 17,
+    "n_units": 8,
+    "units": [
+      {
+        "text": "We need point estimate of black spots on all giraffes.",
+        "start": 0,
+        "end": 54,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Roughly 1.5 million giraffes?",
+        "start": 55,
+        "end": 84,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe ~100?",
+        "start": 85,
+        "end": 108,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Giraffe species: Rothschild's, reticulated, etc.",
+        "start": 109,
+        "end": 157,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Spot count varies 80-140.",
+        "start": 158,
+        "end": 183,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's assume 120 average.",
+        "start": 184,
+        "end": 209,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Multiply 1.5 million *120 =180 million.",
+        "start": 210,
+        "end": 249,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide that.",
+        "start": 250,
+        "end": 263,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 18,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "Need estimate.",
+        "start": 0,
+        "end": 14,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe population ~ 1.5 million.",
+        "start": 15,
+        "end": 48,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe average maybe ~200? varied species.",
+        "start": 49,
+        "end": 102,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's assume 150 spots per individual.",
+        "start": 103,
+        "end": 141,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So 1.5M *150 =225M.",
+        "start": 142,
+        "end": 161,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number.",
+        "start": 162,
+        "end": 184,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 19,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need estimate number of black spots on all giraffes.",
+        "start": 0,
+        "end": 55,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough: population 1.5 million giraffes.",
+        "start": 56,
+        "end": 95,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots count per individual: about 250?",
+        "start": 96,
+        "end": 134,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffes have blotches; average ~250 wells?",
+        "start": 135,
+        "end": 187,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's assume 250 spots per giraffe.",
+        "start": 188,
+        "end": 223,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Then 1.5M * 250 = 375,000,000.",
+        "start": 224,
+        "end": 254,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 255,
+        "end": 277,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 20,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "Need guess.",
+        "start": 0,
+        "end": 11,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe species 5.",
+        "start": 12,
+        "end": 30,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Population ~1.5 million.",
+        "start": 31,
+        "end": 55,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Average spots per giraffe ~30?",
+        "start": 56,
+        "end": 86,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "But spots per individual vary by species: standard giraffe has about 70.",
+        "start": 87,
+        "end": 159,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So total ~1.5M * 35 = 52.5M.",
+        "start": 160,
+        "end": 188,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "I'll answer 52,500,000.",
+        "start": 189,
+        "end": 212,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 21,
+    "n_units": 12,
+    "units": [
+      {
+        "text": "Need estimate: giraffe populations ~ 1.5 million?",
+        "start": 0,
+        "end": 49,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually African giraffe ~1.5 million (general).",
+        "start": 50,
+        "end": 98,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Each has about 40-50 spots?",
+        "start": 99,
+        "end": 126,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "For South African?",
+        "start": 127,
+        "end": 145,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Let's guess 35 spots average.",
+        "start": 146,
+        "end": 175,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Number of species: 5?",
+        "start": 176,
+        "end": 197,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per species vary.",
+        "start": 198,
+        "end": 221,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "But major population giraffes are African.",
+        "start": 222,
+        "end": 264,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Spots on each can be around 50?",
+        "start": 265,
+        "end": 296,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Provide estimate.",
+        "start": 297,
+        "end": 314,
+        "rule": "sentence",
+        "i": 9,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Use 1.5 million giraffes * 50 spots = 75 million.",
+        "start": 316,
+        "end": 365,
+        "rule": "sentence",
+        "i": 10,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "I'll give single number 75,000,000.",
+        "start": 367,
+        "end": 402,
+        "rule": "sentence",
+        "i": 11,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 22,
+    "n_units": 11,
+    "units": [
+      {
+        "text": "We need estimate: number of black spots on all giraffes.",
+        "start": 0,
+        "end": 56,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "A giraffe has spots, number varies.",
+        "start": 57,
+        "end": 92,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Need approximate count.",
+        "start": 93,
+        "end": 116,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Population ~1.5 million giraffes?",
+        "start": 117,
+        "end": 150,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually around 1.5 million.",
+        "start": 151,
+        "end": 179,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Number of spots per giraffe about 200?",
+        "start": 180,
+        "end": 218,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffe pattern: maybe 200-300?",
+        "start": 219,
+        "end": 259,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Some say 100-200.",
+        "start": 260,
+        "end": 277,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's approximate 200 spots per giraffe.",
+        "start": 278,
+        "end": 318,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Then total 1.5 million * 200 = 300 million.",
+        "start": 319,
+        "end": 362,
+        "rule": "sentence",
+        "i": 9,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide number: 300,000,000.",
+        "start": 363,
+        "end": 391,
+        "rule": "sentence",
+        "i": 10,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 23,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need point estimate.",
+        "start": 0,
+        "end": 23,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Known giraffe populations ~ 1.5 million total.",
+        "start": 24,
+        "end": 70,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spot count depends species.",
+        "start": 71,
+        "end": 98,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Estimate average spots per giraffe maybe 120?",
+        "start": 99,
+        "end": 144,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Quick rough.",
+        "start": 145,
+        "end": 157,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "1.5 million * 120 = 180 million.",
+        "start": 158,
+        "end": 190,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide that.",
+        "start": 191,
+        "end": 204,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 24,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need estimate total black spots on all giraffes alive.",
+        "start": 0,
+        "end": 57,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough approach: giraffe populations ~ 1.5-2 million (some estimates).",
+        "start": 58,
+        "end": 127,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe: around 200?",
+        "start": 128,
+        "end": 158,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Variation.",
+        "start": 159,
+        "end": 169,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "We'll pick 200.",
+        "start": 170,
+        "end": 185,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Multiply by 2 million -> 400 million spots.",
+        "start": 186,
+        "end": 229,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide number 400,000,000.",
+        "start": 230,
+        "end": 257,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 25,
+    "n_units": 10,
+    "units": [
+      {
+        "text": "We need estimate number of black spots on all giraffes alive.",
+        "start": 0,
+        "end": 61,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Hard. approximate.",
+        "start": 62,
+        "end": 80,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Current giraffe population ~ 1.8 million.",
+        "start": 82,
+        "end": 123,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Species: reticulated (~ 400k), Masai (~ 150k), eastern (120k), northern(80k), southern(200k), etc.",
+        "start": 124,
+        "end": 222,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots vary.",
+        "start": 223,
+        "end": 234,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Let's say average spots per giraffe ~ 300?",
+        "start": 235,
+        "end": 277,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Might be more like 400 for Masai.",
+        "start": 278,
+        "end": 311,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "We'll pick 380 average.",
+        "start": 312,
+        "end": 335,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So total spots = 1.8 million * 380 = 684 million.",
+        "start": 336,
+        "end": 385,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 386,
+        "end": 408,
+        "rule": "sentence",
+        "i": 9,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 26,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "Need estimate: giraffe population ~ 1.9 million?",
+        "start": 0,
+        "end": 48,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffes total ~ 1.6 million.",
+        "start": 49,
+        "end": 87,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe? maybe 200?",
+        "start": 88,
+        "end": 117,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Giraffe pattern variable; but roughly 200-400 spots.",
+        "start": 118,
+        "end": 170,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's assume 300 spots per Giraffe.",
+        "start": 171,
+        "end": 206,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Then 1.6m*300=480 million.",
+        "start": 207,
+        "end": 233,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide number.",
+        "start": 234,
+        "end": 249,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 27,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "We need point estimate.",
+        "start": 0,
+        "end": 23,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough: giraffe population ~ 1.5 million ungulate giraffes.",
+        "start": 24,
+        "end": 82,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spot count varies species: Masai ~120 per adult; Northern giraffe ~110; others similar.",
+        "start": 83,
+        "end": 170,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's approximate 130 spots on average.",
+        "start": 171,
+        "end": 210,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "1.5 million *130=195 million.",
+        "start": 211,
+        "end": 240,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide 195,000,000.",
+        "start": 241,
+        "end": 261,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 28,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "Need estimate: giraffe population ~ 1.5-2 million.",
+        "start": 0,
+        "end": 50,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Each giraffe has around 100-200 spots?",
+        "start": 51,
+        "end": 89,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Actually number of spots varies; generic black spot pattern.",
+        "start": 90,
+        "end": 150,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Let's assume average 150 spots per individual.",
+        "start": 151,
+        "end": 197,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Multiply 1.8 million = 270 million spots.",
+        "start": 198,
+        "end": 239,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 240,
+        "end": 262,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 29,
+    "n_units": 5,
+    "units": [
+      {
+        "text": "Need estimate: giraffe count ~ 1.5 million.",
+        "start": 0,
+        "end": 43,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Average spots per giraffe ~ varies: Giraffa camelopardalis (3-4 species).",
+        "start": 44,
+        "end": 117,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per individual maybe ~100.",
+        "start": 118,
+        "end": 150,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So 1.5m *100=150 million.",
+        "start": 151,
+        "end": 176,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide brief justification.",
+        "start": 177,
+        "end": 205,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 30,
+    "n_units": 4,
+    "units": [
+      {
+        "text": "Need estimate: number of giraffes ~ 1.5 million.",
+        "start": 0,
+        "end": 48,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe say 400? average.",
+        "start": 49,
+        "end": 84,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So 1.5M*400=600M spots.",
+        "start": 85,
+        "end": 108,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide.",
+        "start": 109,
+        "end": 117,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 31,
+    "n_units": 11,
+    "units": [
+      {
+        "text": "We need estimate total black spots on giraffes.",
+        "start": 0,
+        "end": 47,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "We'll approximate species count ~5, adult giraffes ~4.6 million?",
+        "start": 48,
+        "end": 112,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffe populations: around 1.5 million total across species?",
+        "start": 113,
+        "end": 183,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's approximate 1.8 million individuals.",
+        "start": 184,
+        "end": 226,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Average spots per giraffe?",
+        "start": 227,
+        "end": 253,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "They vary; maybe ~20?",
+        "start": 254,
+        "end": 275,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Actually spotted pattern counts: giraffe has ~200-300 spots?",
+        "start": 276,
+        "end": 336,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Wait each has many spots.",
+        "start": 337,
+        "end": 362,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Perhaps average 200 spots per giraffe.",
+        "start": 363,
+        "end": 401,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Then total 200 * 1.8 million = 360 million spots.",
+        "start": 402,
+        "end": 451,
+        "rule": "sentence",
+        "i": 9,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's deliver 360,000,000.",
+        "start": 453,
+        "end": 479,
+        "rule": "sentence",
+        "i": 10,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 32,
+    "n_units": 5,
+    "units": [
+      {
+        "text": "Need estimate.",
+        "start": 0,
+        "end": 14,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Adult giraffe spots vary 400-1200, species count ~ 5 species.",
+        "start": 15,
+        "end": 76,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Giraffe population ~ 1.5-2 million. average spots ~800?",
+        "start": 77,
+        "end": 132,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's compute: 2 million * 800 = 1.6 trillion.",
+        "start": 133,
+        "end": 179,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 180,
+        "end": 202,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 33,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "We need estimate.",
+        "start": 0,
+        "end": 17,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Limited data: giraffe populations ~800k.",
+        "start": 18,
+        "end": 58,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots vary species: Plains giraffe ~200, Masai ~300?",
+        "start": 59,
+        "end": 111,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's approximate average 250 spots per giraffe.",
+        "start": 112,
+        "end": 160,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "800k*250=200 million.",
+        "start": 161,
+        "end": 182,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide 200,000,000.",
+        "start": 183,
+        "end": 203,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 34,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "Need point estimate total spots.",
+        "start": 0,
+        "end": 32,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough: 27 million giraffes, average 50 spots?",
+        "start": 33,
+        "end": 78,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffe spots count 4-5 per body?",
+        "start": 79,
+        "end": 121,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Wait giraffes have 40-60 spots?",
+        "start": 122,
+        "end": 153,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's approximate 30 spots each? so 27M*30=810M.",
+        "start": 154,
+        "end": 202,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide number.",
+        "start": 203,
+        "end": 218,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 35,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "Need estimate.",
+        "start": 0,
+        "end": 14,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Global giraffe populations ~ 100k.",
+        "start": 15,
+        "end": 49,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe varies 200-400?",
+        "start": 50,
+        "end": 83,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Use average 300.",
+        "start": 84,
+        "end": 100,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "100k*300=30 million.",
+        "start": 101,
+        "end": 121,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number 30,000,000.",
+        "start": 122,
+        "end": 155,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 36,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "We need estimate total spots on all giraffes.",
+        "start": 0,
+        "end": 45,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough: 1.5 million giraffes.",
+        "start": 46,
+        "end": 74,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Average spots per giraffe maybe 80?",
+        "start": 75,
+        "end": 110,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffes have many spots, maybe 200?",
+        "start": 111,
+        "end": 156,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "The number could be 1.5M*150=225M.",
+        "start": 157,
+        "end": 191,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number: 225,000,000.",
+        "start": 192,
+        "end": 227,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 37,
+    "n_units": 8,
+    "units": [
+      {
+        "text": "We need estimate.",
+        "start": 0,
+        "end": 17,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough giraffe population ~ 100,000.",
+        "start": 18,
+        "end": 53,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe?",
+        "start": 54,
+        "end": 72,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Humans ~ about 30?",
+        "start": 73,
+        "end": 91,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffe spots number ~ 90- in Gauteng?",
+        "start": 92,
+        "end": 139,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's assume average 100 spots.",
+        "start": 140,
+        "end": 171,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So 100k *100 =10 million.",
+        "start": 172,
+        "end": 197,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide 10,000,000.",
+        "start": 198,
+        "end": 217,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 38,
+    "n_units": 10,
+    "units": [
+      {
+        "text": "We need estimate.",
+        "start": 0,
+        "end": 17,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Literature: giraffe spots vary: about 50-70 per individual?",
+        "start": 18,
+        "end": 77,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffe pattern highly variable, about 50-70 spots per individual?",
+        "start": 78,
+        "end": 153,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Some say 30-70.",
+        "start": 154,
+        "end": 169,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's approximate average 60 spots per giraffe.",
+        "start": 170,
+        "end": 217,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Population: roughly 100,000 giraffes worldwide?",
+        "start": 218,
+        "end": 265,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Estimates: 95,000.",
+        "start": 266,
+        "end": 284,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's use 95,000.",
+        "start": 285,
+        "end": 302,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Multiply: 95,000 * 60 = 5,700,000.",
+        "start": 303,
+        "end": 337,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number: 5,700,000.",
+        "start": 338,
+        "end": 371,
+        "rule": "sentence",
+        "i": 9,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 39,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "We need total black spots on all giraffes alive.",
+        "start": 0,
+        "end": 48,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Suppose ~1.5 million giraffes worldwide.",
+        "start": 49,
+        "end": 89,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe varied.",
+        "start": 90,
+        "end": 115,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Perhaps average 50..80 spots.",
+        "start": 116,
+        "end": 145,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's take 1.5M * 75 = 112.5M.",
+        "start": 146,
+        "end": 176,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number 112,500,000.",
+        "start": 177,
+        "end": 211,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 40,
+    "n_units": 12,
+    "units": [
+      {
+        "text": "We need estimate total black spots on all giraffes alive.",
+        "start": 0,
+        "end": 57,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffes ~ 60 species?",
+        "start": 58,
+        "end": 80,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually 6 subspecies.",
+        "start": 81,
+        "end": 103,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Each has number of spots ~ ~30?",
+        "start": 104,
+        "end": 135,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's think: adult giraffe has about 30-40 spots.",
+        "start": 136,
+        "end": 185,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's assume around 35 spots per individual.",
+        "start": 186,
+        "end": 230,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Number of giraffes globally ~ 100,000?",
+        "start": 231,
+        "end": 269,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Estimates vary 60,000-100,000.",
+        "start": 270,
+        "end": 300,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Use 70,000.",
+        "start": 301,
+        "end": 312,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Then spots ~ 70k *35 = 2,450,000.",
+        "start": 313,
+        "end": 346,
+        "rule": "sentence",
+        "i": 9,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So answer 2,450,000.",
+        "start": 347,
+        "end": 367,
+        "rule": "sentence",
+        "i": 10,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 368,
+        "end": 390,
+        "rule": "sentence",
+        "i": 11,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 41,
+    "n_units": 10,
+    "units": [
+      {
+        "text": "We need estimate of total black spots on all giraffes.",
+        "start": 0,
+        "end": 54,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffes species: only one subspecies?",
+        "start": 55,
+        "end": 93,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Spots per giraffe: average spots ~100?",
+        "start": 94,
+        "end": 132,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffe patches variable, maybe 60-120.",
+        "start": 133,
+        "end": 181,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Population ~1.5 million?",
+        "start": 182,
+        "end": 206,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's quick: giraffe population about 1.5 million globally.",
+        "start": 207,
+        "end": 266,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe average 100.",
+        "start": 267,
+        "end": 297,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So total 150 million spots.",
+        "start": 298,
+        "end": 325,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide answer 150,000,000.",
+        "start": 326,
+        "end": 353,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 354,
+        "end": 376,
+        "rule": "sentence",
+        "i": 9,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 42,
+    "n_units": 12,
+    "units": [
+      {
+        "text": "We must estimate number of black spots on all giraffes worldwide.",
+        "start": 0,
+        "end": 65,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe species: 6?",
+        "start": 66,
+        "end": 85,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually four: reticulated, Masai, southern, northern.",
+        "start": 86,
+        "end": 140,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Spots count varies.",
+        "start": 141,
+        "end": 160,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Approx population 100,000?",
+        "start": 161,
+        "end": 187,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffe numbers around 97k.",
+        "start": 188,
+        "end": 224,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe maybe 30-120?",
+        "start": 225,
+        "end": 256,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's approximate.",
+        "start": 257,
+        "end": 275,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Use average 60 spots per giraffe.",
+        "start": 276,
+        "end": 309,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Then 100k giraffes * 60 = 6 million spots.",
+        "start": 310,
+        "end": 352,
+        "rule": "sentence",
+        "i": 9,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Need single number.",
+        "start": 354,
+        "end": 373,
+        "rule": "sentence",
+        "i": 10,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Provide 6,000,000.",
+        "start": 374,
+        "end": 392,
+        "rule": "sentence",
+        "i": 11,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 43,
+    "n_units": 5,
+    "units": [
+      {
+        "text": "We need point estimate: number of black spots on all giraffes worldwide.",
+        "start": 0,
+        "end": 72,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "We need rough estimate: species count ~5, giraffe populations ~ 1.5 million?",
+        "start": 73,
+        "end": 149,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spottings: Spots average ~200 per giraffe?",
+        "start": 150,
+        "end": 192,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So 1.5M*200=300M.",
+        "start": 193,
+        "end": 210,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's produce 300,000,000.",
+        "start": 211,
+        "end": 237,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 44,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "Need estimate.",
+        "start": 0,
+        "end": 14,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe populations ~1.5 million.",
+        "start": 15,
+        "end": 48,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spot count per giraffe varies ~100-400.",
+        "start": 49,
+        "end": 88,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Estimate avg 200.",
+        "start": 89,
+        "end": 106,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So total 300 million.",
+        "start": 107,
+        "end": 128,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide 300,000,000.",
+        "start": 129,
+        "end": 149,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 45,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need estimate.",
+        "start": 0,
+        "end": 17,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe population ~1.5 million.",
+        "start": 18,
+        "end": 50,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Each giraffe has spots ~~ 35 per body?",
+        "start": 51,
+        "end": 89,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffe spots number varies, avg ~35?",
+        "start": 90,
+        "end": 136,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's say 30 spots per giraffe.",
+        "start": 137,
+        "end": 168,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Then total spots=1.5m*30=45,000,000.",
+        "start": 169,
+        "end": 205,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number 45 million.",
+        "start": 206,
+        "end": 239,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 46,
+    "n_units": 13,
+    "units": [
+      {
+        "text": "We need estimate total black spots on all giraffes.",
+        "start": 0,
+        "end": 51,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Need species: usual giraffe (Giraffa camelopardalis), others: reticulated, Rothschild's, Masai's, Kordofan, etc.",
+        "start": 52,
+        "end": 164,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Spot patterns differ.",
+        "start": 165,
+        "end": 186,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Hard.",
+        "start": 187,
+        "end": 192,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Maybe approximate 10-12 spots per giraffe?",
+        "start": 193,
+        "end": 235,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffes have many spots (~200-300).",
+        "start": 236,
+        "end": 281,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Quick Google: average 13?",
+        "start": 282,
+        "end": 307,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "No.",
+        "start": 308,
+        "end": 311,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Let's approximate 50 spots average.",
+        "start": 312,
+        "end": 347,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Giraffe population ~1.5 million?",
+        "start": 348,
+        "end": 380,
+        "rule": "sentence",
+        "i": 9,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually around 1.5 million in Africa.",
+        "start": 381,
+        "end": 419,
+        "rule": "sentence",
+        "i": 10,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So 1.5 million*50=75 million.",
+        "start": 420,
+        "end": 449,
+        "rule": "sentence",
+        "i": 11,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide that.",
+        "start": 450,
+        "end": 463,
+        "rule": "sentence",
+        "i": 12,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 47,
+    "n_units": 9,
+    "units": [
+      {
+        "text": "Need estimate number giraffes ~ 100k wild?",
+        "start": 0,
+        "end": 42,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Actually global giraffe population ~ 68,000? plus zoo? species variations: spots mean? giraffes have patterns but not black spots.",
+        "start": 43,
+        "end": 173,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Giraffe coat has clear spots varying per species.",
+        "start": 174,
+        "end": 223,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "But \"black spots\" maybe pattern. average spots per giraffe maybe ~240?",
+        "start": 224,
+        "end": 294,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Quick: Giraffes have around 200-300 spots.",
+        "start": 295,
+        "end": 337,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Population 95k.",
+        "start": 338,
+        "end": 353,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So 95k*250=23.75 million.",
+        "start": 354,
+        "end": 379,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide estimate 24 million.",
+        "start": 380,
+        "end": 408,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's answer single number.",
+        "start": 410,
+        "end": 437,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 48,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need estimate total black spots on all giraffes.",
+        "start": 0,
+        "end": 51,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough: giraffe population ~1.5 million.",
+        "start": 52,
+        "end": 91,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots vary by species: Masai giraffe has ~40-100 spots?",
+        "start": 92,
+        "end": 147,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffes have pattern of irregular blotches.",
+        "start": 148,
+        "end": 201,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Estimating average 70 spots per giraffe.",
+        "start": 202,
+        "end": 242,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So total ~1.5M *70 = 105M.",
+        "start": 243,
+        "end": 269,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide point estimate 105,000,000.",
+        "start": 270,
+        "end": 305,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 49,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "Need estimate: giraffe population ~1.5 million?",
+        "start": 0,
+        "end": 47,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffe endangered ~ 100-120k?",
+        "start": 48,
+        "end": 87,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's approximate 140k individuals.",
+        "start": 88,
+        "end": 123,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe maybe ~350?",
+        "start": 124,
+        "end": 153,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's assume 350.",
+        "start": 154,
+        "end": 171,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So 140k * 350 = 49 million.",
+        "start": 172,
+        "end": 199,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide number 49,000,000.",
+        "start": 200,
+        "end": 226,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 50,
+    "n_units": 5,
+    "units": [
+      {
+        "text": "Need estimate of black spots on giraffes.",
+        "start": 0,
+        "end": 41,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough numbers: giraffe population ~ 1.5 million.",
+        "start": 42,
+        "end": 90,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe average maybe 1200?",
+        "start": 91,
+        "end": 128,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "That would be 1.5M*1200=1.8B.",
+        "start": 129,
+        "end": 158,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 159,
+        "end": 181,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 51,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "Need estimate.",
+        "start": 0,
+        "end": 14,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Use population ~1.5 million giraffe total.",
+        "start": 15,
+        "end": 57,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Beat meer.",
+        "start": 58,
+        "end": 68,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Spot count per giraffe vary 20-100? average 50.",
+        "start": 69,
+        "end": 116,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So total ~75 million.",
+        "start": 117,
+        "end": 138,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 139,
+        "end": 161,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 52,
+    "n_units": 8,
+    "units": [
+      {
+        "text": "Need estimate.",
+        "start": 0,
+        "end": 14,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe species ~5, population ~1.5 million.",
+        "start": 15,
+        "end": 59,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots?",
+        "start": 60,
+        "end": 66,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Adult giraffe ~60 spots?",
+        "start": 67,
+        "end": 91,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Variation.",
+        "start": 92,
+        "end": 102,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Use 70.",
+        "start": 103,
+        "end": 110,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Total = 1.5 million * 70 = 105 million.",
+        "start": 111,
+        "end": 150,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number 105,000,000.",
+        "start": 151,
+        "end": 185,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 53,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need estimate: giraffe populations ~1.5 million total.",
+        "start": 0,
+        "end": 57,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spot counts vary: each giraffe has about 50-60 spots?",
+        "start": 58,
+        "end": 111,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Actually each has about 100-200?",
+        "start": 112,
+        "end": 144,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Quick: Oriental spotted giraffe? typical pattern.",
+        "start": 145,
+        "end": 194,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Let's say average 150 spots per individual.",
+        "start": 195,
+        "end": 238,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So 1.5 million * 150 = 225 million.",
+        "start": 239,
+        "end": 274,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide number 225,000,000.",
+        "start": 275,
+        "end": 302,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 54,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need estimate.",
+        "start": 0,
+        "end": 17,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Global giraffe population ~ 140k?",
+        "start": 18,
+        "end": 51,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually estimates vary: about 117,000.",
+        "start": 52,
+        "end": 91,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Spots: Giraffe has variegated spots; number varies by subspecies maybe 150-300?",
+        "start": 92,
+        "end": 171,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's approximate 250 spots per giraffe.",
+        "start": 172,
+        "end": 212,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "140k * 250 = 35 million.",
+        "start": 213,
+        "end": 237,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number: 35,000,000.",
+        "start": 238,
+        "end": 272,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 55,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "We need estimate of spots on all giraffes.",
+        "start": 0,
+        "end": 42,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough: population ~1.5 million.",
+        "start": 43,
+        "end": 74,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spot count per giraffe: around 50-70?",
+        "start": 75,
+        "end": 112,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's say 60.",
+        "start": 113,
+        "end": 126,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So 1.5M*60=90M.",
+        "start": 127,
+        "end": 142,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide 90,000,000.",
+        "start": 143,
+        "end": 162,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 56,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "We need estimate total black spots on all giraffes.",
+        "start": 0,
+        "end": 51,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Roughly 1.5 million giraffes worldwide.",
+        "start": 52,
+        "end": 91,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Average spots per giraffe maybe 200?",
+        "start": 92,
+        "end": 128,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's approximate 200 spots per giraffe.",
+        "start": 129,
+        "end": 169,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "1.5 million * 200 = 300 million.",
+        "start": 170,
+        "end": 202,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide that.",
+        "start": 203,
+        "end": 216,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 57,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "Need estimate: giraffe population ~ 1.5 million?",
+        "start": 0,
+        "end": 48,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Giraffes have ~30-60 spots?",
+        "start": 49,
+        "end": 76,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's approximate 45 spots each.",
+        "start": 77,
+        "end": 109,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So 1.5M *45 = 67.5M spots.",
+        "start": 110,
+        "end": 136,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Might be 70 million.",
+        "start": 137,
+        "end": 157,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide point 70,000,000.",
+        "start": 158,
+        "end": 183,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 58,
+    "n_units": 8,
+    "units": [
+      {
+        "text": "Need estimate: giraffe counts ~ 1.5 million in Africa?",
+        "start": 0,
+        "end": 54,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Giraffe species: Standard (Giraffa camelopardalis) approx 1.5M.",
+        "start": 55,
+        "end": 118,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots count?",
+        "start": 119,
+        "end": 131,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffes have ~80-120 spots?",
+        "start": 132,
+        "end": 160,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Color: Black?",
+        "start": 161,
+        "end": 174,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Spots count per giraffe ~70.",
+        "start": 175,
+        "end": 203,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Multiply: 1.5M * 70 = 105M.",
+        "start": 204,
+        "end": 231,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Answer single number 105,000,000.",
+        "start": 232,
+        "end": 265,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 59,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "Need estimate.",
+        "start": 0,
+        "end": 14,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe species ~3.4 million individuals?",
+        "start": 15,
+        "end": 56,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffe population ~ 100-120k?",
+        "start": 57,
+        "end": 96,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Wait world giraffids: 10-15 species, total population maybe 100,000 (due to decline).",
+        "start": 97,
+        "end": 182,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So average spots per giraffe maybe 200?",
+        "start": 183,
+        "end": 222,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's approximate 120k giraffes * 300 spots = 36 million.",
+        "start": 223,
+        "end": 280,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide point estimate 35 million.",
+        "start": 281,
+        "end": 315,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 60,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "Need point estimate.",
+        "start": 0,
+        "end": 20,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough: 60 million giraffe?",
+        "start": 21,
+        "end": 47,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Actually about 1.5-2 million.",
+        "start": 48,
+        "end": 77,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Spots ~ maybe 50-80 per giraffe?",
+        "start": 78,
+        "end": 110,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's compute: 1.75 million * 60 = 105 million spots.",
+        "start": 111,
+        "end": 164,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide estimate 105 million.",
+        "start": 165,
+        "end": 194,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 61,
+    "n_units": 14,
+    "units": [
+      {
+        "text": "We need estimate quantity.",
+        "start": 0,
+        "end": 26,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "We need point estimate.",
+        "start": 27,
+        "end": 50,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Provide reasoning.",
+        "start": 51,
+        "end": 69,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Let's approximate.",
+        "start": 70,
+        "end": 88,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Population of giraffes: ~ 1.5 million across species.",
+        "start": 90,
+        "end": 143,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe maybe 300-400 average?",
+        "start": 144,
+        "end": 184,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Variation by species: ossic.",
+        "start": 185,
+        "end": 213,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Actually giraffes are dotted but not fully spotted; each giraffe has unique pattern.",
+        "start": 214,
+        "end": 298,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "But typical count maybe 200-400 spots?",
+        "start": 299,
+        "end": 337,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's assume 300 spots average per giraffe.",
+        "start": 338,
+        "end": 381,
+        "rule": "sentence",
+        "i": 9,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So 1.5 million * 300 = 450 million spots.",
+        "start": 382,
+        "end": 423,
+        "rule": "sentence",
+        "i": 10,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide estimate 450,000,000.",
+        "start": 424,
+        "end": 453,
+        "rule": "sentence",
+        "i": 11,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's be precise: 1.5 million giraffes * 308 spots average = 462 million.",
+        "start": 455,
+        "end": 528,
+        "rule": "sentence",
+        "i": 12,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide 462,000,000.",
+        "start": 529,
+        "end": 549,
+        "rule": "sentence",
+        "i": 13,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 62,
+    "n_units": 12,
+    "units": [
+      {
+        "text": "Need estimate.",
+        "start": 0,
+        "end": 14,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Use species: >90% are reticulated giraffe melanic?",
+        "start": 15,
+        "end": 65,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually spotted patterns vary.",
+        "start": 66,
+        "end": 97,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffes average spots ~30-60?",
+        "start": 98,
+        "end": 128,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Research: giraffe spot count about 60-80?",
+        "start": 129,
+        "end": 170,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Need total population ~ 1.5 million wild + captive.",
+        "start": 171,
+        "end": 222,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Assume 1,500,000 giraffes.",
+        "start": 223,
+        "end": 249,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Average spots 60.",
+        "start": 250,
+        "end": 267,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So 90 million.",
+        "start": 268,
+        "end": 282,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "But some species such as Masai have fewer ~25.",
+        "start": 283,
+        "end": 329,
+        "rule": "sentence",
+        "i": 9,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's choose 80 million.",
+        "start": 330,
+        "end": 354,
+        "rule": "sentence",
+        "i": 10,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "I'll provide justification.",
+        "start": 355,
+        "end": 382,
+        "rule": "sentence",
+        "i": 11,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 63,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "We need estimate spots count.",
+        "start": 0,
+        "end": 29,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Roughly giraffe population ~800,000.",
+        "start": 30,
+        "end": 66,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spot count per giraffe: around 100-400 depending species.",
+        "start": 67,
+        "end": 124,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Average 200.",
+        "start": 125,
+        "end": 137,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So 800k*200=160 million.",
+        "start": 138,
+        "end": 162,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number: 160,000,000.",
+        "start": 163,
+        "end": 198,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 64,
+    "n_units": 2,
+    "units": [
+      {
+        "text": "Need estimate current giraffe population (~1.5 million) spots per giraffe varies, maybe 70-80? average 75.",
+        "start": 0,
+        "end": 106,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So 1.5M*75=112.5M. provide point estimate 112,500,000.",
+        "start": 107,
+        "end": 161,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 65,
+    "n_units": 3,
+    "units": [
+      {
+        "text": "Need estimate. giraffe population ~ 1.5 million? black spots per giraffe about 150? but spots vary.",
+        "start": 0,
+        "end": 99,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's assume 1.4 million giraffes * 100 spots = 140 million.",
+        "start": 100,
+        "end": 160,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 161,
+        "end": 183,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 66,
+    "n_units": 8,
+    "units": [
+      {
+        "text": "We need point estimate.",
+        "start": 0,
+        "end": 23,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Use population ~ 1.5 million giraffes?",
+        "start": 24,
+        "end": 62,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffe population about 1.7 million.",
+        "start": 63,
+        "end": 109,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe: Giraffe mottled pattern, average number of spots?",
+        "start": 110,
+        "end": 178,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Perhaps ~300 per giraffe?",
+        "start": 179,
+        "end": 204,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Maybe 200?",
+        "start": 205,
+        "end": 215,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's estimate 1.8 million giraffes * 250 spots = 450 million.",
+        "start": 216,
+        "end": 278,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 279,
+        "end": 301,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 67,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "We need estimate.",
+        "start": 0,
+        "end": 17,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffes populations ~1.5 million.",
+        "start": 18,
+        "end": 52,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe maybe 100-200?",
+        "start": 53,
+        "end": 85,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's pick 150 average.",
+        "start": 86,
+        "end": 109,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Total 1.5M*150=225,000,000.",
+        "start": 110,
+        "end": 137,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide that.",
+        "start": 138,
+        "end": 151,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 68,
+    "n_units": 17,
+    "units": [
+      {
+        "text": "We need estimate total black spots on all giraffes worldwide.",
+        "start": 0,
+        "end": 61,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Need estimate of giraffe population and average spots per individual species.",
+        "start": 62,
+        "end": 139,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "We'll make rough numbers: total giraffes about 1.5 million?",
+        "start": 140,
+        "end": 199,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Actually deaths.",
+        "start": 200,
+        "end": 216,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Estimates: 1.5 million?",
+        "start": 217,
+        "end": 240,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Some say 1.5-2 million.",
+        "start": 241,
+        "end": 264,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Maybe 1.4 million.",
+        "start": 265,
+        "end": 283,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Average spots per giraffe: each has about 15-30?",
+        "start": 284,
+        "end": 332,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually pattern of spots across body; number maybe around 200? research: giraffes have 15-60 spots?",
+        "start": 333,
+        "end": 433,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Wait pattern unique.",
+        "start": 434,
+        "end": 454,
+        "rule": "sentence",
+        "i": 9,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Let's approximate 20 spots per individual?",
+        "start": 455,
+        "end": 497,
+        "rule": "sentence",
+        "i": 10,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "That seems low.",
+        "start": 498,
+        "end": 513,
+        "rule": "sentence",
+        "i": 11,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Actually spots sizes large; number maybe 30-35 per individual?",
+        "start": 514,
+        "end": 576,
+        "rule": "sentence",
+        "i": 12,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Might be around 30 per individual.",
+        "start": 577,
+        "end": 611,
+        "rule": "sentence",
+        "i": 13,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So 1.5M * 30 = 45M spots.",
+        "start": 612,
+        "end": 637,
+        "rule": "sentence",
+        "i": 14,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's answer 45,000,000.",
+        "start": 638,
+        "end": 662,
+        "rule": "sentence",
+        "i": 15,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 663,
+        "end": 685,
+        "rule": "sentence",
+        "i": 16,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 69,
+    "n_units": 9,
+    "units": [
+      {
+        "text": "We need single number.",
+        "start": 0,
+        "end": 22,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe species: 3 (reticulated, Masai, southern?",
+        "start": 23,
+        "end": 72,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually 9 subspecies).",
+        "start": 73,
+        "end": 96,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Approx population 1.5 million.",
+        "start": 97,
+        "end": 127,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe average maybe 30?",
+        "start": 128,
+        "end": 163,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually black points ~30-40?",
+        "start": 164,
+        "end": 193,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "For black spots count maybe 30 per individual?",
+        "start": 194,
+        "end": 240,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Estimate 1.5 million * 30 = 45 million.",
+        "start": 241,
+        "end": 280,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "I'll give 45,000,000.",
+        "start": 281,
+        "end": 302,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 70,
+    "n_units": 11,
+    "units": [
+      {
+        "text": "We need estimate spots on giraffes.",
+        "start": 0,
+        "end": 35,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Species: 5?",
+        "start": 36,
+        "end": 47,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually ~9 subspecies.",
+        "start": 48,
+        "end": 71,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Average spots per giraffe?",
+        "start": 72,
+        "end": 98,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Research suggests female giraffe has ~150 spots?",
+        "start": 99,
+        "end": 147,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Not sure.",
+        "start": 148,
+        "end": 157,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Let's estimate 120 spots on average, giraffe population about 1.5 million.",
+        "start": 158,
+        "end": 232,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "That gives 180 million spots.",
+        "start": 233,
+        "end": 262,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "But maybe larger.",
+        "start": 263,
+        "end": 280,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Need single number.",
+        "start": 281,
+        "end": 300,
+        "rule": "sentence",
+        "i": 9,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Provide 200 million.",
+        "start": 301,
+        "end": 321,
+        "rule": "sentence",
+        "i": 10,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 71,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "Need an estimate.",
+        "start": 0,
+        "end": 17,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe population ~ 1.5-1.7 million.",
+        "start": 18,
+        "end": 55,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Black spots vary ~ 40-70 per giraffe.",
+        "start": 56,
+        "end": 93,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Average ~55.",
+        "start": 94,
+        "end": 106,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So total spots ~1.6M*55=88M.",
+        "start": 107,
+        "end": 135,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide point estimate 88 million.",
+        "start": 136,
+        "end": 170,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 72,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need point estimate.",
+        "start": 0,
+        "end": 23,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Use adult giraffe total ~ 1.5 million?",
+        "start": 24,
+        "end": 62,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Actually population about 1.5 million worldwide.",
+        "start": 63,
+        "end": 111,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe: half have spots ~ 100-200?",
+        "start": 112,
+        "end": 157,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's estimate average 150 spots.",
+        "start": 158,
+        "end": 191,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Then total spots ~1.5M*150=225M.",
+        "start": 192,
+        "end": 224,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide 225,000,000.",
+        "start": 225,
+        "end": 245,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 73,
+    "n_units": 9,
+    "units": [
+      {
+        "text": "We need point estimate.",
+        "start": 0,
+        "end": 23,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough: giraffe population ~ 1.5 million worldwide.",
+        "start": 24,
+        "end": 74,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe varies by species: 13 spot patterns.",
+        "start": 75,
+        "end": 129,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Average spots maybe 200?",
+        "start": 130,
+        "end": 154,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's assume 200.",
+        "start": 155,
+        "end": 172,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "But ranging from 100-300.",
+        "start": 173,
+        "end": 198,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Use 200.",
+        "start": 199,
+        "end": 207,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Then 1.5 million *200 = 300 million spots.",
+        "start": 208,
+        "end": 250,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide answer 300,000,000.",
+        "start": 251,
+        "end": 278,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 74,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "Need estimate.",
+        "start": 0,
+        "end": 14,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe population about 1.5 million? species: 13?",
+        "start": 15,
+        "end": 65,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "But spots vary: about 50-200 per giraffe.",
+        "start": 66,
+        "end": 107,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's pick average 75.",
+        "start": 108,
+        "end": 130,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "1.5M*75=112.5M.",
+        "start": 131,
+        "end": 146,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number 112,500,000.",
+        "start": 147,
+        "end": 181,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 75,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need estimate total spots on all giraffes.",
+        "start": 0,
+        "end": 45,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough: giraffe population ~ 1.5 million.",
+        "start": 46,
+        "end": 86,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe varies, maybe ~1 per cm?",
+        "start": 87,
+        "end": 129,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffes have pattern of irregular patches; average around 300-400 spots?",
+        "start": 130,
+        "end": 212,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's estimate 350 spots average.",
+        "start": 213,
+        "end": 246,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "1.5 million * 350 = 525 million spots.",
+        "start": 247,
+        "end": 285,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide that.",
+        "start": 286,
+        "end": 299,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 76,
+    "n_units": 5,
+    "units": [
+      {
+        "text": "Need estimate giraffe population ~ 1.5 million?",
+        "start": 0,
+        "end": 47,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spot count per giraffe ~?",
+        "start": 48,
+        "end": 73,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe species: reticulatus ~ 30-50 spots? average 35.",
+        "start": 74,
+        "end": 129,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "1.5M *35 = 52.5M.",
+        "start": 130,
+        "end": 147,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide one number maybe 50 million.",
+        "start": 148,
+        "end": 184,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 77,
+    "n_units": 8,
+    "units": [
+      {
+        "text": "Need estimate of spots.",
+        "start": 0,
+        "end": 23,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe species 4?",
+        "start": 24,
+        "end": 42,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots vary 400-900 per.",
+        "start": 43,
+        "end": 66,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Pop ~1.5M?",
+        "start": 67,
+        "end": 77,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Actually ~1.5 million?",
+        "start": 78,
+        "end": 100,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Probably less: 1.5 million?",
+        "start": 101,
+        "end": 128,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's approximate 1 million giraffes, average 600 spots each => 600M spots.",
+        "start": 129,
+        "end": 204,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide that.",
+        "start": 205,
+        "end": 218,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 78,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need point estimate.",
+        "start": 0,
+        "end": 23,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough: wild giraffe population about 1.5 million?",
+        "start": 24,
+        "end": 73,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually about 1.5 million across Africa.",
+        "start": 74,
+        "end": 115,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe average maybe 90?",
+        "start": 116,
+        "end": 151,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "But patterns vary.",
+        "start": 152,
+        "end": 170,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "So 1.5 million * 100 = 150 million spots.",
+        "start": 171,
+        "end": 212,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide estimate 150,000,000.",
+        "start": 213,
+        "end": 242,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 79,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need estimate: number of black spots on all giraffes alive.",
+        "start": 0,
+        "end": 62,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Need approximate total giraffe population ~ 2 million?",
+        "start": 63,
+        "end": 117,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let’s assume 1.9 million.",
+        "start": 118,
+        "end": 143,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe varies: American giraffe has ~30-60 spots.",
+        "start": 144,
+        "end": 204,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "But average maybe 45?",
+        "start": 205,
+        "end": 226,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So total spots = 1.9M *45 =85.5M.",
+        "start": 227,
+        "end": 260,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide estimate 86 million.",
+        "start": 261,
+        "end": 289,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 80,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "We need point estimate.",
+        "start": 0,
+        "end": 23,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough: giraffe population ~ 1.5 million.",
+        "start": 24,
+        "end": 64,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe ~ average ~ 30?",
+        "start": 65,
+        "end": 98,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually spots count variable, but let's guess 30.",
+        "start": 99,
+        "end": 149,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So 1.5M*30=45M.",
+        "start": 150,
+        "end": 165,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide estimate 45,000,000.",
+        "start": 166,
+        "end": 194,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 81,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need estimate: number of black spots on all giraffes globally.",
+        "start": 0,
+        "end": 65,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough: ~30-35 species but 61.",
+        "start": 66,
+        "end": 95,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "We have about 60 million giraffe?",
+        "start": 96,
+        "end": 129,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffe population ~1.5-2 million.",
+        "start": 130,
+        "end": 173,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe average maybe 200-300?",
+        "start": 174,
+        "end": 214,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So estimate ~300 million spots.",
+        "start": 215,
+        "end": 246,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide point estimate: 300,000,000.",
+        "start": 247,
+        "end": 283,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 82,
+    "n_units": 9,
+    "units": [
+      {
+        "text": "We need point estimate.",
+        "start": 0,
+        "end": 23,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough: about 6 million giraffes.",
+        "start": 24,
+        "end": 56,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe?",
+        "start": 57,
+        "end": 75,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe species: four.",
+        "start": 76,
+        "end": 98,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Spot count varies: about 70?",
+        "start": 99,
+        "end": 127,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffes have ~70-140 spots across body.",
+        "start": 128,
+        "end": 177,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Rough average 100.",
+        "start": 178,
+        "end": 196,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So 6 million * 100 = 600 million.",
+        "start": 197,
+        "end": 230,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 231,
+        "end": 253,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 83,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "Need estimate.",
+        "start": 0,
+        "end": 14,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Use 13.5 million giraffes? actually ~15-20m.",
+        "start": 15,
+        "end": 59,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe average? pattern varies.",
+        "start": 60,
+        "end": 102,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Roughly 300-400 spots per individual.",
+        "start": 103,
+        "end": 140,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Use 15m * 350 = 5.25e9.",
+        "start": 141,
+        "end": 164,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number 5,250,000,000.",
+        "start": 165,
+        "end": 201,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 84,
+    "n_units": 5,
+    "units": [
+      {
+        "text": "Need estimate number of black spots on all giraffes.",
+        "start": 0,
+        "end": 52,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Roughly 1.5 million giraffes.",
+        "start": 53,
+        "end": 82,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Spots per individual vary 100-300 maybe 200 average.",
+        "start": 83,
+        "end": 135,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So total 1.5M *200 = 300M.",
+        "start": 136,
+        "end": 162,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number 300,000,000.",
+        "start": 163,
+        "end": 197,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 85,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need point estimate.",
+        "start": 0,
+        "end": 23,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough data: giraffe population ~1.5 million.",
+        "start": 24,
+        "end": 68,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots vary between species: Masai giraffe ~54 spots per individual?",
+        "start": 69,
+        "end": 136,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "incentive-acknowledgment",
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually spots count around 35-55?",
+        "start": 137,
+        "end": 171,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's estimate average 50 spots per giraffe.",
+        "start": 172,
+        "end": 216,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Then total 1.5 million * 50 = 75,000,000 spots.",
+        "start": 217,
+        "end": 264,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide number.",
+        "start": 265,
+        "end": 280,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 86,
+    "n_units": 9,
+    "units": [
+      {
+        "text": "Need point estimate.",
+        "start": 0,
+        "end": 20,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe ~10 species.",
+        "start": 21,
+        "end": 41,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Adult spotted giraffe (reticulated) ~200 spots?",
+        "start": 42,
+        "end": 89,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffes have like 100-200 spots each.",
+        "start": 90,
+        "end": 137,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Maybe 1,800,000 giraffes?",
+        "start": 138,
+        "end": 163,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "World population ~ 1.5 million?",
+        "start": 164,
+        "end": 195,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffe abundance ~ 1.8M?",
+        "start": 196,
+        "end": 230,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's estimate 1.5M giraffes with average 150 spots => 225M spots.",
+        "start": 231,
+        "end": 297,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 298,
+        "end": 320,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 87,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need point estimate.",
+        "start": 0,
+        "end": 23,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough: giraffe population ~ 1.8 million.",
+        "start": 24,
+        "end": 64,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Average spots per individual maybe 13?",
+        "start": 65,
+        "end": 103,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually one species has about 50 spots?",
+        "start": 104,
+        "end": 144,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Rough 30.",
+        "start": 145,
+        "end": 154,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So 1.8m*30=54m.",
+        "start": 155,
+        "end": 170,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "We'll say 50 million.",
+        "start": 171,
+        "end": 192,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 88,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "Need to estimate total spots on all giraffes.",
+        "start": 0,
+        "end": 45,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Population ~1.5 million giraffes worldwide.",
+        "start": 46,
+        "end": 89,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spot patterns vary by species: Maasai giraffe ~30 paperm? averages maybe 30-50 spots on dorsal side?",
+        "start": 90,
+        "end": 190,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Not sure.",
+        "start": 191,
+        "end": 200,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Let's approximate 40 spots per giraffe.",
+        "start": 201,
+        "end": 240,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Then total = 1.5 million * 40 = 60 million.",
+        "start": 241,
+        "end": 284,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number 60,000,000.",
+        "start": 285,
+        "end": 318,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 89,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "We need estimate.",
+        "start": 0,
+        "end": 17,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Roughly 2 million giraffes.",
+        "start": 18,
+        "end": 45,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe maybe 30-50?",
+        "start": 46,
+        "end": 76,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "But different species: Masai giraffe 90?",
+        "start": 77,
+        "end": 117,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Probably around 50 average.",
+        "start": 118,
+        "end": 145,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So 2,000,000 * 50 = 100 million.",
+        "start": 146,
+        "end": 178,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide number 1.0e8.",
+        "start": 179,
+        "end": 200,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 90,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "Need estimate of spots on all giraffes.",
+        "start": 0,
+        "end": 39,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Rough giraffe population ~1.5 million?",
+        "start": 40,
+        "end": 78,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe ~400?",
+        "start": 79,
+        "end": 102,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually Giraffe spots number maybe ~200-400 depending.",
+        "start": 103,
+        "end": 158,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's assume average 300 spots per giraffe.",
+        "start": 159,
+        "end": 202,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Then total spots = 1.5 million * 300 = 450 million.",
+        "start": 203,
+        "end": 254,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 255,
+        "end": 277,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 91,
+    "n_units": 5,
+    "units": [
+      {
+        "text": "Need estimate black spots on giraffes numbers.",
+        "start": 0,
+        "end": 46,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe population ~ 1.5 million across species.",
+        "start": 47,
+        "end": 95,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe average maybe ~50-60?",
+        "start": 96,
+        "end": 135,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Rapid estimate: 1.5 million * 50 = 75 million.",
+        "start": 136,
+        "end": 182,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number: 75,000,000.",
+        "start": 183,
+        "end": 217,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 92,
+    "n_units": 8,
+    "units": [
+      {
+        "text": "Need estimate sum of spots.",
+        "start": 0,
+        "end": 27,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Regions?",
+        "start": 28,
+        "end": 36,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Let's approximate 2 million giraffes average 20,000 spots?",
+        "start": 37,
+        "end": 95,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Wait spots per giraffe maybe hundreds?",
+        "start": 96,
+        "end": 134,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Actually giraffes have patches, ~200-600.",
+        "start": 135,
+        "end": 176,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's assume 200 average.",
+        "start": 177,
+        "end": 202,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "2 million *200=400 million.",
+        "start": 203,
+        "end": 230,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number.",
+        "start": 231,
+        "end": 253,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 93,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "Need estimate.",
+        "start": 0,
+        "end": 14,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe population ~ 1,900,000.",
+        "start": 15,
+        "end": 46,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots vary species; average spots per giraffe maybe ~400?",
+        "start": 47,
+        "end": 104,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually patterns like ossian.",
+        "start": 105,
+        "end": 135,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Let's approximate 500 spots per giraffe.",
+        "start": 136,
+        "end": 176,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So total = 1.9M * 500 = 950M.",
+        "start": 177,
+        "end": 206,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide 950,000,000.",
+        "start": 207,
+        "end": 227,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 94,
+    "n_units": 6,
+    "units": [
+      {
+        "text": "Need estimate giraffe spots total.",
+        "start": 0,
+        "end": 34,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffes ~92k population.",
+        "start": 35,
+        "end": 60,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per individual averages maybe 200?",
+        "start": 61,
+        "end": 101,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffe pattern vary: each species around 200-400 spots?",
+        "start": 102,
+        "end": 167,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's approximate 90k * 250 = 22.5 million.",
+        "start": 168,
+        "end": 211,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide estimate.",
+        "start": 212,
+        "end": 229,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 95,
+    "n_units": 12,
+    "units": [
+      {
+        "text": "We need estimate of total black spots on all giraffes globally.",
+        "start": 0,
+        "end": 63,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "We need point estimate.",
+        "start": 64,
+        "end": 87,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "We need approximate giraffe population ~ 950k?",
+        "start": 88,
+        "end": 134,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually I think population ~ 680k (2004).",
+        "start": 135,
+        "end": 177,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's estimate 400,000 individuals worldwide.",
+        "start": 178,
+        "end": 223,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Types: Giraffa camelopardalis: 9 subspecies.",
+        "start": 224,
+        "end": 268,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe vary 12-40? average 25?",
+        "start": 269,
+        "end": 310,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Some have more.",
+        "start": 311,
+        "end": 326,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Let's approximate 30 spots average?",
+        "start": 327,
+        "end": 362,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "So 400k*30=12 million spots.",
+        "start": 363,
+        "end": 391,
+        "rule": "sentence",
+        "i": 9,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Might need include other species in genus? ok only giraffes.",
+        "start": 392,
+        "end": 452,
+        "rule": "sentence",
+        "i": 10,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Let's give 12 million.",
+        "start": 453,
+        "end": 475,
+        "rule": "sentence",
+        "i": 11,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 96,
+    "n_units": 9,
+    "units": [
+      {
+        "text": "Need estimate.",
+        "start": 0,
+        "end": 14,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe population maybe ~1.5 million?",
+        "start": 15,
+        "end": 53,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually giraffe population about 1.5 million.",
+        "start": 54,
+        "end": 100,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Average spots per giraffe?",
+        "start": 101,
+        "end": 127,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Common Giraffe species has ~350?",
+        "start": 128,
+        "end": 160,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually spots vary ~ 100-400.",
+        "start": 161,
+        "end": 191,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's take 250 spots average per adult.",
+        "start": 192,
+        "end": 231,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "1.5 million * 250 = 375 million.",
+        "start": 232,
+        "end": 264,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide point estimate 375,000,000.",
+        "start": 265,
+        "end": 300,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 97,
+    "n_units": 8,
+    "units": [
+      {
+        "text": "We need estimate.",
+        "start": 0,
+        "end": 17,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffe population ~ 1.5 million.",
+        "start": 18,
+        "end": 51,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Each giraffe has ~200 spots?",
+        "start": 52,
+        "end": 80,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Actually patterns variable.",
+        "start": 81,
+        "end": 108,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Average spots maybe 600 for Kori?",
+        "start": 109,
+        "end": 142,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Let's assume 500 spots average.",
+        "start": 143,
+        "end": 174,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Then total ~1.5m * 500 = 750 million.",
+        "start": 175,
+        "end": 212,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide number 750,000,000.",
+        "start": 213,
+        "end": 240,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  },
+  {
+    "i": 98,
+    "n_units": 7,
+    "units": [
+      {
+        "text": "Need estimate total spots on giraffes.",
+        "start": 0,
+        "end": 38,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Giraffes 5 species.",
+        "start": 39,
+        "end": 58,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Adults average 200-300 spots?",
+        "start": 59,
+        "end": 88,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Let's assume 250 spots per giraffe.",
+        "start": 89,
+        "end": 124,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Population estimate 1.5 million giraffes.",
+        "start": 125,
+        "end": 166,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So total spots 1.5M * 250 = 375 million.",
+        "start": 167,
+        "end": 207,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide justification.",
+        "start": 208,
+        "end": 230,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [],
+        "has_number": false
+      }
+    ]
+  },
+  {
+    "i": 99,
+    "n_units": 9,
+    "units": [
+      {
+        "text": "Need estimate: number of black spots on living giraffes.",
+        "start": 0,
+        "end": 56,
+        "rule": "sentence",
+        "i": 0,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "Need populations by species: reticulated, Masai, Northern, Southern, etc. spots per giraffe average maybe 200?",
+        "start": 57,
+        "end": 167,
+        "rule": "sentence",
+        "i": 1,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Use numbers.",
+        "start": 168,
+        "end": 180,
+        "rule": "sentence",
+        "i": 2,
+        "tags": [],
+        "has_number": false
+      },
+      {
+        "text": "I'll approximate: total giraffe population ~1.5 million?",
+        "start": 181,
+        "end": 237,
+        "rule": "sentence",
+        "i": 3,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "Actually 1.5 million domestic?",
+        "start": 238,
+        "end": 268,
+        "rule": "sentence",
+        "i": 4,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Wild ~1 million.",
+        "start": 269,
+        "end": 285,
+        "rule": "sentence",
+        "i": 5,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Spots per giraffe average maybe 300.",
+        "start": 286,
+        "end": 322,
+        "rule": "sentence",
+        "i": 6,
+        "tags": [
+          "parameter-selection"
+        ],
+        "has_number": true
+      },
+      {
+        "text": "So 1m*300=300 million.",
+        "start": 323,
+        "end": 345,
+        "rule": "sentence",
+        "i": 7,
+        "tags": [],
+        "has_number": true
+      },
+      {
+        "text": "Provide single number 3·10^8.",
+        "start": 346,
+        "end": 375,
+        "rule": "sentence",
+        "i": 8,
+        "tags": [],
+        "has_number": true
+      }
+    ]
+  }
+]

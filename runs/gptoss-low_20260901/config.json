@@ -1,0 +1,12 @@
+{
+  "model": "gpt-oss-20b-low",
+  "model_id": "openai/gpt-oss-20b",
+  "backend": "local-vllm",
+  "provider": null,
+  "family": "gptoss",
+  "task": "giraffes",
+  "count": 100,
+  "target_max_tokens": 12000,
+  "target_reasoning_effort": "low",
+  "judge_model": "claude-sonnet-5"
+}
