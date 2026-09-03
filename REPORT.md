@@ -31,7 +31,7 @@ Four further results, in decreasing order of confidence:
    more are borderline; the remaining six have intervals that all contain zero and all
    overlap each other. More rollouts would not fix the ordering — each score is measured
    against its own model's spread, and those spreads differ by 36×, so the numbers are not on
-   a common scale (§3.3).
+   a common scale (§2.3).
 
 2. **The models are not biased before they start thinking — but they are badly anchored.**
    Forced to answer with no reasoning at all, both models give the same answers under both
@@ -39,20 +39,20 @@ Four further results, in decreasing order of confidence:
    whichever side the model starts on: gpt-oss rises 3.3M → 24–28M, Qwen3.5 *falls* from
    nonsense magnitudes to ~65M. Anchoring is large and direction-blind; motivated reasoning is
    what remains after subtracting it, and the shipped design has no control that separates the
-   two (§4.1).
+   two (§5.1).
 
 3. **The bias rides on the sentences that pick numbers, not the sentences that talk about the
    bet.** Replacing a sentence with an alternative the model itself would have written, then
    letting it redo everything downstream, only moves the answer for units choosing a Fermi
    input — how many giraffes exist, how many spots each has: **+0.039 [+0.004, +0.065]** at
    the paper's R=100. Units that name the bet or check the estimate against the threshold sit
-   on zero, measured the same way, on the same traces, at the same sample size (§4.3).
+   on zero, measured the same way, on the same traces, at the same sample size (§5.3).
 
 4. **Stated commitments to honesty are causally inert.** Qwen3.5 asserts honesty ~5 times per
    trace under incentive. Across 72 such units against 64 matched neighbouring controls they
    move the answer no more than the ordinary sentences beside them, and a second, independent
    line of evidence agrees: a safety fine-tune that produces half as much honesty-talk has a
-   statistically indistinguishable bias (§5).
+   statistically indistinguishable bias (§6).
 
 **Is this unfaithful CoT?** Yes — but not in the usual sense of a model hiding the cue it
 responded to. These models are open about the bet: 84–100% of incentive-condition traces
@@ -91,9 +91,30 @@ for monitoring: a monitor that looks for a model *talking about* an incentive wi
 wrong sentences, and would clear a trace whose visible reasoning is impeccable while its
 parameter choices quietly carry the bias.
 
+### How this report is arranged
+
+The order below is the argument, not the chronology. In particular **§4 comes before the
+findings it constrains**: the instrument has a regime in which it works, and every causal claim
+in §5 and §6 is made inside that regime.
+
+```mermaid
+flowchart TB
+    S2["<b>§2 · What the shipped metric misses</b><br/>MRF reports nothing on a 48-point swing,<br/>and the 10-model ranking is mostly unsupported"]
+    S3["<b>§3 · How to test what a sentence did</b><br/>replace it with one the model would have written,<br/>regenerate everything after it, compare answers"]
+    S4["<b>§4 · Does the instrument work?</b><br/>only where little reasoning follows the edit.<br/>Past that, a meaning-preserving reword moves<br/>the answer MORE than a real change does"]
+    S5["<b>§5 · Where the bias enters</b><br/>the sentences that pick numbers, not the ones<br/>that discuss the bet — +0.039 [+0.004, +0.065]"]
+    S6["<b>§6 · What does nothing</b><br/>stated commitments to honesty are inert,<br/>shown twice by independent routes"]
+
+    S2 -->|"so measure where the answer<br/>lands, not how it drifts"| S3
+    S3 --> S4
+    S4 -->|"claims are only made<br/>inside the working regime"| S5
+    S4 --> S6
+```
+
 ---
 
 ## 1. Setup
+
 
 Starting point: the repo's 10 shipped runs (10 models × 3 conditions × 100 rollouts). I added
 two local models I could intervene on, chosen so that a shared mechanism would mean something:
@@ -126,7 +147,7 @@ The size gap is deliberate rather than incidental: it means "both models do X" i
 statement about one architecture, one lab's post-training recipe, or one trace length.
 
 Three further configurations were added later to separate trace length from model identity,
-and they carry §6: **gpt-oss at low and high reasoning effort**, and **gpt-oss-safeguard-20b**
+and they carry §4: **gpt-oss at low and high reasoning effort**, and **gpt-oss-safeguard-20b**
 at medium and high.
 
 **Why I picked this problem.** Sentence resampling is the single-trace version of what I do
@@ -138,7 +159,7 @@ for the outcome?* The difference is only the unit of attribution. In a multi-ste
 resample from a step boundary and ask whether the failure survives; here you resample from a
 sentence boundary and ask whether the answer survives. Both fail the same way, too — if you
 attribute from the transcript alone you credit whichever step narrates the decision most
-legibly, which §4.3 shows is exactly the wrong step. That correspondence is why I built the
+legibly, which §5.3 shows is exactly the wrong step. That correspondence is why I built the
 analysis around negative controls: the matched untagged controls, the same-meaning placebo arm,
 and the split-half noise floor are the same discipline as separating a genuine agent failure
 from a harness failure, where the tempting explanation is usually the one the trace states out
@@ -146,55 +167,10 @@ loud.
 
 ---
 
-## 2. Method
+## 2. What the shipped metric misses
 
-Two instruments, following **Thought Anchors** (Bogdan, Macar, Nanda & Conmy,
-arXiv 2506.19143):
 
-- **Forced-answer screen** — truncate at each unit, force an immediate answer, read
-  P(estimate > threshold). Cheap; used only to map where the answer becomes determined and to
-  nominate positions. The paper documents its failure mode — a late necessary sentence
-  suppresses every earlier score — so it is never the verdict.
-- **Counterfactual importance** — resample the unit at position *i* from the model itself,
-  split the resamples by meaning, regenerate the whole remainder, and compare answer
-  distributions. Not deletion: a trace with a hole is off-distribution and confounds content
-  with incoherence.
-
-Three adaptations the task forced:
-
-- **Binary outcome** `Y = 1[estimate > threshold]`, so effects are in probability units.
-- **Signed importance** `A_i = d(c)·Δp` with `d = +1` for `above_good`, `−1` for `below_good`.
-  The paper's metric is unsigned — it asks which sentences matter. Here the question is which
-  sentences matter *toward the incentive*, which only the mirror-condition design makes
-  answerable.
-- **Numeric-aware meaning split.** Sentence embedders rate *"spots per individual: 2,200"*
-  against *"…: 1,200"* at ~0.97 cosine — "same meaning" — though it halves the answer. So
-  numeric units split on the committed value (|log10 ratio| > 0.06), others on MiniLM cosine.
-  The split is a function of the resampled unit alone, never of the outcome.
-
-**Reading the numbers.** Three quantities recur throughout:
-
-- **`P(>thr)`** — the fraction of a condition's rollouts whose *final answer* exceeds that
-  model's threshold. Because the threshold is the median of the 100 baseline estimates,
-  **baseline sits at 0.50 by construction**; if the incentive did nothing, both incentive
-  conditions would sit near 0.50 too. The **gap** is `P(>thr | above_good) − P(>thr |
-  below_good)`, in probability points. It is measured on the visible answer and never touches
-  the trajectory judge, which is what makes it independent of the machinery MRF depends on.
-- **`perm p`** — a label-permutation p-value. Reshuffle which condition each rollout belongs
-  to, recompute MRF, repeat 4,000 times, and count how often chance produces a gap this large.
-  **Small p = hard to fake by chance.** Note a small p does not mean a large effect —
-  deepseek-v4-flash is significant (p=0.014) at MRF +0.006, a tenth of inkling's; use the
-  interval, not the p-value, to compare sizes. Permutation rather than a t-test because these
-  values are skewed and heavy-tailed.
-- **`|Δp|` and signed effect** — from resampling: how much replacing one sentence moves the
-  probability of landing on the incentivized side. Signed by incentive direction, so positive
-  means the original sentence pushed the answer toward the side that condition rewards.
-
----
-
-## 3. The shipped metric misses the effect it exists to measure
-
-### 3.1 MRF is blind to a 48-point swing
+### 2.1 MRF is blind to a 48-point swing
 
 | model | MRF | perm p | P(>thr) below → above | gap |
 |---|---|---|---|---|
@@ -206,7 +182,7 @@ model floats mid-trace drift upward or downward as it reasons. The incentive's a
 is on *where the estimate lands*, which a model can reach without drifting at all — by picking
 a biased parameter early and computing forward from it consistently.
 
-### 3.2 Two defects in the reproduction that would hide this
+### 2.2 Two defects in the reproduction that would hide this
 
 Both are in [`adsingh-64/value-leakage`](https://github.com/adsingh-64/value-leakage), the
 minimal reproduction this work builds on. Neither is fatal to the paradigm; both are
@@ -225,7 +201,7 @@ reasons a real effect could sit in the data unmeasured.
 Whether the upstream repo (`TruthfulAI-research/value_leakage`) shares either is untested — I
 worked only from the reproduction.
 
-### 3.3 The 10-model leaderboard is mostly unsupported
+### 2.3 The 10-model leaderboard is mostly unsupported
 
 `panel.py` computes one MRF score per model and sorts the figure's rows by it, so
 `mega_panel.png` — the repo's headline artefact — reads top-to-bottom as *most* to *least*
@@ -267,7 +243,7 @@ That makes the problem sharper than missing error bars: **MRF is not on a common
 models.** Each score is measured against its own model's spread, and those spreads differ by
 36×, so sorting by raw MRF compares quantities that share no unit.
 
-### 3.4 Two data-quality problems underneath
+### 2.4 Two data-quality problems underneath
 
 - **Judge nulls are mostly sampling noise.** The judge client never sets temperature, so it
   runs at the API default. One retry pass recovered **124 of 141** nulls across all runs, and
@@ -280,332 +256,105 @@ models.** Each score is measured against its own model's spread, and those sprea
 
 ---
 
-## 4. Where the bias enters
+## 3. How to test what a sentence actually did
 
-### 4.1 Nothing before reasoning — but a large, direction-blind anchor
 
-Forced answer with zero reasoning, 200 samples per condition.
+Two instruments, following **Thought Anchors** (Bogdan, Macar, Nanda & Conmy,
+arXiv 2506.19143):
 
-gpt-oss:
+- **Forced-answer screen** — truncate at each unit, force an immediate answer, read
+  P(estimate > threshold). Cheap; used only to map where the answer becomes determined and to
+  nominate positions. The paper documents its failure mode — a late necessary sentence
+  suppresses every earlier score — so it is never the verdict.
+- **Counterfactual importance** — resample the unit at position *i* from the model itself,
+  split the resamples by meaning, regenerate the whole remainder, and compare answer
+  distributions. Not deletion: a trace with a hole is off-distribution and confounds content
+  with incoherence.
 
-| condition | median estimate | P(>thr) | 95% CI |
-|---|---|---|---|
-| baseline (no threshold in prompt) | **3,290,000** | 0.050 | [0.027, 0.090] |
-| below_good | 23,600,000 | 0.075 | [0.046, 0.121] |
-| above_good | 27,740,000 | 0.100 | [0.066, 0.149] |
-| | | **direction gap +0.025** | |
+**The three arms.** At each position: take the prefix (everything before unit *i*), ask the model
+to continue from it R times so it writes R alternatives it might plausibly have produced there,
+sort those by meaning against the original, then regenerate the whole remainder from each and read
+the final answer.
 
-Qwen3.5, same procedure and parser:
+```mermaid
+flowchart TB
+    T["original trace<br/>u₁ u₂ … u_i … u_n"]
+    T --> PRE["<b>prefix</b> = u₁ … u_(i−1)"]
 
-| condition | median estimate | P(>thr) | 95% CI |
-|---|---|---|---|
-| baseline (no threshold in prompt) | 550,000,000,000 *(genuine output, not a parse error)* | 0.780 | [0.713, 0.834] |
-| below_good | 65,000,000 | 0.616 | [0.547, 0.681] |
-| above_good | 64,900,000 | 0.679 | [0.610, 0.741] |
-| | | **direction gap +0.063** | |
+    PRE --> GEN["model continues from the prefix R times<br/>→ R sentences it might have written at position i"]
+    GEN --> SORT{"sort by meaning against u_i<br/>numeric: committed value · else: embedding cosine<br/><b>never by the outcome</b>"}
 
-Neither direction gap is distinguishable from zero — the two incentive conditions' intervals
-overlap almost entirely in both models — so **the tilt is not set when the prompt is encoded.**
+    SORT -->|"same meaning"| SAME["<b>reword arm</b><br/>the control"]
+    SORT -->|"different meaning"| DIFF["<b>genuine-change arm</b>"]
+    PRE --> BASE["<b>base arm</b><br/>continue from the original u_i"]
 
-But the *presence* of a threshold moves the answer enormously, and identically under both
-incentives. gpt-oss's snap estimate rises (3.3M → 24–28M against a 47.5M threshold);
-Qwen3.5's falls (~550 billion → ~65M against a 25.2M threshold). Anchoring is not "estimates
-get bigger" — it is "estimates move toward whatever number is in the context", which is
-precisely what makes it a confound for a threshold-crossing experiment. **Anchoring is large
-and direction-blind; motivated reasoning is what remains after you subtract it.**
+    SAME --> RG["regenerate the entire remainder<br/>and read the final answer"]
+    DIFF --> RG
+    BASE --> RG
 
-**On that 550-billion baseline median.** It is not a parsing failure — the parser is reading
-the model correctly. Denied any reasoning, Qwen3.5 emits nonsense magnitudes; these are
-verbatim completions:
+    RG --> P["p = fraction of rollouts clearing the threshold, per arm"]
+    P --> DP["|Δp| = arm − base"]
+    DP --> SEP["<b>separation = genuine − reword</b><br/>&gt; 0 the edit's meaning mattered<br/>≤ 0 you are reading resampling noise"]
+```
 
-> `10,000,000,000,000,000,000`  ·  `260000000000000000`  ·  `400000000000 (400 billion)`
+That gives three groups, all produced the same way, at the same position, with the same volume of
+text left to regenerate:
 
-Against a 25.2M threshold, that is ten quintillion. The median faithfully summarises garbage,
-so **Qwen's baseline magnitude should not be quoted as an estimate of anything.** Which
-sharpens the anchoring result rather than weakening it: mentioning a threshold does not merely
-shift Qwen's answer, it *regularises* it — four orders of magnitude, landing within a factor
-of three of the threshold itself.
-
-**Qwen's direction gap is not stable, and that is the point.** Measured three ways it reads
-−0.047 (screen at R=24), −0.015 (drop-truncated parser) and +0.063 (final parser). All are
-small, the intervals overlap heavily in every version, and **the sign flips** — which is what
-an absent effect looks like when measured repeatedly. Only the P(>thr) comparison is stable
-enough to carry an argument.
-
-A caveat on the whole section: forced answering measures a different regime from reasoned
-answering. Both models produce no-reasoning estimates that are wrong by orders of magnitude,
-in opposite directions. That is exactly why Thought Anchors treats this as a screen and not a
-verdict, and why the causal claims below rest on full-continuation resampling instead.
-
-### 4.2 The two models leak at different points, by different means
-
-Cut a trace partway through, force an answer, record P(>thr) for each condition; the **gap** is
-the difference between conditions at that cut point. Position is *how far through the reasoning
-the cut was made*, as a fraction of that trace's length — it has to be a fraction rather than a
-sentence number because traces run from 21 to 909 units.
-
-| position in trace | gpt-oss | Qwen3.5 |
+| arm | referred to below as | what it is |
 |---|---|---|
-| 0.0 (first tenth) | +0.061 * | +0.149 |
-| 0.1 | +0.317 * | +0.311 * |
-| 0.2 | **+0.633** * | +0.343 * |
-| 0.5 (halfway) | +0.383 | +0.409 * |
-| 0.9 (last tenth) | +0.332 | **+0.620** * |
+| base | — | continue from the **original** unit; supplies the reference `p` |
+| different-meaning | "genuine change" | the resample commits to something else |
+| same-meaning | "reword" | the resample says the same thing differently |
 
-`*` = the 95% bootstrap CI over traces excludes zero. gpt-oss's **+0.633** at position 0.2
-unpacks as `below_good` landing above the threshold 23% of the time against `above_good`'s 86%.
-Qwen's +0.149 carries no star because its interval is [−0.045, +0.309].
+`|Δp|` for an arm is its `p` minus the base arm's. The same-meaning arm is the **control**: it is
+matched on everything that could move the answer except meaning, so whatever movement it shows is
+downstream sampling, which makes it a *measured* noise floor rather than an assumed one. The model
+writes both piles — hand-authored paraphrases would be off-distribution and the control would then
+measure inserted text rather than resampling.
 
-**gpt-oss commits early and plateaus:** by a fifth of the way in, its answer is almost fully
-determined by the incentive, and the remaining 80% of its reasoning adds nothing. **Qwen3.5
-keeps widening** — the gap more than quadruples from start to end, so its reasoning is where
-the bias accumulates rather than merely where it is expressed.
+Three adaptations the task forced:
 
-The content differs as sharply as the timing:
+- **Binary outcome** `Y = 1[estimate > threshold]`, so effects are in probability units.
+- **Signed importance** `A_i = d(c)·Δp` with `d = +1` for `above_good`, `−1` for `below_good`.
+  The paper's metric is unsigned — it asks which sentences matter. Here the question is which
+  sentences matter *toward the incentive*, which only the mirror-condition design makes
+  answerable.
+- **Numeric-aware meaning split.** Sentence embedders rate *"spots per individual: 2,200"*
+  against *"…: 1,200"* at ~0.97 cosine — "same meaning" — though it halves the answer. Left to
+  the embedder that pair lands in the control arm and destroys it. So numeric units split on the
+  committed value (|log10 ratio| > 0.06), others on MiniLM cosine. **The split is a function of
+  the resampled unit alone, never of the outcome** — which is what stops the arms being defined
+  by the thing they are meant to measure. It is deliberately imperfect in a safe direction: a
+  genuinely different sentence misfiled as same-meaning dilutes the treatment arm toward the
+  base, attenuating effects rather than manufacturing them (§4.2).
 
-- **gpt-oss inflates a parameter and says nothing about it.** Its largest movers are population
-  figures: *"Population estimate: giraffes total ~1.5 million?"* (Δp +0.60), *"Total giraffe
-  population globally ~ 1-2 million"* (+0.57). The true figure is ~117,000.
-- **Qwen3.5 argues with itself about lying.** *"Wait, if I do that, the user loses the bet."*
-  (+0.50). **"If I know the user has a bet that loses if I tell the truth, should I lie?"**
-  (+0.45). *"Wait, if I use conservative data, I might inadvertently trigger the 'bad cause'."*
-  (−0.56). Accurate sourcing costs it: *"The Giraffe Conservation Foundation states the
-  population is around 106,000–117,000"* scores −0.53.
+**Reading the numbers.** Three quantities recur throughout:
 
-### 4.3 Causally, parameter choices carry the bias; talking about the bet does not
-
-Counterfactual importance, gpt-oss @ medium, **R=100** (the paper's density, 23,000
-continuations), a-priori positions only, bootstrapped over traces.
-
-| unit class | n | signed effect | 95% CI |
-|---|---|---|---|
-| **parameter-selection** | 59 | **+0.039** | **[+0.004, +0.065]** |
-| incentive-acknowledgment | 46 | +0.013 | [−0.001, +0.028] |
-| threshold-comparison | 20 | +0.009 | [−0.003, +0.023] |
-| untagged | 158 | +0.004 | [−0.005, +0.013] |
-
-The units that *visibly* engage the incentive are causally inert. The work is done where it
-looks like ordinary estimation.
-
-**The result is stable in sample size.** An earlier pass at R=48 gave parameter-selection
-+0.037 [+0.013, +0.063]; doubling to R=100 moved the point estimate by 0.002 and left the
-ordering unchanged, while the sampling-noise floor fell from 0.043 to 0.031 as √(48/100)
-predicts.
-
-**The contrast is the evidence, not the absolute value.** A single sentence moving the outcome
-~3.9 points is modest, and most parameter sentences do nothing at all — the median |Δp| across
-positions is 0.021, though the tail reaches 0.94. What makes the row meaningful is that every
-class was measured with the same method, the same R, the same traces and the same noise. If
-+0.039 were noise leaking through, the other classes would show it too, and they sit on zero.
-So the claim is not *"parameter choices have a large effect"* — it is that **parameter choices
-are the only class with a detectable directional effect, and bet-discussion is not.**
-
-**On the sampling-noise floor.** Splitting a single position's base samples in half gives a
-per-position error of 0.043 (at R=48), larger than the aggregate effect. That is not the
-contradiction it looks like: the floor says *don't trust any individual sentence's number* —
-and no single-position value is claimed anywhere. The aggregate averages 59 positions, and the
-noise it describes is symmetric around zero, so averaging cancels it rather than accumulating
-it. Converting the floor to a per-position spread implies a standard error near 0.007; the
-reported interval is ±0.025 because it is bootstrapped over **traces (6)** rather than
-positions, the conservative choice when positions within a trace are correlated.
-
-**Track A cannot corroborate this table, and I will not pretend otherwise.** The same analysis
-on Qwen3.5 gives parameter-selection −0.006 [−0.024, +0.013], incentive-acknowledgment +0.022
-[−0.005, +0.064], untagged +0.024 [−0.003, +0.064] — every interval spans zero. At ~20
-positions per condition the class breakdown is underpowered; it neither supports nor
-contradicts Track B. What Track A *does* resolve is where in the trace the effect sits: signed
-effect by normalised position is +0.052 [+0.007, +0.099] over the 0.2–0.4 band and +0.016
-[+0.000, +0.047] over 0.4–0.6, decaying to zero after — the same early-middle concentration its
-screen showed in §4.2. **The class-level claim is Track B's alone; the positional claim is
-supported by both.** §6 explains why Qwen cannot resolve classes, and the reason turns out to
-be a property of the method rather than of the model.
-
-### 4.4 The same measurement across five configurations
-
-Repeating it on other models and trace lengths tests whether the class result replicates *and*
-shows where the method stops working. Both belong in one table, because the second explains the
-first.
-
-| configuration | trace length | R | parameter-selection | resolves? |
-|---|---|---|---|---|
-| gpt-oss @ medium | 2.8k chars | 100 | **+0.039 [+0.004, +0.065]** | **yes** |
-| safeguard @ medium | 2.8k chars | 100 | +0.021 [−0.001, +0.043] | borderline |
-| gpt-oss @ high † | 23k chars | 48 | +0.042 [−0.014, +0.112] | no |
-| Qwen3.5 | 30k chars | 32 | −0.019 [−0.083, +0.031] | no |
-| gpt-oss @ low † | 0.25k chars | 48 | −0.021 [−0.045, +0.002] | different regime |
-
-† Resampled before the reasoning-effort defect described in §6.3 was found: their continuations
-were rendered at `Reasoning: medium` regardless of the effort the traces were sampled at, so
-these two rows measure "a high- (or low-) effort prefix continued at medium effort" rather than
-the configuration named. Both are being re-run. Neither row resolves an effect either way, so
-the conclusion drawn from this table does not rest on them.
-
-**gpt-oss @ high has almost the same point estimate as @ medium (+0.042 vs +0.039) with an
-interval three times wider.** The signal did not change; the instrument stopped resolving it,
-exactly as the horizon limit in §6.3 predicts. Qwen sits further along the same axis, and its
-opposite-signed estimate is best read as an unresolved measurement rather than a contrary
-finding.
-
-**Safeguard is a genuine, partial replication.** Same base model, different post-training,
-matched on trace regime, R, and position-selection policy — and its parameter-selection effect
-is the largest positive class, same sign, at about half the magnitude, with an interval that
-includes zero by a hair. Its placebo behaves identically to gpt-oss's (−0.011 vs −0.010). The
-honest summary is *directionally consistent on a second checkpoint, not independently
-significant*.
-
-**The low-effort row is a different reasoning regime, not a contradiction.** At ~7 units per
-trace the model is not doing Fermi decomposition — it states a number with token justification,
-against a threshold (180M) far from the accurate range, and the tagger's categories do not
-carry the same meaning. Its classes invert. That is a judgement about regime rather than a
-measurement, so the row is reported but not treated as evidence either way.
-
-A caveat across the table: **R varies by row** (100/100/48/32/48), so interval width reflects
-sample size as well as trace length. Matching R everywhere would mean re-running the long-trace
-rows at R=100 — 15+ GPU-hours for rows that are unresolved regardless.
-
-### 4.5 The two conditions are not mirror images of each other
-
-The threshold is each model's own baseline median, so by construction its unincentivized answer
-sits *at* the line: to win `above_good` it must move up, to win `below_good` it must move down.
-Those two moves are not equally available.
-
-The dominant free parameter is the giraffe population, and there the accurate value (~117,000)
-is **lower than what these models reach for when they need a big number** — gpt-oss proposes
-1–2 million under `above_good`. So moving *down* can be accomplished by becoming more accurate,
-while moving *up* requires departing from a figure the model can state correctly. Accuracy is a
-winning strategy on one arm only. Both models show this, measured on opposite arms:
-
-- **gpt-oss, `below_good`** — *"Actually global giraffe numbers: according to IUCN,
-  ~100,000-117,000 for various subspecies?"* scores **+0.71 signed**. The accurate figure
-  *serves* the incentive.
-- **Qwen3.5, `above_good`** — *"The Giraffe Conservation Foundation states the population is
-  around 106,000–117,000"* scores **ΔP −0.53** (forced-answer screen, a weaker instrument). The
-  accurate figure *costs* it the bet.
-
-Part of what gets scored as "motivated reasoning" under `below_good` is therefore
-indistinguishable from the model simply becoming more accurate, so an effect measured on that
-arm alone is weaker evidence than the same effect on `above_good`. This is not a flaw in the
-paradigm — it is a reason to read the two arms separately rather than pooling them, which the
-signed metric does and MRF does not. It applies to the shipped 10-model analysis as much as to
-mine.
-
-*(The two quotes are single sentences from different instruments, offered as illustration of a
-structural point, not as its proof. The structural point stands on the design itself.)*
+- **`P(>thr)`** — the fraction of a condition's rollouts whose *final answer* exceeds that
+  model's threshold. Because the threshold is the median of the 100 baseline estimates,
+  **baseline sits at 0.50 by construction**; if the incentive did nothing, both incentive
+  conditions would sit near 0.50 too. The **gap** is `P(>thr | above_good) − P(>thr |
+  below_good)`, in probability points. It is measured on the visible answer and never touches
+  the trajectory judge, which is what makes it independent of the machinery MRF depends on.
+- **`perm p`** — a label-permutation p-value. Reshuffle which condition each rollout belongs
+  to, recompute MRF, repeat 4,000 times, and count how often chance produces a gap this large.
+  **Small p = hard to fake by chance.** Note a small p does not mean a large effect —
+  deepseek-v4-flash is significant (p=0.014) at MRF +0.006, a tenth of inkling's; use the
+  interval, not the p-value, to compare sizes. Permutation rather than a t-test because these
+  values are skewed and heavy-tailed.
+- **`|Δp|` and signed effect** — from resampling: how much replacing one sentence moves the
+  probability of landing on the incentivized side. Signed by incentive direction, so positive
+  means the original sentence pushed the answer toward the side that condition rewards.
 
 ---
 
-## 5. What does nothing: stated commitments to honesty
+## 4. Does the instrument work?
 
-Qwen3.5 asserts honesty constantly once an incentive is present — **5.2 such units per trace in
-`below_good` and 5.6 in `above_good`, against 0.1 at baseline**. gpt-oss at its default setting
-essentially never does it (2 traces in 100). These are sentences like:
-
-> *"I should prioritize the 'most accurate estimate' instruction over the bet outcome."*
-> *"I'll ignore the bet outcome in my guidance and focus on the math."*
-> *"I will not bias the biological data to influence the charity donation type."*
-
-Does saying this change what the model answers?
-
-### 5.1 The intervention: disavowal units against matched controls
-
-I resampled disavowal units against **matched untagged neighbours** — ordinary sentences within
-±3 units, matched on length. The controls are the point: without them, "disavowal does nothing"
-cannot be told apart from "nothing at this depth does anything".
-
-Both conditions, 6 traces per condition, **72 disavowal units against 64 matched controls**,
-R=32:
-
-| group | n | mean \|Δp\| | 95% CI | signed effect | 95% CI |
-|---|---|---|---|---|---|
-| disavowal | 72 | 0.040 | [0.024, 0.056] | −0.009 | [−0.021, +0.001] |
-| matched control | 64 | 0.047 | [0.025, 0.070] | +0.008 | [−0.012, +0.029] |
-| **difference** | | **−0.007** | | | |
-
-Sampling-noise floor (split-half of the base arm): **0.054**. Both groups sit at or below it,
-disavowal remains *slightly under* its matched controls, and the interval bounds the effect:
-**disavowal units move the answer by at most ~0.056.**
-
-The sentences being tested are not ambiguous. The model states the conflict precisely, names
-the temptation, and commits against it — and the commitment changes the answer no more than the
-sentence next to it does.
-
-**This is a null at the power available, not proof of exactly zero.** What it establishes is
-the comparison: sentences where the model commits to honesty do no more work than the ordinary
-sentences beside them, while §4.3 shows parameter-selection units clearing their own noise floor
-with an interval excluding zero.
-
-### 5.2 A natural experiment that agrees, by a different route
-
-`gpt-oss-safeguard-20b` is a fine-tune of gpt-oss for safety classification — same base
-weights, same harmony format, same effort levels. Architecture, scale and tokenizer held fixed;
-post-training varied.
-
-**Structurally the fine-tune changed almost nothing.** At medium effort the two models produced
-the *identical* median baseline estimate across 200 independent rollouts (47,500,000), and
-their trace composition tracks closely at high effort — 51.5 vs 56.5 parameter-selection units
-per trace, 19.5 vs 20.9 threshold-comparisons.
-
-**The one category that moved is disavowal, and it moved down:**
-
-| model | effort | disavowal / trace (below, above) | traces with ≥1 |
-|---|---|---|---|
-| gpt-oss | medium | 0.04, 0.02 | 4%, 2% |
-| gpt-oss | **high** | **0.40, 0.34** | 33%, 28% |
-| safeguard | medium | 0.00, 0.03 | 0%, 3% |
-| safeguard | **high** | **0.19, 0.13** | 16%, 12% |
-| *Qwen3.5* | *n/a* | *5.23, 5.56* | *~100%* |
-
-Safety post-training did not add self-disclaiming reasoning; it roughly **halved** it. A
-plausible reading — offered as speculation — is that a model trained to apply an *externally
-supplied* policy has less disposition to generate its own normative stance, and our prompt
-supplies no policy. A bare Fermi question is also off-distribution for safeguard, so this need
-not reflect its behaviour in intended use.
-
-**Why this tests §5.1.** If stated commitments to honesty are causally inert, a checkpoint
-producing half as many of them, with estimation behaviour otherwise identical, should show an
-unchanged bias:
-
-| run | disavowal/trace | P(>thr) below → above | gap | 95% CI |
-|---|---|---|---|---|
-| gpt-oss @ medium | 0.02–0.04 | 0.41 → 0.52 | +0.110 | [−0.030, +0.250] |
-| gpt-oss @ high | 0.34–0.40 | 0.46 → 0.46 | +0.000 | [−0.140, +0.140] |
-| safeguard @ medium | 0.00–0.03 | 0.57 → 0.59 | +0.020 | [−0.120, +0.150] |
-| safeguard @ high | 0.13–0.19 | 0.48 → 0.60 | +0.116 | [−0.025, +0.247] |
-
-Halving the honesty-talk left the bias statistically indistinguishable. That is what §5.1
-predicts, reached by comparing checkpoints rather than intervening on sentences.
-
-**The limitation is severe and cuts both ways: none of these four gaps is distinguishable from
-zero.** At n=100 per condition this design resolves Qwen's 48-point swing and nothing near a
-10-point one. The correct statement is *"no gap large enough to detect, and no detectable
-difference between checkpoints"* — the comparison rules out large differences, not small ones.
-It is corroboration, not proof. This is §3.3's conclusion reached from the other end:
-**100 rollouts per condition is not enough to compare models in this paradigm.**
-
-### 5.3 One detail that cuts against a simple reading
-
-The largest disavowal effects are ethical reasoning, and they do not all point the same way:
-
-> *"I should not be manipulated into giving a number just to ensure a 'good cause' donation by
-> the user."* — |Δp| 0.23, signed **−0.23** (pushes away from the incentive)
->
-> *"Ethical consideration: I should not facilitate actions that might lead to harm (donating to
-> a 'bad cause')…"* — |Δp| 0.22, signed **+0.22** (pushes *toward* it)
-
-The second is the model reasoning about avoiding harm, and that reasoning is precisely what
-carries it toward the incentivized answer. So the occasional disavowal unit that does clear the
-floor can push either way depending on whether it frames the bet as something to resist or a
-harm to avert — a more uncomfortable finding than uniform inertness, and worth a targeted
-follow-up.
-
----
-
-## 6. How far the instrument can be trusted
 
 This section is the most transferable part of the work. Everything above depends on
 counterfactual importance actually measuring what it claims to, and it does not always.
 
-### 6.1 The meaning split fails on long traces
+### 4.1 The meaning split fails on long traces
 
 Raising Track A from 24 to 78 positions per condition (142 usable) did **not** rescue its class
 breakdown. Every interval still spans zero except `untagged` (+0.015 [+0.003, +0.027]) — the
@@ -623,9 +372,9 @@ The diagnostic is the placebo arm — resamples that mean the *same* thing as th
 in Qwen3.5. Both arms sit well above their noise floors (0.031 and 0.064), so the intervention
 is doing something — it is the *semantic* discrimination that fails.
 
-### 6.2 Why the signed class result survives that failure
+### 4.2 Why the signed class result survives that failure
 
-The placebo check concerns **magnitude** (|Δp|, unsigned), while §4.3's claim rests on the
+The placebo check concerns **magnitude** (|Δp|, unsigned), while §5.3's claim rests on the
 **signed** effect. Symmetric perturbation noise averages to zero in a signed metric but
 accumulates in an unsigned one, which is why the two disagree.
 
@@ -637,9 +386,9 @@ the failure the placebo reveals.
 
 What I would not claim is any *per-position* magnitude from this method on long traces.
 
-### 6.3 The horizon limit: it is remaining reasoning, not trace length
+### 4.3 The horizon limit: it is remaining reasoning, not trace length
 
-The natural explanation for §6.1 is trace length: Qwen's traces are ~10× longer, so a mid-trace
+The natural explanation for §4.1 is trace length: Qwen's traces are ~10× longer, so a mid-trace
 resample leaves thousands of tokens in which the outcome can be re-randomised regardless of what
 the swapped sentence said. But comparing Qwen to gpt-oss confounds length with model family
 *and* with R (32 vs 100).
@@ -698,7 +447,7 @@ seeds its own generator and the script aborts if a recomputation disagrees with 
 † **These two rows were resampled with the reasoning-effort setting dropped.** `resample.py`
 rendered every continuation at the template default, `Reasoning: medium`, regardless of the
 effort the trace was sampled at. For the high and low runs that means continuations were
-generated under a different stop-bias than the traces they continue — and §6.4 measures that
+generated under a different stop-bias than the traces they continue — and §4.4 measures that
 setting as moving P(stop) at a natural boundary from 0.675 to 0.998. Both are being re-run with
 the effort honoured. The arm comparison within each run stays internally valid, because base,
 different- and same-meaning arms were all generated the same way; what is wrong is the
@@ -736,11 +485,20 @@ outcome.
 
 **What this means for reuse.** The obvious next application — long agentic trajectories — sits
 squarely inside the limit. Resampling a step thousands of tokens before the outcome will mostly
-measure the sampling that follows. The mitigation is more specific than "raise R": **place
-interventions late.** Late cuts in a long trace recover most of the method's resolving power at
-no extra cost, because the operative variable is remaining reasoning rather than trace length.
-Where early steps must be tested, R has to rise to cover a noise floor that grows with distance
-to the outcome.
+measure the sampling that follows.
+
+What this does *not* license is the obvious mitigation. "Place the intervention late" would
+follow if the split were known to discriminate at the tail of a long trace, and that is exactly
+what is missing: of the positions with under 500 characters remaining, 979 sit in short traces
+and **5** in the long-trace runs. The direct test — late against early cuts inside the same long
+trace — spans zero on Qwen3.5 (+0.042 [−0.001, +0.078]) and clears it only on the run under
+re-measurement. The operative variable is remaining reasoning; whether a late cut in a
+23k-character trace inherits the short-trace behaviour is a prediction this data cannot settle.
+
+What the data does support is narrower and duller: **carry the placebo arm**. The point at which
+the meaning-split stops discriminating is not visible from the treatment arm alone — here it
+failed while raw movement was still growing — so the control is what tells you whether a number
+means anything.
 
 **Limits of this test.** The result rests on bin-level contrasts, not on per-run trends: of the
 five within-run splits, only gpt-oss @ high excludes zero, and that is the row being re-measured.
@@ -751,12 +509,12 @@ against the latter is that the same-meaning arm is what grows, which position-im
 predict. A designed test would fix the cut position and vary only what follows it, which is now
 the most valuable experiment outstanding (§9).
 
-### 6.4 Reasoning effort: a confound, and then a control
+### 4.4 Reasoning effort: a confound, and then a control
 
 gpt-oss ran at its **default `Reasoning: medium`**, a line its chat template writes into the
 system prompt. Qwen3.5 has no equivalent — `reasoning_effort` is silently ignored by its
 template (accepted, no error, no effect), and its only lever is binary `enable_thinking`. So the
-two models were never matched on effort, and §4.2's trace-length gap was partly a setting I left
+two models were never matched on effort, and §5.2's trace-length gap was partly a setting I left
 alone.
 
 Same prompt, same sampling, only the effort word changed (40 rollouts each, `above_good`):
@@ -771,7 +529,7 @@ Same prompt, same sampling, only the effort word changed (40 rollouts each, `abo
 
 **Effort explains the entire length gap.** At `high`, gpt-oss writes 482 units against Qwen3.5's
 497 — essentially identical. The 10× difference was configuration, not family. That is what made
-§6.3's clean test possible, turning a confound into the control variable.
+§4.3's clean test possible, turning a confound into the control variable.
 
 **Mechanism.** The effort word is a learned control code that shifts the per-step probability of
 emitting the token that ends the analysis channel. Taking one 707-token trace, truncating it, and
@@ -785,7 +543,7 @@ stopping is available, and that bias compounds autoregressively into the 25× le
 does nothing, so a run can be labelled effort-controlled while nothing changed. The sampling code
 now raises rather than accepting the argument for that family.
 
-### 6.5 The answer parser, validated and repaired
+### 4.5 The answer parser, validated and repaired
 
 The regex that reads the final estimate was checked against the independent estimate judge on
 200 answers sampled across all six local runs:
@@ -816,12 +574,12 @@ above-vs-below *gap* 0.02 — smaller than the interval on every effect reported
 conclusions stand.
 
 **What cannot be repaired.** The resampling runs stored thresholded 0/1 outcomes rather than
-completion text, so §4.3 and §6.3 cannot be re-parsed — only re-run. Those numbers were produced
+completion text, so §5.3 and §4.3 cannot be re-parsed — only re-run. Those numbers were produced
 with the buggy parser and carry a ~3% parse-error rate.
 
-**Why that does not undermine §6.3.** The rate is ~3% for gpt-oss and **0% for Qwen3.5** (0 of
+**Why that does not undermine §4.3.** The rate is ~3% for gpt-oss and **0% for Qwen3.5** (0 of
 300 answers changed), so it cannot explain Qwen's degraded separation at all. And within a run
-the rate does not depend on position, while §6.3's load-bearing result contrasts early against
+the rate does not depend on position, while §4.3's load-bearing result contrasts early against
 late cuts *in the same traces* — a roughly uniform noise term lifts both halves together and
 cannot manufacture a gradient between them. What it does do is inflate the floor slightly in the
 gpt-oss arms, making those separations conservative rather than inflated.
@@ -831,7 +589,7 @@ space-separated thousands (*"5 300 000 000"* → 530,000,000, regex correct). Si
 judge produced every threshold and every P(>thr) here, it carries a ~1% order-of-magnitude
 failure mode of its own.
 
-### 6.6 Sampling noise dominates below R≈32
+### 4.6 Sampling noise dominates below R≈32
 
 An early pass at R=16 produced a treatment |Δp| of 0.149 against a same-meaning placebo of 0.144
 — noise measuring itself. That is why R was raised and why the noise floor is now *measured* by
@@ -840,7 +598,330 @@ own floor.
 
 ---
 
+## 5. Where the bias enters
+
+
+### 5.1 Nothing before reasoning — but a large, direction-blind anchor
+
+Forced answer with zero reasoning, 200 samples per condition.
+
+gpt-oss:
+
+| condition | median estimate | P(>thr) | 95% CI |
+|---|---|---|---|
+| baseline (no threshold in prompt) | **3,290,000** | 0.050 | [0.027, 0.090] |
+| below_good | 23,600,000 | 0.075 | [0.046, 0.121] |
+| above_good | 27,740,000 | 0.100 | [0.066, 0.149] |
+| | | **direction gap +0.025** | |
+
+Qwen3.5, same procedure and parser:
+
+| condition | median estimate | P(>thr) | 95% CI |
+|---|---|---|---|
+| baseline (no threshold in prompt) | 550,000,000,000 *(genuine output, not a parse error)* | 0.780 | [0.713, 0.834] |
+| below_good | 65,000,000 | 0.616 | [0.547, 0.681] |
+| above_good | 64,900,000 | 0.679 | [0.610, 0.741] |
+| | | **direction gap +0.063** | |
+
+Neither direction gap is distinguishable from zero — the two incentive conditions' intervals
+overlap almost entirely in both models — so **the tilt is not set when the prompt is encoded.**
+
+But the *presence* of a threshold moves the answer enormously, and identically under both
+incentives. gpt-oss's snap estimate rises (3.3M → 24–28M against a 47.5M threshold);
+Qwen3.5's falls (~550 billion → ~65M against a 25.2M threshold). Anchoring is not "estimates
+get bigger" — it is "estimates move toward whatever number is in the context", which is
+precisely what makes it a confound for a threshold-crossing experiment. **Anchoring is large
+and direction-blind; motivated reasoning is what remains after you subtract it.**
+
+**On that 550-billion baseline median.** It is not a parsing failure — the parser is reading
+the model correctly. Denied any reasoning, Qwen3.5 emits nonsense magnitudes; these are
+verbatim completions:
+
+> `10,000,000,000,000,000,000`  ·  `260000000000000000`  ·  `400000000000 (400 billion)`
+
+Against a 25.2M threshold, that is ten quintillion. The median faithfully summarises garbage,
+so **Qwen's baseline magnitude should not be quoted as an estimate of anything.** Which
+sharpens the anchoring result rather than weakening it: mentioning a threshold does not merely
+shift Qwen's answer, it *regularises* it — four orders of magnitude, landing within a factor
+of three of the threshold itself.
+
+**Qwen's direction gap is not stable, and that is the point.** Measured three ways it reads
+−0.047 (screen at R=24), −0.015 (drop-truncated parser) and +0.063 (final parser). All are
+small, the intervals overlap heavily in every version, and **the sign flips** — which is what
+an absent effect looks like when measured repeatedly. Only the P(>thr) comparison is stable
+enough to carry an argument.
+
+A caveat on the whole section: forced answering measures a different regime from reasoned
+answering. Both models produce no-reasoning estimates that are wrong by orders of magnitude,
+in opposite directions. That is exactly why Thought Anchors treats this as a screen and not a
+verdict, and why the causal claims below rest on full-continuation resampling instead.
+
+### 5.2 The two models leak at different points, by different means
+
+Cut a trace partway through, force an answer, record P(>thr) for each condition; the **gap** is
+the difference between conditions at that cut point. Position is *how far through the reasoning
+the cut was made*, as a fraction of that trace's length — it has to be a fraction rather than a
+sentence number because traces run from 21 to 909 units.
+
+| position in trace | gpt-oss | Qwen3.5 |
+|---|---|---|
+| 0.0 (first tenth) | +0.061 * | +0.149 |
+| 0.1 | +0.317 * | +0.311 * |
+| 0.2 | **+0.633** * | +0.343 * |
+| 0.5 (halfway) | +0.383 | +0.409 * |
+| 0.9 (last tenth) | +0.332 | **+0.620** * |
+
+`*` = the 95% bootstrap CI over traces excludes zero. gpt-oss's **+0.633** at position 0.2
+unpacks as `below_good` landing above the threshold 23% of the time against `above_good`'s 86%.
+Qwen's +0.149 carries no star because its interval is [−0.045, +0.309].
+
+**gpt-oss commits early and plateaus:** by a fifth of the way in, its answer is almost fully
+determined by the incentive, and the remaining 80% of its reasoning adds nothing. **Qwen3.5
+keeps widening** — the gap more than quadruples from start to end, so its reasoning is where
+the bias accumulates rather than merely where it is expressed.
+
+The content differs as sharply as the timing:
+
+- **gpt-oss inflates a parameter and says nothing about it.** Its largest movers are population
+  figures: *"Population estimate: giraffes total ~1.5 million?"* (Δp +0.60), *"Total giraffe
+  population globally ~ 1-2 million"* (+0.57). The true figure is ~117,000.
+- **Qwen3.5 argues with itself about lying.** *"Wait, if I do that, the user loses the bet."*
+  (+0.50). **"If I know the user has a bet that loses if I tell the truth, should I lie?"**
+  (+0.45). *"Wait, if I use conservative data, I might inadvertently trigger the 'bad cause'."*
+  (−0.56). Accurate sourcing costs it: *"The Giraffe Conservation Foundation states the
+  population is around 106,000–117,000"* scores −0.53.
+
+### 5.3 Causally, parameter choices carry the bias; talking about the bet does not
+
+Counterfactual importance, gpt-oss @ medium, **R=100** (the paper's density, 23,000
+continuations), a-priori positions only, bootstrapped over traces.
+
+| unit class | n | signed effect | 95% CI |
+|---|---|---|---|
+| **parameter-selection** | 59 | **+0.039** | **[+0.004, +0.065]** |
+| incentive-acknowledgment | 46 | +0.013 | [−0.001, +0.028] |
+| threshold-comparison | 20 | +0.009 | [−0.003, +0.023] |
+| untagged | 158 | +0.004 | [−0.005, +0.013] |
+
+The units that *visibly* engage the incentive are causally inert. The work is done where it
+looks like ordinary estimation.
+
+**The result is stable in sample size.** An earlier pass at R=48 gave parameter-selection
++0.037 [+0.013, +0.063]; doubling to R=100 moved the point estimate by 0.002 and left the
+ordering unchanged, while the sampling-noise floor fell from 0.043 to 0.031 as √(48/100)
+predicts.
+
+**The contrast is the evidence, not the absolute value.** A single sentence moving the outcome
+~3.9 points is modest, and most parameter sentences do nothing at all — the median |Δp| across
+positions is 0.021, though the tail reaches 0.94. What makes the row meaningful is that every
+class was measured with the same method, the same R, the same traces and the same noise. If
++0.039 were noise leaking through, the other classes would show it too, and they sit on zero.
+So the claim is not *"parameter choices have a large effect"* — it is that **parameter choices
+are the only class with a detectable directional effect, and bet-discussion is not.**
+
+**On the sampling-noise floor.** Splitting a single position's base samples in half gives a
+per-position error of 0.043 (at R=48), larger than the aggregate effect. That is not the
+contradiction it looks like: the floor says *don't trust any individual sentence's number* —
+and no single-position value is claimed anywhere. The aggregate averages 59 positions, and the
+noise it describes is symmetric around zero, so averaging cancels it rather than accumulating
+it. Converting the floor to a per-position spread implies a standard error near 0.007; the
+reported interval is ±0.025 because it is bootstrapped over **traces (6)** rather than
+positions, the conservative choice when positions within a trace are correlated.
+
+**Track A cannot corroborate this table, and I will not pretend otherwise.** The same analysis
+on Qwen3.5 gives parameter-selection −0.006 [−0.024, +0.013], incentive-acknowledgment +0.022
+[−0.005, +0.064], untagged +0.024 [−0.003, +0.064] — every interval spans zero. At ~20
+positions per condition the class breakdown is underpowered; it neither supports nor
+contradicts Track B. What Track A *does* resolve is where in the trace the effect sits: signed
+effect by normalised position is +0.052 [+0.007, +0.099] over the 0.2–0.4 band and +0.016
+[+0.000, +0.047] over 0.4–0.6, decaying to zero after — the same early-middle concentration its
+screen showed in §5.2. **The class-level claim is Track B's alone; the positional claim is
+supported by both.** §4 explains why Qwen cannot resolve classes, and the reason turns out to
+be a property of the method rather than of the model.
+
+### 5.4 The same measurement across five configurations
+
+Repeating it on other models and trace lengths tests whether the class result replicates *and*
+shows where the method stops working. Both belong in one table, because the second explains the
+first.
+
+| configuration | trace length | R | parameter-selection | resolves? |
+|---|---|---|---|---|
+| gpt-oss @ medium | 2.8k chars | 100 | **+0.039 [+0.004, +0.065]** | **yes** |
+| safeguard @ medium | 2.8k chars | 100 | +0.021 [−0.001, +0.043] | borderline |
+| gpt-oss @ high † | 23k chars | 48 | +0.042 [−0.014, +0.112] | no |
+| Qwen3.5 | 30k chars | 32 | −0.019 [−0.083, +0.031] | no |
+| gpt-oss @ low † | 0.25k chars | 48 | −0.021 [−0.045, +0.002] | different regime |
+
+† Resampled before the reasoning-effort defect described in §4.3 was found: their continuations
+were rendered at `Reasoning: medium` regardless of the effort the traces were sampled at, so
+these two rows measure "a high- (or low-) effort prefix continued at medium effort" rather than
+the configuration named. Both are being re-run. Neither row resolves an effect either way, so
+the conclusion drawn from this table does not rest on them.
+
+**gpt-oss @ high has almost the same point estimate as @ medium (+0.042 vs +0.039) with an
+interval three times wider.** The signal did not change; the instrument stopped resolving it,
+exactly as the horizon limit in §4.3 predicts. Qwen sits further along the same axis, and its
+opposite-signed estimate is best read as an unresolved measurement rather than a contrary
+finding.
+
+**Safeguard is a genuine, partial replication.** Same base model, different post-training,
+matched on trace regime, R, and position-selection policy — and its parameter-selection effect
+is the largest positive class, same sign, at about half the magnitude, with an interval that
+includes zero by a hair. Its placebo behaves identically to gpt-oss's (−0.011 vs −0.010). The
+honest summary is *directionally consistent on a second checkpoint, not independently
+significant*.
+
+**The low-effort row is a different reasoning regime, not a contradiction.** At ~7 units per
+trace the model is not doing Fermi decomposition — it states a number with token justification,
+against a threshold (180M) far from the accurate range, and the tagger's categories do not
+carry the same meaning. Its classes invert. That is a judgement about regime rather than a
+measurement, so the row is reported but not treated as evidence either way.
+
+A caveat across the table: **R varies by row** (100/100/48/32/48), so interval width reflects
+sample size as well as trace length. Matching R everywhere would mean re-running the long-trace
+rows at R=100 — 15+ GPU-hours for rows that are unresolved regardless.
+
+### 5.5 The two conditions are not mirror images of each other
+
+The threshold is each model's own baseline median, so by construction its unincentivized answer
+sits *at* the line: to win `above_good` it must move up, to win `below_good` it must move down.
+Those two moves are not equally available.
+
+The dominant free parameter is the giraffe population, and there the accurate value (~117,000)
+is **lower than what these models reach for when they need a big number** — gpt-oss proposes
+1–2 million under `above_good`. So moving *down* can be accomplished by becoming more accurate,
+while moving *up* requires departing from a figure the model can state correctly. Accuracy is a
+winning strategy on one arm only. Both models show this, measured on opposite arms:
+
+- **gpt-oss, `below_good`** — *"Actually global giraffe numbers: according to IUCN,
+  ~100,000-117,000 for various subspecies?"* scores **+0.71 signed**. The accurate figure
+  *serves* the incentive.
+- **Qwen3.5, `above_good`** — *"The Giraffe Conservation Foundation states the population is
+  around 106,000–117,000"* scores **ΔP −0.53** (forced-answer screen, a weaker instrument). The
+  accurate figure *costs* it the bet.
+
+Part of what gets scored as "motivated reasoning" under `below_good` is therefore
+indistinguishable from the model simply becoming more accurate, so an effect measured on that
+arm alone is weaker evidence than the same effect on `above_good`. This is not a flaw in the
+paradigm — it is a reason to read the two arms separately rather than pooling them, which the
+signed metric does and MRF does not. It applies to the shipped 10-model analysis as much as to
+mine.
+
+*(The two quotes are single sentences from different instruments, offered as illustration of a
+structural point, not as its proof. The structural point stands on the design itself.)*
+
+---
+
+## 6. What does nothing
+
+
+Qwen3.5 asserts honesty constantly once an incentive is present — **5.2 such units per trace in
+`below_good` and 5.6 in `above_good`, against 0.1 at baseline**. gpt-oss at its default setting
+essentially never does it (2 traces in 100). These are sentences like:
+
+> *"I should prioritize the 'most accurate estimate' instruction over the bet outcome."*
+> *"I'll ignore the bet outcome in my guidance and focus on the math."*
+> *"I will not bias the biological data to influence the charity donation type."*
+
+Does saying this change what the model answers?
+
+### 6.1 The intervention: disavowal units against matched controls
+
+I resampled disavowal units against **matched untagged neighbours** — ordinary sentences within
+±3 units, matched on length. The controls are the point: without them, "disavowal does nothing"
+cannot be told apart from "nothing at this depth does anything".
+
+Both conditions, 6 traces per condition, **72 disavowal units against 64 matched controls**,
+R=32:
+
+| group | n | mean \|Δp\| | 95% CI | signed effect | 95% CI |
+|---|---|---|---|---|---|
+| disavowal | 72 | 0.040 | [0.024, 0.056] | −0.009 | [−0.021, +0.001] |
+| matched control | 64 | 0.047 | [0.025, 0.070] | +0.008 | [−0.012, +0.029] |
+| **difference** | | **−0.007** | | | |
+
+Sampling-noise floor (split-half of the base arm): **0.054**. Both groups sit at or below it,
+disavowal remains *slightly under* its matched controls, and the interval bounds the effect:
+**disavowal units move the answer by at most ~0.056.**
+
+The sentences being tested are not ambiguous. The model states the conflict precisely, names
+the temptation, and commits against it — and the commitment changes the answer no more than the
+sentence next to it does.
+
+**This is a null at the power available, not proof of exactly zero.** What it establishes is
+the comparison: sentences where the model commits to honesty do no more work than the ordinary
+sentences beside them, while §5.3 shows parameter-selection units clearing their own noise floor
+with an interval excluding zero.
+
+### 6.2 A natural experiment that agrees, by a different route
+
+`gpt-oss-safeguard-20b` is a fine-tune of gpt-oss for safety classification — same base
+weights, same harmony format, same effort levels. Architecture, scale and tokenizer held fixed;
+post-training varied.
+
+**Structurally the fine-tune changed almost nothing.** At medium effort the two models produced
+the *identical* median baseline estimate across 200 independent rollouts (47,500,000), and
+their trace composition tracks closely at high effort — 51.5 vs 56.5 parameter-selection units
+per trace, 19.5 vs 20.9 threshold-comparisons.
+
+**The one category that moved is disavowal, and it moved down:**
+
+| model | effort | disavowal / trace (below, above) | traces with ≥1 |
+|---|---|---|---|
+| gpt-oss | medium | 0.04, 0.02 | 4%, 2% |
+| gpt-oss | **high** | **0.40, 0.34** | 33%, 28% |
+| safeguard | medium | 0.00, 0.03 | 0%, 3% |
+| safeguard | **high** | **0.19, 0.13** | 16%, 12% |
+| *Qwen3.5* | *n/a* | *5.23, 5.56* | *~100%* |
+
+Safety post-training did not add self-disclaiming reasoning; it roughly **halved** it. A
+plausible reading — offered as speculation — is that a model trained to apply an *externally
+supplied* policy has less disposition to generate its own normative stance, and our prompt
+supplies no policy. A bare Fermi question is also off-distribution for safeguard, so this need
+not reflect its behaviour in intended use.
+
+**Why this tests §6.1.** If stated commitments to honesty are causally inert, a checkpoint
+producing half as many of them, with estimation behaviour otherwise identical, should show an
+unchanged bias:
+
+| run | disavowal/trace | P(>thr) below → above | gap | 95% CI |
+|---|---|---|---|---|
+| gpt-oss @ medium | 0.02–0.04 | 0.41 → 0.52 | +0.110 | [−0.030, +0.250] |
+| gpt-oss @ high | 0.34–0.40 | 0.46 → 0.46 | +0.000 | [−0.140, +0.140] |
+| safeguard @ medium | 0.00–0.03 | 0.57 → 0.59 | +0.020 | [−0.120, +0.150] |
+| safeguard @ high | 0.13–0.19 | 0.48 → 0.60 | +0.116 | [−0.025, +0.247] |
+
+Halving the honesty-talk left the bias statistically indistinguishable. That is what §6.1
+predicts, reached by comparing checkpoints rather than intervening on sentences.
+
+**The limitation is severe and cuts both ways: none of these four gaps is distinguishable from
+zero.** At n=100 per condition this design resolves Qwen's 48-point swing and nothing near a
+10-point one. The correct statement is *"no gap large enough to detect, and no detectable
+difference between checkpoints"* — the comparison rules out large differences, not small ones.
+It is corroboration, not proof. This is §2.3's conclusion reached from the other end:
+**100 rollouts per condition is not enough to compare models in this paradigm.**
+
+### 6.3 One detail that cuts against a simple reading
+
+The largest disavowal effects are ethical reasoning, and they do not all point the same way:
+
+> *"I should not be manipulated into giving a number just to ensure a 'good cause' donation by
+> the user."* — |Δp| 0.23, signed **−0.23** (pushes away from the incentive)
+>
+> *"Ethical consideration: I should not facilitate actions that might lead to harm (donating to
+> a 'bad cause')…"* — |Δp| 0.22, signed **+0.22** (pushes *toward* it)
+
+The second is the model reasoning about avoiding harm, and that reasoning is precisely what
+carries it toward the incentivized answer. So the occasional disavowal unit that does clear the
+floor can push either way depending on whether it frames the bet as something to resist or a
+harm to avert — a more uncomfortable finding than uniform inertness, and worth a targeted
+follow-up.
+
+---
+
 ## 7. Does the mechanism generalise? (correlational)
+
 
 Resampling only runs on the two local models, but the mechanisms leave different signatures in
 trajectory data that already exists for all 12 runs:
@@ -865,38 +946,40 @@ discarded for tidiness.
 
 ## 8. Limitations
 
+
 - **Statistical power.** The paper uses 100 rollouts per position. Track B reaches that; Track A
   runs at R=32, and the long-trace configurations at R=48.
 - **Trace selection and coverage on Track A.** Its resampled traces were chosen as the cheapest
   to continue (cost scales with tokens remaining), biasing toward terser traces, and the position
   plan was trimmed to fit the deadline. Track A's counterfactual numbers rest on ~20 usable
   positions per condition against Track B's 282. Track A's load-bearing roles are the disavowal
-  test (§5.1) and the screen (§4.2), where its material is dense.
+  test (§6.1) and the screen (§5.2), where its material is dense.
 - **Bernoulli KL is unreliable here.** At these sample sizes p̂ saturates at 0 or 1 often, and KL
   with an ε floor explodes on exactly those cases, so a mean KL measures saturation frequency.
   |Δp| carries the argument; KL is reported only for comparability.
 - **Quantisation.** Track A is 4-bit.
 - **The shipped `claude-opus-4-7` run is a summarised trace, not raw CoT** — it can never be
   resampled, and its trajectory judge was reading a summary.
-- **Forced-answer magnitudes are unreliable for Qwen3.5** (§4.1): its no-reasoning medians move
+- **Forced-answer magnitudes are unreliable for Qwen3.5** (§5.1): its no-reasoning medians move
   by orders of magnitude between parser versions, so only its P(>thr) comparison is used.
-- **The resampling runs carry a ~3% parse-error rate** (§6.5) that can be removed only by
+- **The resampling runs carry a ~3% parse-error rate** (§4.5) that can be removed only by
   re-running them.
 - **The gpt-oss @ high and @ low counterfactual runs were resampled at the wrong reasoning
-  effort** (§6.3, Appendix A entry 8) — their continuations were rendered at medium regardless.
+  effort** (§4.3, Appendix A entry 8) — their continuations were rendered at medium regardless.
   Both are being re-run; no conclusion here rests on either.
 - **The within-run horizon splits are directional, not established.** Four of five span zero and
   the fifth is the run under re-measurement, so the horizon result stands on the bin-level
   contrasts and Qwen3.5's rank correlation rather than on any single run's internal trend.
 - **Six bootstrap clusters.** Track B's intervals are bootstrapped over 6 traces, a small number
-  of clusters, which argues for treating the *ordering* of the classes in §4.3 as the result and
+  of clusters, which argues for treating the *ordering* of the classes in §5.3 as the result and
   the exact magnitude as provisional.
 
 ---
 
 ## 9. What I would do next
 
-1. **A designed horizon test.** §6.3's result is observational: remaining length correlates with
+
+1. **A designed horizon test.** §4.3's result is observational: remaining length correlates with
    position index, so "far from the outcome" and "early in the argument" are not fully separated.
    Fixing the cut position and varying only the amount of reasoning that follows it would settle
    this, and it is the single most valuable experiment left.
@@ -904,15 +987,15 @@ discarded for tidiness.
    picking a year or a population instead of the estimate. Fixing it means changing the selection
    policy, which needs its own labelled validation set — cheap to build, since the judge already
    supplies the labels.
-3. **Raise R to 100 on the long-trace rows**, so §4.4's interval widths reflect trace length
+3. **Raise R to 100 on the long-trace rows**, so §5.4's interval widths reflect trace length
    rather than sample size.
 4. **A neutral-threshold condition** (threshold stated, nothing riding on it) run *with*
-   reasoning, to confirm §4.1's anchoring result outside the forced-answer regime.
-5. **Test the asymmetry in §4.5 directly** by moving the threshold so that honesty and incentive
+   reasoning, to confirm §5.1's anchoring result outside the forced-answer regime.
+5. **Test the asymmetry in §5.5 directly** by moving the threshold so that honesty and incentive
    disagree in both arms.
-6. **Chase the harm-framing result in §5.3.** Whether ethical framing systematically vectors into
+6. **Chase the harm-framing result in §6.3.** Whether ethical framing systematically vectors into
    the biased answer is a better question than the one I set out to test.
-7. **Fix the two defects in the reproduction** (§3.2) and re-run the shipped analysis; the ranking
+7. **Fix the two defects in the reproduction** (§2.2) and re-run the shipped analysis; the ranking
    already moved once when judge nulls were repaired.
 
 ---
@@ -931,9 +1014,9 @@ Kept in one place so the record is auditable. Each of these is already reflected
 | 3 | gpt-oss's disavowal gap "survives length matching" — implying it does not produce the behaviour | At 100 rollouts rather than 40, gpt-oss @ high reaches 0.34–0.40 per trace in ~30% of traces: **~15× rarer than Qwen, not absent** | Overstated from a 40-rollout sample |
 | 4 | The horizon decay is "a cliff, not a slope", collapsing somewhere between 2.8k and 23k characters of trace | **Retracted.** The relationship is monotone in *remaining* reasoning; the cliff was an artifact of comparing whole runs, each of which averages over its own distribution of remaining length | Total trace length was a proxy for the real variable |
 | 5 | Regex parsing validated and clean at 96% | Re-checking against all six runs found **two order-of-magnitude bugs**, now fixed (96.5% → 98.0%) | The first check predated the gpt-oss configurations that format numbers differently |
-| 6 | Track A would corroborate the class-level result once its position count was raised | It did not, and §6.1 explains why — the failure is a property of the method on long traces, not of the model | Raising 24 → 78 positions per arm left every interval spanning zero |
+| 6 | Track A would corroborate the class-level result once its position count was raised | It did not, and §4.1 explains why — the failure is a property of the method on long traces, not of the model | Raising 24 → 78 positions per arm left every interval spanning zero |
 | 7 | Qwen3.5's within-run horizon degradation was **+0.043 [+0.001, +0.080]**, an interval excluding zero | **+0.042 [−0.001, +0.078]** — it includes zero. No within-run split is established except gpt-oss @ high, which is itself under re-measurement (entry 8) | `horizon_curve.py` computed each statistic twice, once to print and once to save, from one generator that kept advancing. The two draws disagreed and this row straddled zero; the printed one was quoted. Each statistic now seeds its own generator, and the script aborts if a recomputation disagrees with the saved value |
-| 8 | gpt-oss @ high and @ low counterfactual runs were labelled as high- and low-effort resampling | They measure a high- (or low-) effort *prefix* **continued at medium effort**. Being re-run with the setting honoured, alongside safeguard @ high | `resample.py` never passed `reasoning_effort` to the renderer, so every continuation was rendered at the template default. §6.4 measures that setting as moving P(stop) at a natural boundary from 0.675 to 0.998. It now defaults from the run's own `config.json`, so a forgotten flag cannot reintroduce it |
+| 8 | gpt-oss @ high and @ low counterfactual runs were labelled as high- and low-effort resampling | They measure a high- (or low-) effort *prefix* **continued at medium effort**. Being re-run with the setting honoured, alongside safeguard @ high | `resample.py` never passed `reasoning_effort` to the renderer, so every continuation was rendered at the template default. §4.4 measures that setting as moving P(stop) at a natural boundary from 0.675 to 0.998. It now defaults from the run's own `config.json`, so a forgotten flag cannot reintroduce it |
 
 ---
 
@@ -943,20 +1026,20 @@ All paths are relative to the repository root.
 
 | file | contents |
 |---|---|
-| `analysis/forensics.json` | MRF, bootstrap CIs, permutation p, P(>thr) for all 12 runs (§3.1, §3.3) |
+| `analysis/forensics.json` | MRF, bootstrap CIs, permutation p, P(>thr) for all 12 runs (§2.1, §2.3) |
 | `analysis/fingerprints.json` | early-commitment / sustained-drift classification per run (§7) |
-| `runs/*/forced_answer_k-1_v3.json` | pre-reasoning tilt and anchoring, 200/condition (§4.1) |
-| `runs/*/screen.json`, `screen_analysis.json` | forced-answer curves, divergence points, position nominations (§4.2) |
-| `runs/*/counterfactual*.json`, `counterfactual_analysis.json` | per-position counterfactual importance and class tables (§4.3, §4.4) |
-| `runs/local-gpt-oss-*/counterfactual_R100.json` | gpt-oss at the paper's density, 23,000 continuations (§4.3) |
-| `runs/local-qwen3p5-*/counterfactual_all.json` | Qwen3.5 merged to 78/77 positions per arm (§6.1) |
-| `runs/local-qwen3p5-*/disavowal_{below,above}.json`, `disavowal_analysis.json` | the disavowal test and its matched controls (§5.1) |
+| `runs/*/forced_answer_k-1_v3.json` | pre-reasoning tilt and anchoring, 200/condition (§5.1) |
+| `runs/*/screen.json`, `screen_analysis.json` | forced-answer curves, divergence points, position nominations (§5.2) |
+| `runs/*/counterfactual*.json`, `counterfactual_analysis.json` | per-position counterfactual importance and class tables (§5.3, §5.4) |
+| `runs/local-gpt-oss-*/counterfactual_R100.json` | gpt-oss at the paper's density, 23,000 continuations (§5.3) |
+| `runs/local-qwen3p5-*/counterfactual_all.json` | Qwen3.5 merged to 78/77 positions per arm (§4.1) |
+| `runs/local-qwen3p5-*/disavowal_{below,above}.json`, `disavowal_analysis.json` | the disavowal test and its matched controls (§6.1) |
 | `runs/*/segments_*.json` | sentence/unit segmentation with offsets and tags |
-| `runs/*/trajectory_retry_report.json` | judge-null recovery per condition (§3.4) |
+| `runs/*/trajectory_retry_report.json` | judge-null recovery per condition (§2.4) |
 | `analysis/pre_retry/` | as-shipped `factor.json` for every run, before the judge repair |
 | `analysis/positions_*.json` | frozen position plans — a-priori and exploratory ledgers kept separate |
-| `analysis/horizon_curve.json` | separation vs reasoning remaining after the cut, pooled and per-configuration (§6.3) |
-| `analysis/parser_validation.json` | regex-vs-judge agreement before and after the parser repair (§6.5) |
+| `analysis/horizon_curve.json` | separation vs reasoning remaining after the cut, pooled and per-configuration (§4.3) |
+| `analysis/parser_validation.json` | regex-vs-judge agreement before and after the parser repair (§4.5) |
 | `analysis/PLAN.md`, `analysis/STATUS.md` | plan of record and running status log |
 
 Key scripts: `local_gen.py` (sampling with per-family CoT splitting), `segment.py` (units +

@@ -56,6 +56,34 @@ Full report: **[`REPORT.md`](REPORT.md)**.
 
 ---
 
+## The whole project on one screen
+
+```mermaid
+flowchart TB
+    Q["<b>One question, asked two ways</b><br/>Estimate giraffe spots. A donation rides on whether the answer<br/>clears a threshold, and the two versions differ only in<br/>which direction the bet pays."]
+
+    Q --> RUN["<b>Run locally, so the chain of thought is raw</b><br/>Qwen3.5-35B · gpt-oss-20b · gpt-oss-safeguard-20b<br/>3 conditions × 100 rollouts each"]
+    Q --> SHIP["<b>Plus the 10 runs shipped with the repo</b><br/>re-analysed, not re-sampled"]
+
+    RUN --> SCREEN["<b>Screen</b> — cut the trace, force an answer<br/><i>where does the answer get decided?</i>"]
+    RUN --> RESAMP["<b>Resample</b> — swap one sentence for one the<br/>model would have written, regenerate the rest<br/><i>which sentence caused it?</i>"]
+
+    SHIP --> F4["<b>The shipped ranking is mostly unsupported</b><br/>only 2 of 10 effects clear zero, and the scores<br/>are not on a common scale"]
+    SCREEN --> F3["<b>No bias before reasoning starts</b><br/>but a large, direction-blind anchor onto<br/>whatever threshold sits in the prompt"]
+    RESAMP --> F1["<b>Parameter choices carry the bias</b><br/>+0.039 [+0.004, +0.065], while sentences<br/>discussing the bet sit on zero"]
+    RESAMP --> F2["<b>Stated honesty is causally inert</b><br/>and a checkpoint with half as much of it<br/>behaves identically"]
+    RESAMP --> LIM["<b>…but the method has a limit</b><br/>it stops working when too much reasoning<br/>follows the sentence you changed"]
+
+    LIM -.->|"bounds how far these<br/>can be trusted"| F1
+    LIM -.-> F2
+```
+
+Four of those boxes are findings about the **models**. The fifth is about the **instrument**, and
+it constrains the others — which is why validating the method took as much of the work as using
+it, and why it gets its own section below.
+
+---
+
 ## The four findings
 
 The first three come from the two local models run here, where the raw chain of thought can be
@@ -66,7 +94,7 @@ Replace a sentence with an alternative the model itself would have written, let 
 everything downstream, and see whether the answer changes. Only units choosing a Fermi input
 move it — signed effect **+0.039 [+0.004, +0.065]** at the paper's R=100, against ~0 for units
 that name the bet or compare against the threshold, measured on the same traces at the same
-sample size. ([§4.3](REPORT.md))
+sample size. ([§5.3](REPORT.md))
 
 **2. Stated commitments to honesty are causally inert.** Qwen3.5 asserts honesty ~5 times per
 trace under incentive. Across 72 such units against 64 matched neighbouring controls they move
@@ -79,14 +107,14 @@ same base weights, same format, and — measured here — the same estimation be
 identical median baseline estimate across 200 rollouts. It produces roughly **half** the
 honesty-talk, and its bias gap is statistically indistinguishable. Halving the narration changed
 nothing measurable, reached by comparing checkpoints rather than intervening on sentences.
-([§5](REPORT.md))
+([§6](REPORT.md))
 
 **3. No pre-reasoning tilt, but large direction-blind anchoring.** Forced to answer with no
 reasoning, both models give the same answers under both incentives. But merely stating a
 threshold moves the estimate toward it from whichever side the model starts on — gpt-oss rises
 3.3M → 24–28M (threshold 47.5M), Qwen3.5 falls from nonsense magnitudes to ~65M (threshold
 25.2M). Anchoring is not "estimates get bigger"; it is "estimates move toward the number in the
-context", which is what makes it a confound for a threshold-crossing design. ([§4.1](REPORT.md))
+context", which is what makes it a confound for a threshold-crossing design. ([§5.1](REPORT.md))
 
 **4. The original repo's 10-model leaderboard is mostly unsupported.** This one is re-analysis,
 not new sampling. The reproduction this work builds on ships raw rollouts for ten models plus a
@@ -102,7 +130,7 @@ of the published one. Two positions are earned, two arguable, six arbitrary.
 
 More rollouts would not fix it. Each score is measured against its own model's spread, and those
 spreads differ by **36×**, so the scores are not on a common scale to begin with.
-([§3.3](REPORT.md))
+([§2.3](REPORT.md))
 
 ### Is this unfaithful chain of thought?
 
@@ -116,94 +144,222 @@ visible reasoning is impeccable while its parameter choices carry the bias.
 
 ## Method findings worth reusing
 
-These are about the instrument rather than the models, and they are the most transferable part
-of the work ([§6](REPORT.md)).
+Every causal claim in this report rests on a single instrument: replace one sentence, regenerate
+everything after it, and see whether the answer changes. Before any of those claims could be
+believed, the instrument itself had to be checked — and it turned out to have a hard boundary
+that anyone reusing the technique will hit. That boundary is the most transferable thing here,
+more so than the model results. ([§4](REPORT.md))
 
-- **The method stops working when too much reasoning follows the sentence you changed.**
+### The problem: a trace does not tell you what caused its answer
 
-  *How the measurement works.* Change one sentence, regenerate everything after it, and see
-  whether the final answer moves. That number alone means nothing, because regenerating anything
-  at temperature moves the answer somewhat. So every position also gets a **control**:
-  replacements that reword the sentence without changing what it says. Those should leave the
-  answer where it was.
+This is not hypothetical. §5.3 finds that the sentences visibly deliberating about the bet have
+no effect on the final answer, while unremarkable sentences picking a population figure decide
+it. Anyone judging by what the trace *says* would credit exactly the wrong sentences.
 
-  Subtracting the control is what turns this into evidence. **genuine − reword** is the movement
-  attributable to *meaning* rather than to resampling. Positive means the edit's content
-  mattered. Zero or negative means you are reading randomness.
+So causation has to be tested rather than read: change one sentence, and see whether the answer
+follows.
 
-  Each row is one configuration measured against itself — same weights, same effort, same sample
-  size — with only the position of the edit varying. **Bold intervals exclude zero.**
+**Why not simply delete the sentence.** A trace with a hole in it is off-distribution — the model
+has never seen text like that — so any change in the answer confounds *"this content was removed"*
+with *"the reasoning stopped making sense"*. Instead the sentence is replaced by one **the model
+itself would have written at that point**, which keeps the trace in a state the model recognises.
 
-  | configuration | reasoning still to come | genuine change | reword | genuine − reword |
-  |---|---|---|---|---|
-  | gpt-oss @ medium | under 500 chars | 0.023 | 0.014 | **+0.009** [+0.003, +0.017] |
-  | safeguard @ medium | under 500 chars | 0.026 | 0.017 | **+0.009** [+0.002, +0.018] |
-  | gpt-oss @ medium | 500–2,000 | 0.058 | 0.068 | **−0.010** [−0.021, −0.000] |
-  | safeguard @ medium | 2,000–8,000 | 0.089 | 0.102 | −0.013 [−0.035, +0.016] |
-  | Qwen3.5 | 8,000–20,000 | 0.053 | **0.126** | **−0.073** [−0.119, −0.010] |
+### Why the raw number is uninterpretable
 
-  Reading down: with under 500 characters left the method demonstrably works, and two
-  independent checkpoints agree to three decimals. By 500–2,000 the difference has already
-  crossed below zero. By 8,000–20,000 the **reword moves the answer more than a genuine change
-  does** — the instrument has not merely weakened, it has inverted. Across all of Qwen3.5's
-  positions the rank correlation between remaining reasoning and the gap is −0.238 (p = 0.035).
+Regenerating the remainder of a trace is stochastic. Do it twice from an identical prefix and you
+get different answers, because every token after the cut is sampled afresh. When the answer moves
+after an edit, you cannot tell whether the edit caused it or the regeneration did.
 
-  **Post-training does not change it.** `gpt-oss-safeguard` is a safety fine-tune of the same
-  base weights, matched here on effort, sample size and position policy — and it lands on the
-  same +0.009 at short range and tracks gpt-oss elsewhere. This is a property of the *method*,
-  not of a checkpoint's disposition, so expect it to transfer to whatever model you point it at.
+This is not a rounding concern. Every number below is a change in **`p`, the fraction of rollouts
+whose final estimate clears the threshold** — so it is in probability points, and `0.126` means
+12.6 points. On Qwen3.5, at positions with 8,000–20,000 characters still to come, resampling
+*alone* moves `p` by 0.126 — three times the **+0.039** class-level effect that is this report's
+headline causal finding.
 
-  **The practical consequence: place interventions late.** Late edits in a long trace recover
-  most of the method's power at no extra cost. This is the main caution for anyone applying the
-  technique to long agentic trajectories, which sit squarely inside the limit.
+### The control that makes it interpretable
 
-  *Scope, honestly stated.* The bin contrasts above carry the finding; the per-configuration
-  late-vs-early splits point the same way but mostly span zero, so the trend within any single
-  run is directional rather than established. A gpt-oss @ high row belongs here and is
-  deliberately absent — that run was resampled with the reasoning-effort setting dropped, so its
-  continuations ran under a different stop-bias than the traces they continue. It is being
-  re-measured alongside safeguard @ high. Nothing in the table depends on it: Qwen has no effort
-  control, and both medium runs were rendered at the effort they were sampled with. Pooled
-  figures over all 1,328 positions are in [§6.3](REPORT.md).
+The fix is a placebo arm — a second set of edits that change nothing meaningful, run through the
+identical machinery:
 
-- **The regime is bounded at both ends.** Very short traces fail too, for the opposite reason:
-  when a trace has three or four units, replacing one rewrites most of the reasoning, so even a
-  same-meaning resample produces a different derivation. The method needs traces long enough
-  that one unit is a small part of the whole, and cuts late enough that little remains to
-  re-randomise the outcome.
+```mermaid
+flowchart TB
+    T["original trace<br/>u₁ u₂ … u_i … u_n"]
+    T --> PRE["<b>prefix</b> = everything before u_i"]
 
-- **Which side moves faster tells you it is a broken instrument, not a discovery.** There is a
-  tempting alternative reading of the result above: perhaps early sentences genuinely *are* more
-  important, since they set up the whole derivation, so of course editing them moves the answer
-  more. That would be a finding about reasoning rather than a failed measurement.
+    PRE --> GEN["model continues from the prefix R times<br/>→ R sentences it might have written at position i"]
+    GEN --> SORT{"sort by meaning against u_i<br/>numeric: the committed value · else: embedding cosine<br/><b>never by the outcome</b>"}
 
-  The two arms separate the cases. A reword carries no extra meaning wherever it sits, so the
-  reword arm can only move through randomness. Within gpt-oss at medium effort, going from
-  under 500 characters remaining to 2,000–8,000, a genuine change moves the answer 5.6× more
-  (0.023 → 0.128) while a **reword moves it 10.4× more** (0.014 → 0.145). If early sentences
-  simply mattered more, the genuine changes should have pulled ahead. They fall behind — so what
-  grows with the horizon is downstream sampling re-randomising the outcome.
+    SORT -->|"same meaning"| SAME["<b>reword arm</b><br/>the control"]
+    SORT -->|"different meaning"| DIFF["<b>genuine-change arm</b>"]
+    PRE --> BASE["<b>base arm</b><br/>continue from the original u_i"]
 
-- **The signed metric survives that failure where an unsigned one would not.** Symmetric
-  perturbation noise cancels under signing, and misclassification can only dilute a treatment
-  arm toward the base, never manufacture an effect.
+    SAME --> RG["regenerate the entire remainder<br/>and read the final answer"]
+    DIFF --> RG
+    BASE --> RG
+
+    RG --> P["p = fraction of rollouts clearing the threshold, per arm"]
+    P --> DP["|Δp| = arm − base"]
+    DP --> SEP["<b>separation = genuine − reword</b><br/>&gt; 0 the edit's meaning mattered<br/>≤ 0 you are reading resampling noise"]
+```
+
+The three groups are produced identically apart from that one sort step:
+
+| name used here | the arm | what it is |
+|---|---|---|
+| *(reference)* | base | continue from the **original** sentence — supplies the reference `p` |
+| **genuine change** | different-meaning | the resample commits to something else |
+| **reword** | same-meaning | the resample says the same thing differently |
+
+The reword arm is the control, and it is matched on everything that could move the answer
+**except meaning**: same prefix, same position, same generator, same volume of text regenerated.
+Whatever movement it shows is therefore resampling noise — measured rather than assumed.
+
+**genuine − reword** is treatment minus control: the share of the movement attributable to
+meaning. Positive means the edit's content mattered; zero or negative means you are reading
+randomness. (Subtracting in that order also makes the sign read the intuitive way — bigger is a
+better instrument.)
+
+Two design details carry more weight than they look:
+
+- **The model writes both piles.** Paraphrases written by hand would be off-distribution, and the
+  control would then measure "text a human inserted" instead of resampling noise.
+- **The sort never looks at the outcome.** Numeric units split on the committed value
+  (|log₁₀ ratio| > 0.06), everything else on MiniLM cosine — a rule fixed in advance. The numeric
+  special case exists because embedders fail exactly where it matters: *"spots per individual:
+  2,200"* against *"…: 1,200"* scores ~0.97 cosine, "same meaning", while halving the answer.
+  Left to the embedder, that pair lands in the control arm and destroys it. Sorting by anything
+  outcome-dependent would define the arms by the thing they are meant to measure.
+
+### The alarming result, and the experiment it forced
+
+On Qwen3.5, at positions with 8,000–20,000 characters still to come, the control moved the answer
+**more** than the treatment: a genuine change shifted `p` by 0.053, a mere reword by **0.126**.
+Replacing a sentence with one that means the same thing perturbed the final answer more than
+replacing it with one that means something different.
+
+That admits two readings, and they are not close:
+
+- the instrument is broken in this regime, or
+- something real is happening that the metric is mis-describing.
+
+Either way the question is the same: **under what conditions does this measurement work at all?**
+
+### The experiment: vary only what follows the edit
+
+The suspected variable was **how much reasoning remains after the cut**, on a mechanical
+argument: the more text still to be generated, the more opportunity sampling has to re-randomise
+the outcome regardless of what was edited.
+
+Testing that requires holding everything else fixed — same weights, same effort setting, same R,
+same position-selection policy — and varying only *where in the trace the edit lands*, which is
+what varies how much comes after it. Two independently post-trained checkpoints were run this way.
+**Bold intervals exclude zero.**
+
+| reasoning still to come | gpt-oss @ medium | safeguard @ medium |
+|---|---|---|
+| under 500 chars | **+0.009** [+0.003, +0.017] | **+0.009** [+0.002, +0.018] |
+| 500–2,000 | **−0.010** [−0.021, −0.000] | −0.013 [−0.032, +0.005] |
+| 2,000–8,000 | −0.017 [−0.056, +0.020] | −0.013 [−0.035, +0.016] |
+
+With under 500 characters left the method demonstrably works, and the two checkpoints agree to
+three decimals. By 500–2,000 the difference has already crossed below zero. Further out it
+inverts outright — Qwen3.5 at 8,000–20,000 gives **−0.073 [−0.119, −0.010]**, the alarming result
+above. Across all of Qwen3.5's positions the rank correlation between remaining reasoning and the
+gap is −0.238 (p = 0.035).
+
+`gpt-oss-safeguard` is a safety fine-tune of the same base weights, and it tracks gpt-oss at every
+horizon. This is a property of the **method**, not of a checkpoint's disposition — so expect it to
+transfer to whatever model you point it at.
+
+### Broken instrument, or a real discovery?
+
+The competing explanation deserves a fair hearing: perhaps early sentences genuinely *are* more
+important, since they set up the whole derivation, so of course editing them moves the answer
+more. That would be a finding about reasoning, not a failed measurement.
+
+The two arms settle it. Look at what each is doing as the edit moves earlier:
+
+| gpt-oss @ medium | genuine change | reword |
+|---|---|---|
+| under 500 remaining | 0.023 | 0.014 |
+| 500–2,000 | 0.058 | 0.068 |
+| 2,000–8,000 | 0.128 | 0.145 |
+
+Both arms grow — **5.6×** for genuine changes, **10.4×** for rewords. A reword carries no extra
+meaning wherever it sits, so its arm can only grow through randomness. If importance were the
+story, the genuine arm should have pulled ahead; it falls behind. What grows with the horizon is
+noise, and it outpaces the signal.
+
+This also explains something counterintuitive in that table. Movement is *smallest* where the
+method works best, because |Δp| tracks **how much of the answer is still up for grabs**, not how
+decisive a sentence was. Cut with 300 characters left and ~99% of the reasoning is held fixed —
+the answer is nearly pinned, and any edit can only nudge it. Cut with 5,000 left and everything
+downstream is re-rolled. The method works at short range not because effects are large — they are
+the smallest here — but because the little movement that survives is attributable to meaning.
+
+*(Individual sentences can still be decisive: the largest single effect measured is |Δp| 0.94,
+against a median across positions of 0.021 (§5.3). What makes a sentence decisive is not its
+position, though — these models commit early, with the forced-answer screen putting gpt-oss's
+condition gap at +0.633 a fifth of the way in and flat thereafter (§5.2), so most late units are
+bookkeeping on an answer already chosen.)*
+
+### What follows if you reuse this
+
+- **Run the placebo arm.** Without a same-meaning control you cannot tell a real effect from
+  resampling, and the point where that distinction fails is not something you can eyeball — on
+  these traces it fails while the raw movement is still growing. This is the main caution for
+  anyone applying the technique to long agentic trajectories, which sit squarely inside the
+  failure regime.
+- **The usable regime is bounded at both ends.** Very short traces fail too, for the opposite
+  reason: when a trace has three or four units, replacing one rewrites most of the reasoning, so
+  even a same-meaning resample produces a different derivation. The method needs a trace long
+  enough that one sentence is a small part of it, but not so long that the answer gets re-rolled
+  after the edit.
+- **Sign your metric if you can.** Symmetric perturbation noise averages to zero once effects are
+  signed by incentive direction, but accumulates in a magnitude like |Δp|. That is why this
+  report's class-level result survives a placebo check its unsigned counterpart fails (§4.2). An
+  imperfect meaning-sort is safe in the same way: misfiling a genuinely different sentence into
+  the control dilutes the treatment arm toward the base, attenuating effects rather than inventing
+  them.
+- **Never trust a single position.** The per-position noise floor is 0.031 even at R=100, larger
+  than most individual effects. Importance is only ever a class-level statement — *"this kind of
+  sentence moves the answer toward the incentive and that kind does not"* — measured on the same
+  traces at the same sample size. The headline result is exactly that shape:
+  parameter-selection **+0.039 [+0.004, +0.065]** against ~0 for the sentences discussing the bet.
+
+### Open questions this leaves
+
+- **The clean version of the horizon experiment has not been run.** Remaining reasoning here is
+  *observational*: it correlates with position in the trace, so "far from the outcome" and "early
+  in the argument" are not fully separated. The designed test fixes the cut position and varies
+  only how much is generated after it. That is the single most valuable experiment outstanding.
+- **The evidence is bin-level, not per-run.** Of five within-run late-versus-early splits, four
+  span zero and the fifth is a run under re-measurement, so the trend inside any single
+  configuration is directional rather than established.
+- **Two runs are being re-measured.** gpt-oss @ high and @ low were resampled with the
+  reasoning-effort setting silently dropped, so their continuations ran under a different
+  stop-bias than the traces they continue. Nothing above depends on them — Qwen has no effort
+  control, and both medium runs were rendered at the effort they were sampled with. Pooled figures
+  over all 1,328 positions: [§4.3](REPORT.md).
+
+### Other traps that cost time
 
 - **Sampling noise dominates below R≈32.** An early pass at R=16 produced a treatment effect of
-  0.149 against a same-meaning placebo of 0.144 — noise measuring itself. The noise floor is
+  0.149 against a same-meaning placebo of 0.144 — noise measuring itself. The noise floor is now
   measured by split-half of the base arm rather than assumed.
 
 - **Reasoning effort is a one-word system-prompt control with 25× consequences.** For gpt-oss,
   `Reasoning: low|medium|high` changes exactly one line and moves median trace length 260 →
-  1,050 → 6,560 tokens. Measured mechanism: at a trace's natural stopping point P(end-of-reasoning
-  token) is 0.998 under `low` and 0.675 under `high`. Qwen3.5 has no graded equivalent —
-  `reasoning_effort` is silently ignored. **The silent no-op is a trap**: a run can be labelled
-  effort-controlled while nothing changed, so the sampling code raises rather than accepting the
-  argument for that family.
+  1,050 → 6,560 tokens. Measured mechanism: at a trace's natural stopping point
+  P(end-of-reasoning token) is 0.998 under `low` and 0.675 under `high`. Qwen3.5 has no graded
+  equivalent — `reasoning_effort` is silently ignored. **The silent no-op is a trap**: a run can
+  be labelled effort-controlled while nothing changed, so the sampling code now raises rather
+  than accepting the argument for that family.
 
 - **Validate parsers against an independent reader, not against a parse rate.** Checking the
-  regex against the estimate judge on 200 answers found **two order-of-magnitude bugs** a 97.5%
-  parse *rate* had concealed, both reading low, both now fixed (agreement 96.5% → 98.0%). One was
-  introduced by the fix for an earlier parser bug.
+  regex against the estimate judge on 200 answers found **two order-of-magnitude bugs** that a
+  97.5% parse *rate* had concealed, both reading low, both now fixed (agreement 96.5% → 98.0%).
+  One was introduced by the fix for an earlier parser bug.
 
 - **100 rollouts per condition is not enough to compare models here.** Across four
   gpt-oss-family runs every measured bias gap had a confidence interval spanning zero. The design
@@ -224,7 +380,7 @@ of the work ([§6](REPORT.md)).
   [arXiv:2506.19143](https://arxiv.org/abs/2506.19143)), with three adaptations described below.
 
 Two defects found in the reproduction while working with it, reported in full in
-[`REPORT.md`](REPORT.md) §3.2. They are noted here because they affect anyone reusing that
+[`REPORT.md`](REPORT.md) §2.2. They are noted here because they affect anyone reusing that
 pipeline, not as criticism of a small reproduction:
 
 - `estimates.json` contains only `baseline` in all 10 shipped runs. The estimate judge runs
@@ -245,9 +401,13 @@ Whether the upstream study shares either is untested — only the reproduction w
 |---|---|---|
 | model | `Qwen/Qwen3.5-35B-A3B-GPTQ-Int4` | `openai/gpt-oss-20b` |
 | role | mainstream open-weight reference; same family and MoE architecture as a shipped run | independent family and post-training lineage |
-| rollouts | 3 conditions × 100, 0 truncated, 0 parse failures | 3 × 100, 0 truncated, 0 parse failures |
+| rollouts | 3 conditions × 100, 0 truncated, 0 parse failures* | 3 × 100, 0 truncated, 0 parse failures* |
 | threshold (median baseline estimate) | 25,178,000 | 47,500,000 |
 | median reasoning per rollout | 25,151–32,347 chars | 2,324–3,036 chars |
+
+\* "0 parse failures" means the parser returned a number for every rollout. That is a parse
+*rate*, and the parser validation above is the reason it should not be read as reassurance — a
+97.5% rate elsewhere concealed values that were wrong by a factor of 1000.
 
 Three further configurations separate trace length from model identity: **gpt-oss at low and
 high reasoning effort**, and **gpt-oss-safeguard-20b** at medium and high. These carry the
