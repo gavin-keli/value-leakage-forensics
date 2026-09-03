@@ -73,6 +73,7 @@ def bernoulli_kl(p: float, q: float, eps: float = 1e-3) -> float:
 
 def main(model: str, family: str, run_dir: str, positions_file: str,
          R: int = 16, max_tokens: int = 24000, max_model_len: int = 32768,
+         reasoning_effort: str | None = None,
          temperature: float = 1.0, gpu_memory_utilization: float = 0.90,
          cos_threshold: float = 0.8, out_name: str = "counterfactual.json",
          embed_model: str = "sentence-transformers/all-MiniLM-L6-v2",
@@ -86,6 +87,17 @@ def main(model: str, family: str, run_dir: str, positions_file: str,
     run_path = Path(run_dir)
     threshold = json.loads((run_path / "threshold.json").read_text())["threshold"]
     plan = json.loads(Path(positions_file).read_text())
+
+    # The trace being continued was generated at some effort level; continuing it at a
+    # different one changes the stop-bias mid-trace. Default to whatever the run recorded.
+    if reasoning_effort is None:
+        cfg_path = run_path / "config.json"
+        if cfg_path.exists():
+            reasoning_effort = json.loads(cfg_path.read_text()).get("target_reasoning_effort")
+    if reasoning_effort and family != "gptoss":
+        raise SystemExit(f"reasoning_effort is silently ignored by family={family!r}; "
+                         "refusing to label this run effort-controlled")
+    print(f"reasoning_effort = {reasoning_effort!r}")
 
     llm = LLM(model=model, max_model_len=max_model_len,
               gpu_memory_utilization=gpu_memory_utilization,
@@ -102,7 +114,8 @@ def main(model: str, family: str, run_dir: str, positions_file: str,
     for cond, traces in plan["conditions"].items():
         if cond not in wanted:
             continue
-        rendered = render(tok, build_prompt(cond, threshold))
+        rendered = render(tok, build_prompt(cond, threshold),
+                          reasoning_effort=reasoning_effort)
         rows = json.loads((run_path / f"{cond}.json").read_text())["rows"]
         segs = {s["i"]: s for s in
                 json.loads((run_path / f"segments_{cond}.json").read_text())}

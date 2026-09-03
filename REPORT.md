@@ -430,9 +430,15 @@ first.
 |---|---|---|---|---|
 | gpt-oss @ medium | 2.8k chars | 100 | **+0.039 [+0.004, +0.065]** | **yes** |
 | safeguard @ medium | 2.8k chars | 100 | +0.021 [−0.001, +0.043] | borderline |
-| gpt-oss @ high | 23k chars | 48 | +0.042 [−0.014, +0.112] | no |
+| gpt-oss @ high † | 23k chars | 48 | +0.042 [−0.014, +0.112] | no |
 | Qwen3.5 | 30k chars | 32 | −0.019 [−0.083, +0.031] | no |
-| gpt-oss @ low | 0.25k chars | 48 | −0.021 [−0.045, +0.002] | different regime |
+| gpt-oss @ low † | 0.25k chars | 48 | −0.021 [−0.045, +0.002] | different regime |
+
+† Resampled before the reasoning-effort defect described in §6.3 was found: their continuations
+were rendered at `Reasoning: medium` regardless of the effort the traces were sampled at, so
+these two rows measure "a high- (or low-) effort prefix continued at medium effort" rather than
+the configuration named. Both are being re-run. Neither row resolves an effect either way, so
+the conclusion drawn from this table does not rest on them.
 
 **gpt-oss @ high has almost the same point estimate as @ medium (+0.042 vs +0.039) with an
 interval three times wider.** The signal did not change; the instrument stopped resolving it,
@@ -671,24 +677,50 @@ its own median remaining length:
 
 | configuration | median remaining | separation, less remaining | separation, more remaining | difference | 95% CI |
 |---|---|---|---|---|---|
-| gpt-oss @ high | 17.4k | −0.007 | −0.070 | **+0.061** | [+0.001, +0.104] |
-| Qwen3.5 | 4.7k | −0.012 | −0.054 | **+0.043** | [+0.001, +0.080] |
-| gpt-oss @ medium | 1.6k | −0.004 | −0.016 | +0.012 | [−0.025, +0.045] |
+| gpt-oss @ high † | 17.4k | −0.007 | −0.070 | **+0.061** | [+0.003, +0.105] |
+| Qwen3.5 | 4.7k | −0.012 | −0.054 | +0.042 | [−0.001, +0.078] |
+| gpt-oss @ medium | 1.6k | −0.004 | −0.016 | +0.011 | [−0.027, +0.046] |
 | safeguard @ medium | 2.0k | −0.006 | −0.015 | +0.009 | [−0.025, +0.036] |
-| gpt-oss @ low | 0.1k | +0.005 | +0.003 | +0.001 | [−0.014, +0.017] |
+| gpt-oss @ low † | 0.1k | +0.005 | +0.003 | +0.002 | [−0.015, +0.018] |
 
-Both long-trace configurations degrade significantly *within themselves*: late cuts in a
-23k-char gpt-oss trace behave like short traces, early cuts in the same traces do not. Qwen's
-rank correlation with remaining length is −0.238 (p = 0.037); pooled over all 1,328 positions it
-is −0.081 (p = 0.002). The three short-trace runs carry the same sign with intervals spanning
-zero — expected, since remaining length barely varies inside them.
+**Every one of these intervals except gpt-oss @ high spans zero, and that row is the one under
+re-measurement (†).** So the *within-run* trend is directional across all five configurations
+and established in none of them that I can currently rely on. What carries the result is the
+bin-level contrast in the previous table, plus Qwen's rank correlation with remaining length,
+−0.238 (p = 0.035); pooled over all 1,328 positions it is −0.081 (p = 0.003).
 
-**Which arm moves says this is noise, not signal.** Across the bins the same-meaning arm grows
-faster than the different-meaning arm (0.121 → 0.176 against 0.126 → 0.118). Were long horizons
-a sign that early sentences genuinely matter more, the *different*-meaning arm should have
-pulled ahead. It does not. What grows is the answer movement produced by an intervention that
-changed no meaning at all — downstream sampling re-randomising the outcome faster than the edit
-can steer it.
+An earlier version of this table reported Qwen at +0.043 [+0.001, +0.080] and called it
+significant. That interval came from a second bootstrap draw: `horizon_curve.py` computed each
+statistic twice, once to print and once to save, from a shared generator that kept advancing, so
+the two passes disagreed — and for this row they fell either side of zero. Each statistic now
+seeds its own generator and the script aborts if a recomputation disagrees with what it saved.
+
+† **These two rows were resampled with the reasoning-effort setting dropped.** `resample.py`
+rendered every continuation at the template default, `Reasoning: medium`, regardless of the
+effort the trace was sampled at. For the high and low runs that means continuations were
+generated under a different stop-bias than the traces they continue — and §6.4 measures that
+setting as moving P(stop) at a natural boundary from 0.675 to 0.998. Both are being re-run with
+the effort honoured. The arm comparison within each run stays internally valid, because base,
+different- and same-meaning arms were all generated the same way; what is wrong is the
+configuration label. Qwen3.5 is unaffected — it has no effort control — and both medium runs
+were rendered at the effort they were sampled with.
+
+**Which arm moves says this is noise, not signal.** This rules out the competing reading of the
+result — that early sentences genuinely *are* more important, since they set up the derivation,
+which would make this a finding about reasoning rather than a failed measurement. A same-meaning
+resample carries no extra meaning wherever it sits, so that arm can move only through
+randomness; if importance were the story, the *different*-meaning arm should pull ahead.
+
+It does not. Within a single configuration both arms grow with the horizon, but the placebo
+grows faster: gpt-oss @ medium, going from under 0.5k characters remaining to 2–8k, moves
+0.023 → 0.128 on different-meaning against **0.014 → 0.145 on same-meaning** — 5.6× against
+10.4×. What grows is the answer movement produced by an intervention that changed no meaning at
+all, and it outpaces the signal.
+
+*(The pooled figures read 0.126 → 0.118 against 0.121 → 0.176, which makes the different-meaning
+arm look flat. That flatness is an artifact of pooling configurations whose baseline |Δp| levels
+differ — low effort sits near 0.13 in both arms, the longer-trace runs far lower — so the
+within-configuration comparison above is the one to rely on.)*
 
 **Low effort fails for the opposite reason, and it is not a floor effect.** Its |Δp| is the
 largest of any configuration in both arms, with 270 of 1,527 positions exceeding 0.25 — there is
@@ -710,14 +742,14 @@ no extra cost, because the operative variable is remaining reasoning rather than
 Where early steps must be tested, R has to rise to cover a noise floor that grows with distance
 to the outcome.
 
-**Limits of this test.** The run-level comparison rests on 29 positions with ≥5 samples in both
-arms for gpt-oss @ high, against a split-half noise floor of 0.050 that both arms sit near. The
-within-run analysis is better powered (1,328 positions) but reuses data collected for other
-purposes, so remaining length is observational rather than assigned — it correlates with position
-index, and I cannot fully separate "far from the outcome" from "early in the argument". The
-strongest evidence against the latter is that the same-meaning arm is what grows, which
-position-importance does not predict. A designed test would fix the cut position and vary only
-what follows it.
+**Limits of this test.** The result rests on bin-level contrasts, not on per-run trends: of the
+five within-run splits, only gpt-oss @ high excludes zero, and that is the row being re-measured.
+The bins are better powered (1,328 positions) but reuse data collected for other purposes, so
+remaining length is observational rather than assigned — it correlates with position index, and I
+cannot fully separate "far from the outcome" from "early in the argument". The strongest evidence
+against the latter is that the same-meaning arm is what grows, which position-importance does not
+predict. A designed test would fix the cut position and vary only what follows it, which is now
+the most valuable experiment outstanding (§9).
 
 ### 6.4 Reasoning effort: a confound, and then a control
 
@@ -850,6 +882,12 @@ discarded for tidiness.
   by orders of magnitude between parser versions, so only its P(>thr) comparison is used.
 - **The resampling runs carry a ~3% parse-error rate** (§6.5) that can be removed only by
   re-running them.
+- **The gpt-oss @ high and @ low counterfactual runs were resampled at the wrong reasoning
+  effort** (§6.3, Appendix A entry 8) — their continuations were rendered at medium regardless.
+  Both are being re-run; no conclusion here rests on either.
+- **The within-run horizon splits are directional, not established.** Four of five span zero and
+  the fifth is the run under re-measurement, so the horizon result stands on the bin-level
+  contrasts and Qwen3.5's rank correlation rather than on any single run's internal trend.
 - **Six bootstrap clusters.** Track B's intervals are bootstrapped over 6 traces, a small number
   of clusters, which argues for treating the *ordering* of the classes in §4.3 as the result and
   the exact magnitude as provisional.
@@ -894,6 +932,8 @@ Kept in one place so the record is auditable. Each of these is already reflected
 | 4 | The horizon decay is "a cliff, not a slope", collapsing somewhere between 2.8k and 23k characters of trace | **Retracted.** The relationship is monotone in *remaining* reasoning; the cliff was an artifact of comparing whole runs, each of which averages over its own distribution of remaining length | Total trace length was a proxy for the real variable |
 | 5 | Regex parsing validated and clean at 96% | Re-checking against all six runs found **two order-of-magnitude bugs**, now fixed (96.5% → 98.0%) | The first check predated the gpt-oss configurations that format numbers differently |
 | 6 | Track A would corroborate the class-level result once its position count was raised | It did not, and §6.1 explains why — the failure is a property of the method on long traces, not of the model | Raising 24 → 78 positions per arm left every interval spanning zero |
+| 7 | Qwen3.5's within-run horizon degradation was **+0.043 [+0.001, +0.080]**, an interval excluding zero | **+0.042 [−0.001, +0.078]** — it includes zero. No within-run split is established except gpt-oss @ high, which is itself under re-measurement (entry 8) | `horizon_curve.py` computed each statistic twice, once to print and once to save, from one generator that kept advancing. The two draws disagreed and this row straddled zero; the printed one was quoted. Each statistic now seeds its own generator, and the script aborts if a recomputation disagrees with the saved value |
+| 8 | gpt-oss @ high and @ low counterfactual runs were labelled as high- and low-effort resampling | They measure a high- (or low-) effort *prefix* **continued at medium effort**. Being re-run with the setting honoured, alongside safeguard @ high | `resample.py` never passed `reasoning_effort` to the renderer, so every continuation was rendered at the template default. §6.4 measures that setting as moving P(stop) at a natural boundary from 0.675 to 0.998. It now defaults from the run's own `config.json`, so a forgotten flag cannot reintroduce it |
 
 ---
 

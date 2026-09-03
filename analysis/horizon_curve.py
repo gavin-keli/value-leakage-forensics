@@ -23,7 +23,11 @@ from pathlib import Path
 import fire
 import numpy as np
 
-RNG = np.random.default_rng(0)
+# Every statistic seeds its own generator. A single shared RNG made results depend on the
+# order statistics were computed in, so the printed table and the saved JSON disagreed — for
+# one configuration the two bootstraps landed either side of zero, which is the difference
+# between "established" and "not".
+SEED = 0
 CONDS = ("below_good", "above_good")
 MIN_ARM = 5
 BINS = [(0, 500), (500, 2000), (2000, 8000), (8000, 20000), (20000, 10**9)]
@@ -69,6 +73,7 @@ def boot_sep(items, n=3000):
     """Placebo separation with a CI bootstrapped over traces, not positions."""
     if not items:
         return None, None, None, 0
+    rng = np.random.default_rng(SEED)
     groups = {}
     for it in items:
         groups.setdefault((it["label"], it["cond"], it["trace"]), []).append(it)
@@ -79,7 +84,7 @@ def boot_sep(items, n=3000):
         return obs, None, None, len(items)
     stats = []
     for _ in range(n):
-        idx = RNG.integers(0, len(keys), len(keys))
+        idx = rng.integers(0, len(keys), len(keys))
         pick = [it for i in idx for it in groups[keys[i]]]
         if pick:
             stats.append(float(np.mean([x["d_diff"] for x in pick])
@@ -109,6 +114,7 @@ def spearman(items):
     """
     if len(items) < 8:
         return None, None, len(items)
+    rng = np.random.default_rng(SEED)
     rem = np.array([it["remaining"] for it in items], float)
     sep = np.array([it["d_diff"] - it["d_same"] for it in items], float)
     rr, rs = rankdata(rem), rankdata(sep)
@@ -122,7 +128,7 @@ def spearman(items):
     null = []
     for _ in range(2000):
         perm = np.empty(len(items), float)
-        shuffled = RNG.permutation(len(blocks))
+        shuffled = rng.permutation(len(blocks))
         # move whole traces, preserving each trace's internal ordering
         src = [j for b in shuffled for j in blocks[b]]
         perm[np.array([j for b in blocks for j in b])] = rs[np.array(src)]
@@ -135,6 +141,7 @@ def median_split(items):
     """Separation below vs above the median remaining length, CI on the gap."""
     if len(items) < 12:
         return None
+    rng = np.random.default_rng(SEED)
     med = float(np.median([it["remaining"] for it in items]))
     lo = [it for it in items if it["remaining"] <= med]
     hi = [it for it in items if it["remaining"] > med]
@@ -148,7 +155,7 @@ def median_split(items):
     keys = list(groups)
     diffs = []
     for _ in range(3000):
-        idx = RNG.integers(0, len(keys), len(keys))
+        idx = rng.integers(0, len(keys), len(keys))
         pick = [it for i in idx for it in groups[keys[i]]]
         a = [it for it in pick if it["remaining"] <= med]
         b = [it for it in pick if it["remaining"] > med]
@@ -256,8 +263,28 @@ def main(specs: str, out: str = "analysis/horizon_curve.json"):
         }
     rho, p, _ = spearman(all_items)
     payload["pooled_spearman_rho"], payload["pooled_spearman_p"] = rho, p
+
+    # Every statistic is computed twice here — once to print, once to save. They must agree;
+    # when they did not, the printed and saved intervals for one configuration fell either
+    # side of zero and the write-up quoted the wrong one.
+    bad = []
+    for label in labels:
+        sub = [i for i in all_items if i["label"] == label]
+        again = median_split(sub)
+        stored = payload["by_config"][label]["median_split"]
+        if again is None and stored is None:
+            continue
+        if again is None or stored is None or \
+                abs(again[6] - stored["ci95"][0]) > 1e-12 or \
+                abs(again[7] - stored["ci95"][1]) > 1e-12:
+            bad.append(label)
+    if bad:
+        raise SystemExit(f"ABORT: non-reproducible statistics for {bad} — printed and saved "
+                         "values disagree, so the RNG is still order-dependent")
+    print("\nreproducibility check: recomputed statistics match the saved ones")
+
     Path(out).write_text(json.dumps(payload, indent=2, default=str))
-    print(f"\nsaved {out}")
+    print(f"saved {out}")
 
 
 if __name__ == "__main__":
