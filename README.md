@@ -496,3 +496,35 @@ resampled traces selected as cheapest-to-continue, biasing toward terser traces;
 unreliable at these sample sizes (|Δp| carries the argument); Track A quantised to 4-bit; and the
 resampling runs carry a ~3% parse-error rate that can be removed only by re-running them, since
 they stored thresholded outcomes rather than completion text.
+
+---
+
+## Citation
+
+The underlying study this work builds on, cited as its authors request:
+
+```bibtex
+@misc{betley2026valueleakagellmsanswers,
+      title={Value Leakage: An LLM's Answers Are Silently Shaped by Its Own Values},
+      author={Jan Betley and Johannes Treutlein and Jan Dubiński and Harry Mayne and Karol Gałązka and Niels Warncke and Anna Sztyber-Betley and Owain Evans},
+      year={2026},
+      eprint={2607.14345},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2607.14345},
+}
+```
+
+The sentence-level causal method follows **Thought Anchors** (Bogdan, Macar, Nanda & Conmy,
+[arXiv:2506.19143](https://arxiv.org/abs/2506.19143)); the three adaptations made here are
+described under [Provenance](#provenance).
+
+## License
+
+[MIT](LICENSE) for the analysis code, the written material, and the runs generated in this
+repository (`runs/` dated `20260830` and `20260901`).
+
+The rollouts for the 10 shipped models (`runs/` dated `20260815`) come from
+[adsingh-64/value-leakage](https://github.com/adsingh-64/value-leakage) and are redistributed
+only so the re-analysis in [`REPORT.md`](REPORT.md) can be independently verified. Neither
+upstream repository states a license; [LICENSE](LICENSE) sets out the full scope.
