@@ -1,0 +1,26 @@
+# Reproduction environment for value-leakage-forensics.  Python 3.12.14.
+#
+# The analysis scripts do not merely cite the upstream reproduction, they import
+# from it: value_leakage.sample, .judge, .plot, .run and .api.anthropic.messages
+# are used across analysis/. It is therefore a hard dependency, pinned below to
+# the exact commit this work ran against so the numbers in REPORT.md can be
+# reproduced rather than approximated.
+value_leakage @ git+https://github.com/adsingh-64/value-leakage.git@16d129859e1f0e281363fb4f5910bcaeea316b10
+
+# imported directly by analysis/
+fire==0.7.1
+numpy==2.5.2
+python-dotenv==1.2.3
+sentence-transformers==6.0.0
+transformers==5.16.1
+vllm==0.28.0
+
+# required by the upstream package along the judge and plotting paths
+anthropic==1.2.0
+matplotlib==3.11.1
+pandas==3.0.5
+scipy==1.18.1
+
+# pulled in by vllm; pinned because the CUDA build is what the environment notes
+# in README.md refer to
+torch==2.13.0

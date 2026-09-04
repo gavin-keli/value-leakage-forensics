@@ -468,11 +468,14 @@ REPORT.md                 full report: findings, method validity, limitations, c
 Needs a GPU (48GB for the Qwen Int4 model, 24GB for gpt-oss) and an `ANTHROPIC_API_KEY` for the
 judges.
 
+The analysis scripts import the task, judge and plotting code directly from the upstream
+reproduction (`value_leakage.sample`, `.judge`, `.plot`, `.run`), so it is a hard dependency
+rather than a citation. [`requirements.txt`](requirements.txt) pins it to the exact commit this
+work ran against, together with every other version used.
+
 ```bash
 conda create -y -n vl python=3.12 && conda activate vl
-pip install "numpy<2.4" vllm sentence-transformers fire matplotlib scipy pandas \
-            anthropic python-dotenv
-pip install -e .
+pip install -r requirements.txt
 
 # sample, judge, screen, resample
 python analysis/local_gen.py --model <hf-id> --family qwen --condition baseline \
